@@ -2,8 +2,8 @@
   number: 1
   materials: /lectures/1.pdf
   notes: /notes/1.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/JjfCP-bvEeo
+  download: https://disk.yandex.com/i/7k9e8nU_OrSpwg
 
 - title: Автоматическое дифференцирование. Forward\Reverse Mode. Вычислительный граф
   number: 2
