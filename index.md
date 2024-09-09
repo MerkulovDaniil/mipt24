@@ -18,5 +18,3 @@ loss_surface.html
 # Команда курса
 :::{#team}
 :::
-
-
