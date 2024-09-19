@@ -5,7 +5,14 @@
   youtube: https://youtu.be/JjfCP-bvEeo
   download: https://disk.yandex.com/i/7k9e8nU_OrSpwg
 
-- title: Автоматическое дифференцирование. Forward\Reverse Mode. Вычислительный граф
+- title: Повторяем матричные производные. Проклятие размерности методов нулевого порядка
+  number: 1.2
+  materials: /lectures/1a.pdf
+  notes: /notes/1a.pdf
+  youtube: 
+  download:
+
+- title: Автоматическое дифференцирование. Forward\Reverse Mode. Вычислительный граф.
   number: 2
   materials: /lectures/2.pdf
   notes: /notes/2.pdf
