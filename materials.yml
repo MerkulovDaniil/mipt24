@@ -23,8 +23,8 @@
   number: 4
   materials: /lectures/4.pdf
   notes: /notes/4.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/uS3vyyNrkrQ
+  download: https://disk.yandex.com/i/zPalLTAAmn6p7A
 
 - title:  Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация. Выпуклость нейронных сетей
   number: 5
