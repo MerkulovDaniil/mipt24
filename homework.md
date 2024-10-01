@@ -6,7 +6,7 @@ toc: true
 
 ### Linear algebra basics
 
-1. [10 points] **Effect of Diagonal Scaling on Rank** Let $A \in \mathbb{R}^{m \times n}$ be a matrix with rank $r$. Suppose $D \in \mathbb{R}^{n \times n}$ is a diagonal matrix. Determine the rank of the product $DA$. Explain your reasoning.
+1. [10 points] **Effect of Diagonal Scaling on Rank** Let $A \in \mathbb{R}^{n \times n}$ be a matrix with rank $r$. Suppose $D \in \mathbb{R}^{n \times n}$ is a diagonal matrix. Determine the rank of the product $DA$. Explain your reasoning.
 1. [20 points] Find SVD of the following matrices:
 
     * $A = \begin{bmatrix} 1\\2\\3 \end{bmatrix}$ 
