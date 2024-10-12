@@ -7,7 +7,7 @@ name: Quarto Publish
 
 jobs:
   build-deploy:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
@@ -23,10 +23,20 @@ jobs:
         with: 
           tinytex: true
 
-      - name: Install CMU Unicode Fonts
+      - name: Install CMU Serif Fonts Manually
         run: |
-          tlmgr update --self
-          tlmgr install cm-unicode
+          # Download CMU Serif font package
+          wget https://sourceforge.net/projects/cm-unicode/files/0.7.0/cmuntt.zip/download -O cmuntt.zip
+          
+          # Unzip the font files
+          unzip cmuntt.zip -d cmun_fonts
+          
+          # Create a fonts directory for CMU and copy the fonts
+          sudo mkdir -p /usr/share/fonts/truetype/cmun
+          sudo cp cmun_fonts/*.ttf /usr/share/fonts/truetype/cmun/
+          
+          # Update the font cache
+          sudo fc-cache -fv
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
