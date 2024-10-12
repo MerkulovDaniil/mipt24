@@ -26,14 +26,14 @@
   youtube: https://youtu.be/uS3vyyNrkrQ
   download: https://disk.yandex.com/i/zPalLTAAmn6p7A
 
-- title:  Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация. Выпуклость нейронных сетей
+- title:  Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация.
   number: 5
   materials: /lectures/5.pdf
   notes: /notes/5.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/9zpJStnjNrg
+  download: https://disk.yandex.com/i/h_6U1bWWQyosSg
 
-- title: Сопряженные множества. Сопряженные конусы. Многогранники. Сопряженные функции. Преобразование Лежандра. Сопряженная норма
+- title:  Сопряженные множества. Сопряженные конусы. Многогранники. Сопряженные функции. Преобразование Лежандра. Сопряженная норма
   number: 6
   materials: /lectures/6.pdf
   notes: /notes/6.pdf

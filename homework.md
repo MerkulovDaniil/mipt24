@@ -199,7 +199,7 @@ toc: true
 1. [5 points] The center of mass of a body is an important concept in physics (mechanics). Obviously, the center of mass of a body does not always lie inside the body. For example, the center of mass of a doughnut is located in its hole. Prove that the center of mass of a system of material points lies in the convex hull of the set of these points.
 1. [10 points] Show, that $\mathbf{conv}\{xx^\top: x \in \mathbb{R}^n, \Vert x\Vert  = 1\} = \{A \in \mathbb{S}^n_+: \text{tr}(A) = 1\}$.
 1. [5 points] Prove that the set of $\{x \in \mathbb{R}^2 \mid e^{x_1}\le x_2\}$ is convex.
-1. [5 points] Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone.
+1. [5 points] Show that the set of directions of the non-strict local descending of the differentiable function in a point is a convex cone. We assume, that $\nabla f(x_0) \neq 0$ at the target point.
 1. [10 points] Is the following set convex
     $$
     S = \left\{ a \in \mathbb{R}^k \mid p(0) = 1, \vert p(t) \vert\leq 1 \text{ for } \alpha\leq t \leq \beta\right\},
