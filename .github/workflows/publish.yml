@@ -19,6 +19,7 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
           tinytex: true
 
