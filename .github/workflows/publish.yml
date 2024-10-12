@@ -14,6 +14,11 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      
+      - name: Install CMU Unicode Fonts Manually
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-cmu
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -22,21 +27,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with: 
           tinytex: true
-
-      - name: Install CMU Serif Fonts Manually
-        run: |
-          # Download CMU Serif font package
-          wget https://sourceforge.net/projects/cm-unicode/files/0.7.0/cmuntt.zip/download -O cmuntt.zip
-          
-          # Unzip the font files
-          unzip cmuntt.zip -d cmun_fonts
-          
-          # Create a fonts directory for CMU and copy the fonts
-          sudo mkdir -p /usr/share/fonts/truetype/cmun
-          sudo cp cmun_fonts/*.ttf /usr/share/fonts/truetype/cmun/
-          
-          # Update the font cache
-          sudo fc-cache -fv
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
