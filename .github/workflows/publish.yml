@@ -22,6 +22,11 @@ jobs:
         with: 
           tinytex: true
 
+      - name: Install CMU Unicode Fonts
+        run: |
+          tlmgr update --self
+          tlmgr install cm-unicode
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
