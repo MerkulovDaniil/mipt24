@@ -33,14 +33,14 @@
   youtube: https://youtu.be/9zpJStnjNrg
   download: https://disk.yandex.com/i/h_6U1bWWQyosSg
 
-- title:  Сопряженные множества. Сопряженные конусы. Многогранники. Сопряженные функции. Преобразование Лежандра. Сопряженная норма
+- title:  Сопряженные множества. Сопряженные конусы. Многогранники. Сопряженные функции. Преобразование Лежандра. Субградиент. Субдифференциал. Теоремы Моро-Рокафеллара, Дубовицкого-Милютина
   number: 6
   materials: /lectures/6.pdf
   notes: /notes/6.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/T0p5LQtm4MY
+  download: https://disk.yandex.ru/i/QB4yzXcme_xVxg
 
-- title: Субградиент. Субдифференциал. Теоремы Моро-Рокафеллара, Дубовицкого-Милютина
+- title: Субдифференциал. Условия оптимальности. Функция Лагранжа. Множители Лагранжа.
   number: 7
   materials: /lectures/7.pdf
   notes: /notes/7.pdf
