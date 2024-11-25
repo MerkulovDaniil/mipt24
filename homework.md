@@ -326,11 +326,11 @@ toc: true
     
         ![Draw a normal cone for the set $S$ in these points](normal_cone.svg)
     
-    i) Show, that $N_S(x) = \{0\} \quad \forall x \in \mathbf{ri }(S)$.
+    i) Show, that $N_S(x) = \{0\} \quad \forall x \in \mathbf{i }(S)$.
 
 1. [15 points] For $f(X) = \|X\|_{\text{tr}}$, show that subgradients at $X=U \Sigma V^T$ (this is an SVD of $X$) satisfy 
     $$
     \partial f(X) \supseteq \{UV^T + W : \|W\|_{\mathrm{op}} \leq 1, \;
     U^T W = 0, \; WV = 0 \}.
     $$
-    Hint: you may use the fact that $\|\cdot\|_{\text{tr}}$ and $\|\cdot\|_{\mathrm{op}}$ are dual norms, which implies $\langle A, B \rangle \leq \|A\|_{\text{tr}}\|B\|_{\mathrm{op}}$ for any matrices $A,B$, where recall $\langle A,B \rangle = \text{tr}(A^T B)$. {\bf Bonus (5 pts):} prove the other direction.   
+    Hint: you may use the fact that $\|\cdot\|_{\text{tr}}$ and $\|\cdot\|_{\mathrm{op}}$ are dual norms, which implies $\langle A, B \rangle \leq \|A\|_{\text{tr}}\|B\|_{\mathrm{op}}$ for any matrices $A,B$, where recall $\langle A,B \rangle = \text{tr}(A^T B)$.  **Bonus (5 pts):** prove the other direction.   
