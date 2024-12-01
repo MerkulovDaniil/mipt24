@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -70,10 +70,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-525b64fa876ba94807832753c66db7ce.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -147,8 +147,12 @@ window.Quarto = {
 </script>
 
 <meta property="og:title" content="💀 Домашка">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://mipt24.fmin.xyz/huber_function.svg">
 <meta name="twitter:title" content="💀 Домашка">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://mipt24.fmin.xyz/huber_function.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
@@ -203,11 +207,16 @@ window.Quarto = {
   <li><a href="#conjugate-sets" id="toc-conjugate-sets" class="nav-link" data-scroll-target="#conjugate-sets">Conjugate sets</a></li>
   <li><a href="#conjugate-functions" id="toc-conjugate-functions" class="nav-link" data-scroll-target="#conjugate-functions">Conjugate functions</a></li>
   <li><a href="#subgradients" id="toc-subgradients" class="nav-link" data-scroll-target="#subgradients">Subgradients</a></li>
+  <li><a href="#optimality-conditions.-kkt" id="toc-optimality-conditions.-kkt" class="nav-link" data-scroll-target="#optimality-conditions.-kkt">Optimality Conditions. KKT</a></li>
+  <li><a href="#duality" id="toc-duality" class="nav-link" data-scroll-target="#duality">Duality</a></li>
+  <li><a href="#linear-programming" id="toc-linear-programming" class="nav-link" data-scroll-target="#linear-programming">Linear Programming</a></li>
+  <li><a href="#sequence-convergence" id="toc-sequence-convergence" class="nav-link" data-scroll-target="#sequence-convergence">Sequence convergence</a></li>
+  <li><a href="#line-search" id="toc-line-search" class="nav-link" data-scroll-target="#line-search">Line search</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/mipt24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 <header id="title-block-header">
 </header>
@@ -570,6 +579,287 @@ N_S(x) = \left\{c \in \mathbb{R}^n : \langle c, y-x\rangle \leq 0 \quad \forall 
 U^T W = 0, \; WV = 0 \}.
 </span> Hint: you may use the fact that <span class="math inline">\|\cdot\|_{\text{tr}}</span> and <span class="math inline">\|\cdot\|_{\mathrm{op}}</span> are dual norms, which implies <span class="math inline">\langle A, B \rangle \leq \|A\|_{\text{tr}}\|B\|_{\mathrm{op}}</span> for any matrices <span class="math inline">A,B</span>, where recall <span class="math inline">\langle A,B \rangle = \text{tr}(A^T B)</span>. <strong>Bonus (5 pts):</strong> prove the other direction.</li>
 </ol>
+</section>
+<section id="optimality-conditions.-kkt" class="level3">
+<h3 class="anchored" data-anchor-id="optimality-conditions.-kkt">Optimality Conditions. KKT</h3>
+<p>In this section, you can consider either the arbitrary norm or the Euclidian norm if nothing else is specified.</p>
+<ol type="1">
+<li><p><strong>Toy example</strong> [10 points] <span class="math display">
+\begin{split}
+&amp; x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+\text{s.t. } &amp; (x-2)(x-4) \leq 0
+\end{split}
+</span></p>
+<ol type="1">
+<li>Give the feasible set, the optimal value, and the optimal solution.</li>
+<li>Plot the objective <span class="math inline">x^2 +1</span> versus <span class="math inline">x</span>. On the same plot, show the feasible set, optimal point, and value, and plot the Lagrangian <span class="math inline">L(x,\mu)</span> versus <span class="math inline">x</span> for a few positive values of <span class="math inline">\mu</span>. Verify the lower bound property (<span class="math inline">p^* \geq \inf_x L(x, \mu)</span>for <span class="math inline">\mu \geq 0</span>). Derive and sketch the Lagrange dual function <span class="math inline">g</span>.</li>
+<li>State the dual problem, and verify that it is a concave maximization problem. Find the dual optimal value and dual optimal solution <span class="math inline">\mu^*</span>. Does strong duality hold?</li>
+<li>Let <span class="math inline">p^*(u)</span> denote the optimal value of the problem</li>
+</ol>
+<p><span class="math display">
+\begin{split}
+&amp; x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+\text{s.t. } &amp; (x-2)(x-4) \leq u
+\end{split}
+</span></p>
+<p>as a function of the parameter <span class="math inline">u</span>. Plot <span class="math inline">p^*(u)</span>. Verify that <span class="math inline">\dfrac{dp^*(0)}{du} = -\mu^*</span></p></li>
+<li><p>[10 points] Give an explicit solution to the following LP.</p>
+<p><span class="math display">
+\begin{split}
+&amp; c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
+\text{s.t. } &amp; 1^\top x = 1, \\
+&amp; x \succeq 0
+\end{split}
+</span></p>
+<p>This problem can be considered the simplest portfolio optimization problem.</p></li>
+<li><p>[20 points] Show, that the following problem has a unique solution and find it:</p>
+<p><span class="math display">
+\begin{split}
+&amp; \langle C^{-1}, X\rangle - \log \det X \to \min\limits_{x \in \mathbb{R}^{n \times n} }\\
+\text{s.t. } &amp; \langle Xa, a\rangle \leq 1,
+\end{split}
+</span></p>
+<p>where <span class="math inline">C \in \mathbb{S}^n_{++}, a \in \mathbb{R}^n \neq 0</span>. The answer should not involve inversion of the matrix <span class="math inline">C</span>.</p></li>
+<li><p>[20 points] Derive the KKT conditions for the problem</p>
+<p><span class="math display">
+\begin{split}
+&amp; \mathbf{tr \;}X - \log\text{det }X \to \min\limits_{X \in \mathbb{S}^n_{++} }\\
+\text{s.t. } &amp; Xs = y,
+\end{split}
+</span></p>
+<p>where <span class="math inline">y \in \mathbb{R}^n</span> and <span class="math inline">s \in \mathbb{R}^n</span> are given with <span class="math inline">y^\top s = 1</span>. Verify that the optimal solution is given by</p>
+<p><span class="math display">
+X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
+</span></p></li>
+</ol>
+</section>
+<section id="duality" class="level3">
+<h3 class="anchored" data-anchor-id="duality">Duality</h3>
+<ol type="1">
+<li><p>[10 points] Derive the dual problem for the Ridge regression problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
+<p><span class="math display">
+\begin{split}
+\dfrac{1}{2}\|y-b\|^2 + \dfrac{\lambda}{2}\|x\|^2 &amp;\to \min\limits_{x \in \mathbb{R}^n, y \in \mathbb{R}^m }\\
+\text{s.t. } &amp; y = Ax
+\end{split}
+</span></p></li>
+<li><p>[20 points] Derive the dual problem for the support vector machine problem with <span class="math inline">A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda &gt; 0</span>:</p>
+<p><span class="math display">
+\begin{split}
+\langle \mathbf{1}, t\rangle + \dfrac{\lambda}{2}\|x\|^2 &amp;\to \min\limits_{x \in \mathbb{R}^n, t \in \mathbb{R}^m }\\
+\text{s.t. } &amp; Ax \succeq \mathbf{1} - t \\
+&amp; t \succeq 0
+\end{split}
+</span></p></li>
+<li><p>[20 points] <strong>Analytic centering.</strong> Derive a dual problem for</p>
+<p><span class="math display">
+-\sum_{i=1}^m \log (b_i - a_i^\top x) \to \min\limits_{x \in \mathbb{R}^{n} }
+</span></p>
+<p>with domain <span class="math inline">\{x \mid a^\top_i x &lt; b_i , i = [1,m]\}</span>.</p>
+<p>First introduce new variables <span class="math inline">y_i</span> and equality constraints <span class="math inline">y_i = b_i − a^\top_i x</span>. (The solution to this problem is called the analytic center of the linear inequalities <span class="math inline">a^\top_i x \leq b_i ,i = [1,m]</span>. Analytic centers have geometric applications, and play an important role in barrier methods.)</p></li>
+</ol>
+</section>
+<section id="linear-programming" class="level3">
+<h3 class="anchored" data-anchor-id="linear-programming">Linear Programming</h3>
+<ol type="1">
+<li><p>[20 points] <strong>📱🎧💻 Covers manufacturing.</strong> Lyzard Corp is producing covers for the following products:</p>
+<ul>
+<li>📱 phones</li>
+<li>🎧 headphones</li>
+<li>💻 laptops</li>
+</ul>
+<p>The company’s production facilities are such that if we devote the entire production to headphone covers, we can produce 5000 of them in one day. If we devote the entire production to phone covers or laptop covers, we can produce 4000 or 2000 of them in one day.</p>
+<p>The production schedule is one week (6 working days), and the week’s production must be stored before distribution. Storing 1000 headphone covers (packaging included) takes up 30 cubic feet of space. Storing 1000 phone covers (packaging included) takes up 50 cubic feet of space, and storing 1000 laptop covers (packaging included) takes up 220 cubic feet of space. The total storage space available is 1500 cubic feet.</p>
+<p>Due to commercial agreements with Lyzard Corp has to deliver at least 4500 headphone covers and 4000 laptop covers per week to strengthen the product’s diffusion.</p>
+<p>The marketing department estimates that the weekly demand for headphones covers, phone, and laptop covers does not exceed 10000 14000, and 7000 units, therefore the company does not want to produce more than these amounts for headphones, phone, and laptop covers.</p>
+<p>Finally, the net profit per headphone cover, phone cover, and laptop cover are $5, $7, and $12, respectively.</p>
+<p>The aim is to determine a weekly production schedule that maximizes the total net profit.</p>
+<ol type="1">
+<li><p>Write a Linear Programming formulation for the problem. Use the following variables:</p>
+<ul>
+<li><span class="math inline">y_1</span> = number of headphones covers produced over the week,<br>
+</li>
+<li><span class="math inline">y_2</span> = number of phone covers produced over the week,<br>
+</li>
+<li><span class="math inline">y_3</span> = number of laptop covers produced over the week.</li>
+</ul></li>
+<li><p>Find the solution to the problem using <a href="http://www.pyomo.org">PyOMO</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install pyomo</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> sudo apt<span class="op">-</span>get install glpk<span class="op">-</span>utils <span class="op">--</span>quiet  <span class="co"># GLPK</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span> sudo apt<span class="op">-</span>get install coinor<span class="op">-</span>cbc <span class="op">--</span>quiet  <span class="co"># CoinOR</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Perform the sensitivity analysis. Which constraint could be relaxed to increase the profit the most? Prove it numerically.</p></li>
+</ol></li>
+<li><p>[10 points] Prove the optimality of the solution</p>
+<p><span class="math display">
+x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
+</span></p>
+<p>to the following linear programming problem:</p>
+<p><span class="math display">
+\begin{split}
+&amp; 9x_1 + 3x_2 + 7x_3 \to \max\limits_{x \in \mathbb{R}^3 }\\
+\text{s.t. } &amp; 2x_1 + x_2 + 3x_3 \leq 6 \\
+&amp; 5x_1 + 4x_2 + x_3 \leq 12 \\
+&amp; 3x_3 \leq 1,\\
+&amp; x_1, x_2, x_3 \geq 0
+\end{split}
+</span></p>
+<p>but you cannot use any numerical algorithm here.</p></li>
+<li><p>[5 points] Transform the following linear program into an equivalent linear program in the standard form <span class="math inline">\left(c^\top x \to \min\limits_{x\in \mathbb{R}^n} : Ax = b,x ≥ 0\right)</span>:</p>
+<p><span class="math display">
+\begin{split}
+&amp; x_1−x_2 \to \min\limits_{x \in \mathbb{R}^2 }\\
+\text{s.t. } &amp; 2x_1 + x_2 \geq 3 \\
+&amp; 3x_1 − x_2 \leq 7 \\
+&amp; x_1 \geq 0
+\end{split}
+</span></p></li>
+<li><p>[20 points] Economic interpretation of the dual problem: Suppose a small shop makes wooden toys, where each toy train requires one piece of wood and <span class="math inline">2</span> tins of paint, while each toy boat requires one piece of wood and <span class="math inline">1</span> tin of paint. The profit on each toy train is <span class="math inline">\$30</span>, and the profit on each toy boat is <span class="math inline">\$20</span>. Given an inventory of <span class="math inline">80</span> pieces of wood and <span class="math inline">100</span> tins of paint, how many of each toy should be made to maximize the profit?</p>
+<ol type="1">
+<li>Write out the optimization problem in standard form, writing all constraints as inequalities.</li>
+<li>Sketch the feasible set and determine <span class="math inline">p^*</span> and <span class="math inline">x^*</span></li>
+<li>Find the dual problem, then determine <span class="math inline">d^*</span> and <span class="math inline">\lambda^*</span>. Note that we can interpret the Lagrange multipliers <span class="math inline">\lambda_k</span> associated with the constraints on wood and paint as the prices for each piece of wood and tin of paint, so that <span class="math inline">−d^*</span> is how much money would be obtained from selling the inventory for those prices. Strong duality says a buyer should not pay more for the inventory than what the toy store would make by producing and selling toys from it, and that the toy store should not sell the inventory for less than that.</li>
+<li>The other interpretation of the Lagrange multipliers is as sensitivities to changes in the constraints. Suppose the toymaker found some more pieces of wood; the <span class="math inline">\lambda_k</span> associated with the wood constraint will equal the partial derivative of <span class="math inline">−p^*</span> with respect to how much more wood became available. Suppose the inventory increases by one piece of wood. Use <span class="math inline">\lambda^*</span> to estimate how much the profit would increase, without solving the updated optimization problem. How is this consistent with the price interpretation given above for the Lagrange multipliers? <a href="https://tleise.people.amherst.edu/Math294Spring2017/TeXfiles/LagrangeDualityHW.pdf">source</a></li>
+</ol></li>
+</ol>
+</section>
+<section id="sequence-convergence" class="level3">
+<h3 class="anchored" data-anchor-id="sequence-convergence">Sequence convergence</h3>
+<ol type="1">
+<li><p>[15 points] Determine the convergence or divergence of a given sequences</p>
+<ul>
+<li><span class="math inline">r_{k} = \frac{1}{\sqrt{k}}</span>.</li>
+<li><span class="math inline">r_{k} = 0.707^k</span>.</li>
+<li><span class="math inline">r_{k} = 0.707^{2^k}</span>.</li>
+</ul></li>
+<li><p>[10 points] Determine the convergence or divergence of a given sequence <span class="math inline">r_k =\begin{cases} \frac{1}{k}, &amp; \text{if } k\text{ is even} \\ e^{-k}, &amp; \text{if } k\text{ is odd} \end{cases}</span>.</p></li>
+<li><p>[10 points] Determine the following sequence <span class="math inline">\{r_k\}</span> by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.</p>
+<p><span class="math display">
+r_k = \dfrac{1}{k!}
+</span></p></li>
+<li><p>[10 points] Determine the following sequence <span class="math inline">\{r_k\}</span> by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally find out whether there is quadratic convergence.</p>
+<p><span class="math display">
+r_k = \dfrac{1}{k^k}
+</span></p></li>
+<li><p>[15 points] Let <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> be a sequence of non-negative numbers and let <span class="math inline">s &gt; 0</span> be some integer. Prove that sequence <span class="math inline">\left\{ r_k \right\}_{k=m+s}^\infty</span> is linearly convergent with constant <span class="math inline">q</span> if and only if a the sequence <span class="math inline">\left\{ r_k \right\}_{k=m}^\infty</span> converged linearly with constant <span class="math inline">q</span>.</p></li>
+</ol>
+</section>
+<section id="line-search" class="level3">
+<h3 class="anchored" data-anchor-id="line-search">Line search</h3>
+<ol type="1">
+<li><p>[10 points] Consider a quadratic function <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span>, and let us start from a point <span class="math inline">x_k \in \mathbb{R}^n</span> moving in the direction of the antigradient <span class="math inline">-\nabla f(x_k)</span>. Show that the minimum of <span class="math inline">f</span> along this direction as a function of the step size <span class="math inline">\alpha</span>, for a decreasing function at <span class="math inline">x_k</span>, satisfies Armijo’s condition for any <span class="math inline">c_1</span> in the range <span class="math inline">0 \leq c_1 \leq \frac{1}{2}</span>. Specifically, demonstrate that the following inequality holds at the optimal <span class="math inline">\alpha^*</span>:</p>
+<p><span class="math display">
+\varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
+</span></p></li>
+<li><p><strong>Implementing and Testing Line Search Conditions in Gradient Descent</strong> [30 points]</p>
+<p><span class="math display">
+x_{k+1} = x_k - \alpha \nabla f(x_k)
+</span></p>
+<p>In this assignment, you will modify an existing Python code for gradient descent to include various line search conditions. You will test these modifications on two functions: a quadratic function and the Rosenbrock function. The main objectives are to understand how different line search strategies influence the convergence of the gradient descent algorithm and to compare their efficiencies based on the number of function evaluations.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> minimize_scalar</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">214</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the quadratic function and its gradient</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> quadratic_function(x, A, b):</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.5</span> <span class="op">*</span> np.dot(x.T, np.dot(A, x)) <span class="op">-</span> np.dot(b.T, x)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> grad_quadratic(x, A, b):</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.dot(A, x) <span class="op">-</span> b</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a 2D quadratic problem with a specified condition number</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_quadratic_problem(cond_number):</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random symmetric matrix</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> np.random.randn(<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> np.dot(M, M.T)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Ensure the matrix has the desired condition number</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    U, s, V <span class="op">=</span> np.linalg.svd(M)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> np.linspace(cond_number, <span class="dv">1</span>, <span class="bu">len</span>(s))  <span class="co"># Spread the singular values</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    A <span class="op">=</span> np.dot(U, np.dot(np.diag(s), V))</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Random b</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> np.random.randn(<span class="dv">2</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> A, b</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Gradient descent function</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> gradient_descent(start_point, A, b, stepsize_func, max_iter<span class="op">=</span><span class="dv">100</span>):</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> start_point.copy()</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    trajectory <span class="op">=</span> [x.copy()]</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(max_iter):</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>        grad <span class="op">=</span> grad_quadratic(x, A, b)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>        step_size <span class="op">=</span> stepsize_func(x, grad)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        x <span class="op">-=</span> step_size <span class="op">*</span> grad</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        trajectory.append(x.copy())</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array(trajectory)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Backtracking line search strategy using scipy</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> backtracking_line_search(x, grad, A, b, alpha<span class="op">=</span><span class="fl">0.3</span>, beta<span class="op">=</span><span class="fl">0.8</span>):</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> objective(t):</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> quadratic_function(x <span class="op">-</span> t <span class="op">*</span> grad, A, b)</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> minimize_scalar(objective, method<span class="op">=</span><span class="st">'golden'</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> res.x</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate ill-posed problem</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>cond_number <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>A, b <span class="op">=</span> generate_quadratic_problem(cond_number)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Starting point</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>start_point <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">1.8</span>])</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform gradient descent with both strategies</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>trajectory_fixed <span class="op">=</span> gradient_descent(start_point, A, b, <span class="kw">lambda</span> x, g: <span class="fl">5e-2</span>)</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>trajectory_backtracking <span class="op">=</span> gradient_descent(start_point, A, b, <span class="kw">lambda</span> x, g: backtracking_line_search(x, g, A, b))</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the trajectories on a contour plot</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>x1, x2 <span class="op">=</span> np.meshgrid(np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">400</span>), np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">400</span>))</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> np.array([quadratic_function(np.array([x, y]), A, b) <span class="cf">for</span> x, y <span class="kw">in</span> <span class="bu">zip</span>(x1.flatten(), x2.flatten())]).reshape(x1.shape)</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>plt.contour(x1, x2, Z, levels<span class="op">=</span><span class="dv">50</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>plt.plot(trajectory_fixed[:, <span class="dv">0</span>], trajectory_fixed[:, <span class="dv">1</span>], <span class="st">'o-'</span>, label<span class="op">=</span><span class="st">'Fixed Step Size'</span>)</span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>plt.plot(trajectory_backtracking[:, <span class="dv">0</span>], trajectory_backtracking[:, <span class="dv">1</span>], <span class="st">'o-'</span>, label<span class="op">=</span><span class="st">'Backtracking Line Search'</span>)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co"># Add markers for start and optimal points</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>plt.plot(start_point[<span class="dv">0</span>], start_point[<span class="dv">1</span>], <span class="st">'ro'</span>, label<span class="op">=</span><span class="st">'Start Point'</span>)</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>optimal_point <span class="op">=</span> np.linalg.solve(A, b)</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>plt.plot(optimal_point[<span class="dv">0</span>], optimal_point[<span class="dv">1</span>], <span class="st">'y*'</span>, markersize<span class="op">=</span><span class="dv">15</span>, label<span class="op">=</span><span class="st">'Optimal Point'</span>)</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Gradient Descent Trajectories on Quadratic Function'</span>)</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'x2'</span>)</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">"linesearch.svg"</span>)</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="linesearch.svg" class="img-fluid figure-img"></p>
+<figcaption>The code above plots this</figcaption>
+</figure>
+</div>
+<p>Start by reviewing the provided Python code. This code implements gradient descent with a fixed step size and a backtracking line search on a quadratic function. Familiarize yourself with how the gradient descent function and the step size strategies are implemented.</p>
+<ol type="1">
+<li><p>Modify the gradient descent function to include the following line search conditions:</p>
+<ol type="a">
+<li>Sufficient Decrease Condition</li>
+<li>Curvature Condition</li>
+<li>Goldstein Condition</li>
+<li>Wolfe Condition</li>
+<li>Dichotomy</li>
+</ol>
+<p>Test your modified gradient descent algorithm with the implemented line search conditions on the provided quadratic function. Plot the trajectories over iterations for each condition. Choose and specify hyperparameters for inexact line search condition. Choose and specify the termination criterion. Start from the point <span class="math inline">x_0 = (-1, 2)^T</span>.</p></li>
+<li><p>Compare these 7 methods from the budget perspective. Plot the graph of function value from the number of function evaluations for each method on the same graph.</p></li>
+<li><p>Plot trajectory for another function with the same set of methods</p>
+<p><span class="math display">
+f(x_1, x_2) =  10(x_2 − x_1^2)^2 + (x_1 − 1)^2
+</span></p>
+<p>with <span class="math inline">x_0 = (-1, 2)^T</span>. You might need to adjust hyperparameters.</p></li>
+<li><p>Plot the same function value from the number of function calls for this experiment.</p></li>
+</ol></li>
+</ol>
 
 
 </section>
@@ -657,8 +947,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -774,7 +1062,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
