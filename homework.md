@@ -334,3 +334,323 @@ toc: true
     U^T W = 0, \; WV = 0 \}.
     $$
     Hint: you may use the fact that $\|\cdot\|_{\text{tr}}$ and $\|\cdot\|_{\mathrm{op}}$ are dual norms, which implies $\langle A, B \rangle \leq \|A\|_{\text{tr}}\|B\|_{\mathrm{op}}$ for any matrices $A,B$, where recall $\langle A,B \rangle = \text{tr}(A^T B)$.  **Bonus (5 pts):** prove the other direction.   
+
+### Optimality Conditions. KKT
+
+In this section, you can consider either the arbitrary norm or the Euclidian norm if nothing else is specified.
+
+1. **Toy example** [10 points] 
+    $$
+    \begin{split}
+    & x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+    \text{s.t. } & (x-2)(x-4) \leq 0
+    \end{split}
+    $$
+
+    1. Give the feasible set, the optimal value, and the optimal solution.
+    1.  Plot the objective $x^2 +1$ versus $x$. On the same plot, show the feasible set, optimal point, and value, and plot the Lagrangian $L(x,\mu)$ versus $x$ for a few positive values of $\mu$. Verify the lower bound property ($p^* \geq \inf_x L(x, \mu)$for $\mu \geq 0$). Derive and sketch the Lagrange dual function $g$.
+    1. State the dual problem, and verify that it is a concave maximization problem. Find the dual optimal value and dual optimal solution $\mu^*$. Does strong duality hold?
+    1.  Let $p^*(u)$ denote the optimal value of the problem
+
+    $$
+    \begin{split}
+    & x^2 + 1 \to \min\limits_{x \in \mathbb{R} }\\
+    \text{s.t. } & (x-2)(x-4) \leq u
+    \end{split}
+    $$
+
+    as a function of the parameter $u$. Plot $p^*(u)$. Verify that $\dfrac{dp^*(0)}{du} = -\mu^*$ 
+
+
+1. [10 points] Give an explicit solution to the following LP.
+    
+    $$
+    \begin{split}
+    & c^\top x \to \min\limits_{x \in \mathbb{R}^n }\\
+    \text{s.t. } & 1^\top x = 1, \\
+    & x \succeq 0 
+    \end{split}
+    $$
+
+    This problem can be considered the simplest portfolio optimization problem.
+
+1. [20 points] Show, that the following problem has a unique solution and find it:
+
+    $$
+    \begin{split}
+    & \langle C^{-1}, X\rangle - \log \det X \to \min\limits_{x \in \mathbb{R}^{n \times n} }\\
+    \text{s.t. } & \langle Xa, a\rangle \leq 1,
+    \end{split}
+    $$
+
+    where $C \in \mathbb{S}^n_{++}, a \in \mathbb{R}^n \neq 0$. The answer should not involve inversion of the matrix $C$.
+
+1. [20 points] Derive the KKT conditions for the problem
+    
+    $$
+    \begin{split}
+    & \mathbf{tr \;}X - \log\text{det }X \to \min\limits_{X \in \mathbb{S}^n_{++} }\\
+    \text{s.t. } & Xs = y,
+    \end{split}
+    $$
+
+    where $y \in \mathbb{R}^n$ and $s \in \mathbb{R}^n$ are given with $y^\top s = 1$. Verify that the optimal solution is given by
+
+    $$
+    X^* = I + yy^\top - \dfrac{1}{s^\top s}ss^\top
+    $$
+    
+
+
+
+### Duality
+
+1. [10 points] Derive the dual problem for the Ridge regression problem with $A \in \mathbb{R}^{m \times n}, b \in \mathbb{R}^m, \lambda > 0$:
+
+    $$
+    \begin{split}
+    \dfrac{1}{2}\|y-b\|^2 + \dfrac{\lambda}{2}\|x\|^2 &\to \min\limits_{x \in \mathbb{R}^n, y \in \mathbb{R}^m }\\
+    \text{s.t. } & y = Ax
+    \end{split}
+    $$
+
+1. [20 points] Derive the dual problem for the support vector machine problem with $A \in \mathbb{R}^{m \times n}, \mathbf{1} \in \mathbb{R}^m \in \mathbb{R}^m, \lambda > 0$:
+
+    $$
+    \begin{split}
+    \langle \mathbf{1}, t\rangle + \dfrac{\lambda}{2}\|x\|^2 &\to \min\limits_{x \in \mathbb{R}^n, t \in \mathbb{R}^m }\\
+    \text{s.t. } & Ax \succeq \mathbf{1} - t \\
+    & t \succeq 0
+    \end{split}
+    $$
+
+1. [20 points] **Analytic centering.** Derive a dual problem for
+    
+    $$
+    -\sum_{i=1}^m \log (b_i - a_i^\top x) \to \min\limits_{x \in \mathbb{R}^{n} }
+    $$
+
+    with domain $\{x \mid a^\top_i x < b_i , i = [1,m]\}$. 
+    
+    First introduce new variables $y_i$ and equality constraints $y_i = b_i − a^\top_i x$. (The solution to this problem is called the analytic center of the linear inequalities $a^\top_i x \leq b_i ,i = [1,m]$.  Analytic centers have geometric applications, and play an important role in barrier methods.) 
+
+### Linear Programming
+
+1. [20 points] **📱🎧💻 Covers manufacturing.** Lyzard Corp is producing covers for the following products: 
+    * 📱 phones
+    * 🎧 headphones
+    * 💻 laptops
+
+    The company’s production facilities are such that if we devote the entire production to headphone covers, we can produce 5000 of them in one day. If we devote the entire production to phone covers or laptop covers, we can produce 4000 or 2000 of them in one day. 
+
+    The production schedule is one week (6 working days), and the week’s production must be stored before distribution. Storing 1000 headphone covers (packaging included) takes up 30 cubic feet of space. Storing 1000 phone covers (packaging included) takes up 50 cubic feet of space, and storing 1000 laptop covers (packaging included) takes up 220 cubic feet of space. The total storage space available is 1500 cubic feet. 
+    
+    Due to commercial agreements with Lyzard Corp has to deliver at least 4500 headphone covers and 4000 laptop covers per week to strengthen the product’s diffusion. 
+
+    The marketing department estimates that the weekly demand for headphones covers, phone, and laptop covers does not exceed 10000 14000, and 7000 units, therefore the company does not want to produce more than these amounts for headphones, phone, and laptop covers. 
+
+    Finally, the net profit per headphone cover, phone cover, and laptop cover are \$5, \$7, and \$12, respectively.
+
+    The aim is to determine a weekly production schedule that maximizes the total net profit.
+
+    1. Write a Linear Programming formulation for the problem.  Use the following variables:
+
+        * $y_1$ = number of headphones covers produced over the week,  
+        * $y_2$ = number of phone covers produced over the week,  
+        * $y_3$ = number of laptop covers produced over the week. 
+
+    1. Find the solution to the problem using [PyOMO](http://www.pyomo.org)
+    
+        ```python
+        !pip install pyomo
+        ! sudo apt-get install glpk-utils --quiet  # GLPK
+        ! sudo apt-get install coinor-cbc --quiet  # CoinOR
+        ```
+
+    1. Perform the sensitivity analysis. Which constraint could be relaxed to increase the profit the most? Prove it numerically.
+
+1. [10 points] Prove the optimality of the solution 
+    
+    $$
+    x = \left(\frac{7}{3} , 0, \frac{1}{3}\right)^T
+    $$
+    
+    to the following linear programming problem:
+    
+    $$
+    \begin{split}
+    & 9x_1 + 3x_2 + 7x_3 \to \max\limits_{x \in \mathbb{R}^3 }\\
+    \text{s.t. } & 2x_1 + x_2 + 3x_3 \leq 6 \\
+    & 5x_1 + 4x_2 + x_3 \leq 12 \\
+    & 3x_3 \leq 1,\\
+    & x_1, x_2, x_3 \geq 0
+    \end{split}
+    $$
+
+    but you cannot use any numerical algorithm here.
+
+1. [5 points] Transform the following linear program into an equivalent linear program in the standard form $\left(c^\top x \to \min\limits_{x\in \mathbb{R}^n} : Ax = b,x ≥ 0\right)$:
+
+    $$
+    \begin{split}
+    & x_1−x_2 \to \min\limits_{x \in \mathbb{R}^2 }\\
+    \text{s.t. } & 2x_1 + x_2 \geq 3 \\
+    & 3x_1 − x_2 \leq 7 \\
+    & x_1 \geq 0
+    \end{split}
+    $$
+
+1. [20 points] Economic interpretation of the dual problem: Suppose a small shop makes wooden toys, where each toy train requires one piece of wood and $2$ tins of paint, while each toy boat requires one piece of wood and $1$ tin of paint. The profit on each toy train is $\$30$, and the profit on each toy boat is $\$20$. Given an inventory of $80$ pieces of wood and $100$ tins of paint, how many of each toy
+should be made to maximize the profit?
+    1. Write out the optimization problem in standard form, writing all constraints as inequalities.
+    1. Sketch the feasible set and determine $p^*$ and $x^*$
+    1. Find the dual problem, then determine $d^*$ and $\lambda^*$. Note that we can interpret the Lagrange multipliers $\lambda_k$ associated with the constraints on wood and paint as the prices for each piece of wood and tin of paint, so that $−d^*$ is how much money would be obtained from selling the inventory for those prices. Strong duality says a buyer should not pay more for the inventory than what the toy store would make by producing and selling toys from it, and that the toy store should not sell the inventory for less than that.
+    1. The other interpretation of the Lagrange multipliers is as sensitivities to changes in the constraints. Suppose the toymaker found some more pieces of wood; the $\lambda_k$ associated with the wood constraint will equal the partial derivative of $−p^*$ with respect to how much more wood became available. Suppose the inventory increases by one piece of wood. Use $\lambda^*$ to estimate how much the profit would increase, without solving the updated optimization problem. How is this consistent with the price interpretation given above for the Lagrange multipliers? [source](https://tleise.people.amherst.edu/Math294Spring2017/TeXfiles/LagrangeDualityHW.pdf) 
+
+### Sequence convergence
+
+1. [15 points] Determine the convergence or divergence of a given sequences
+
+    * $r_{k} = \frac{1}{\sqrt{k}}$.
+    * $r_{k} = 0.707^k$.
+    * $r_{k} = 0.707^{2^k}$.
+
+1. [10 points] Determine the convergence or divergence of a given sequence $r_k =\begin{cases} \frac{1}{k}, & \text{if } k\text{ is even} \\ e^{-k}, & \text{if } k\text{ is odd} \end{cases}$.
+
+1. [10 points] Determine the following sequence $\{r_k\}$ by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally, find out whether there is quadratic convergence.
+
+    $$
+    r_k = \dfrac{1}{k!}
+    $$
+
+1. [10 points] Determine the following sequence $\{r_k\}$ by convergence rate (linear, sublinear, superlinear). In the case of superlinear convergence, additionally find out whether there is quadratic convergence.
+
+    $$
+    r_k = \dfrac{1}{k^k}
+    $$
+
+1. [15 points] Let $\left\{ r_k \right\}_{k=m}^\infty$ be a sequence of non-negative numbers and let $s > 0$ be some integer. Prove that sequence $\left\{ r_k \right\}_{k=m+s}^\infty$ is linearly convergent with constant $q$ if and only if a the sequence $\left\{ r_k \right\}_{k=m}^\infty$ converged linearly with constant $q$.
+
+### Line search
+
+1. [10 points] Consider a quadratic function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, and let us start from a point $x_k \in \mathbb{R}^n$ moving in the direction of the antigradient $-\nabla f(x_k)$. Show that the minimum of $f$ along this direction as a function of the step size $\alpha$, for a decreasing function at $x_k$, satisfies Armijo's condition for any $c_1$ in the range $0 \leq c_1 \leq \frac{1}{2}$. Specifically, demonstrate that the following inequality holds at the optimal $\alpha^*$:
+
+   $$
+   \varphi(\alpha) = f(x_{k+1}) = f(x_k - \alpha \nabla f(x_k)) \leq f(x_k) - c_1 \alpha \|\nabla f(x_k)\|_2^2
+   $$
+
+1. **Implementing and Testing Line Search Conditions in Gradient Descent** [30 points] 
+
+    $$
+    x_{k+1} = x_k - \alpha \nabla f(x_k)
+    $$
+    
+    In this assignment, you will modify an existing Python code for gradient descent to include various line search conditions. You will test these modifications on two functions: a quadratic function and the Rosenbrock function. The main objectives are to understand how different line search strategies influence the convergence of the gradient descent algorithm and to compare their efficiencies based on the number of function evaluations.
+
+    ```python
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from scipy.optimize import minimize_scalar
+    np.random.seed(214)
+
+    # Define the quadratic function and its gradient
+    def quadratic_function(x, A, b):
+        return 0.5 * np.dot(x.T, np.dot(A, x)) - np.dot(b.T, x)
+
+    def grad_quadratic(x, A, b):
+        return np.dot(A, x) - b
+
+    # Generate a 2D quadratic problem with a specified condition number
+    def generate_quadratic_problem(cond_number):
+        # Random symmetric matrix
+        M = np.random.randn(2, 2)
+        M = np.dot(M, M.T)
+
+        # Ensure the matrix has the desired condition number
+        U, s, V = np.linalg.svd(M)
+        s = np.linspace(cond_number, 1, len(s))  # Spread the singular values
+        A = np.dot(U, np.dot(np.diag(s), V))
+
+        # Random b
+        b = np.random.randn(2)
+
+        return A, b
+
+    # Gradient descent function
+    def gradient_descent(start_point, A, b, stepsize_func, max_iter=100):
+        x = start_point.copy()
+        trajectory = [x.copy()]
+
+        for i in range(max_iter):
+            grad = grad_quadratic(x, A, b)
+            step_size = stepsize_func(x, grad)
+            x -= step_size * grad
+            trajectory.append(x.copy())
+
+        return np.array(trajectory)
+
+    # Backtracking line search strategy using scipy
+    def backtracking_line_search(x, grad, A, b, alpha=0.3, beta=0.8):
+        def objective(t):
+            return quadratic_function(x - t * grad, A, b)
+        res = minimize_scalar(objective, method='golden')
+        return res.x
+
+    # Generate ill-posed problem
+    cond_number = 30
+    A, b = generate_quadratic_problem(cond_number)
+
+    # Starting point
+    start_point = np.array([1.0, 1.8])
+
+    # Perform gradient descent with both strategies
+    trajectory_fixed = gradient_descent(start_point, A, b, lambda x, g: 5e-2)
+    trajectory_backtracking = gradient_descent(start_point, A, b, lambda x, g: backtracking_line_search(x, g, A, b))
+
+    # Plot the trajectories on a contour plot
+    x1, x2 = np.meshgrid(np.linspace(-2, 2, 400), np.linspace(-2, 2, 400))
+    Z = np.array([quadratic_function(np.array([x, y]), A, b) for x, y in zip(x1.flatten(), x2.flatten())]).reshape(x1.shape)
+
+    plt.figure(figsize=(10, 8))
+    plt.contour(x1, x2, Z, levels=50, cmap='viridis')
+    plt.plot(trajectory_fixed[:, 0], trajectory_fixed[:, 1], 'o-', label='Fixed Step Size')
+    plt.plot(trajectory_backtracking[:, 0], trajectory_backtracking[:, 1], 'o-', label='Backtracking Line Search')
+
+    # Add markers for start and optimal points
+    plt.plot(start_point[0], start_point[1], 'ro', label='Start Point')
+    optimal_point = np.linalg.solve(A, b)
+    plt.plot(optimal_point[0], optimal_point[1], 'y*', markersize=15, label='Optimal Point')
+
+    plt.legend()
+    plt.title('Gradient Descent Trajectories on Quadratic Function')
+    plt.xlabel('x1')
+    plt.ylabel('x2')
+    plt.savefig("linesearch.svg")
+    plt.show()
+    ```
+
+    ![The code above plots this](linesearch.svg)
+
+    Start by reviewing the provided Python code. This code implements gradient descent with a fixed step size and a backtracking line search on a quadratic function. Familiarize yourself with how the gradient descent function and the step size strategies are implemented.
+
+    1. Modify the gradient descent function to include the following line search conditions:
+        
+        a. Sufficient Decrease Condition
+        b. Curvature Condition
+        c. Goldstein Condition
+        d. Wolfe Condition
+        e. Dichotomy
+        
+        Test your modified gradient descent algorithm with the implemented line search conditions on the provided quadratic function. Plot the trajectories over iterations for each condition. Choose and specify hyperparameters for inexact line search condition. Choose and specify the termination criterion. Start from the point $x_0 = (-1, 2)^T$.
+
+    1. Compare these 7 methods from the budget perspective. Plot the graph of function value from the number of function evaluations for each method on the same graph.
+
+    1. Plot trajectory for another function with the same set of methods
+    
+        $$
+        f(x_1, x_2) =  10(x_2 − x_1^2)^2 + (x_1 − 1)^2
+        $$
+
+        with $x_0 = (-1, 2)^T$. You might need to adjust hyperparameters.
+
+    1. Plot the same function value from the number of function calls for this experiment.
