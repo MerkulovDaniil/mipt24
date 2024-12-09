@@ -66,14 +66,14 @@
   materials: /lectures/10.pdf
   notes: /notes/10.pdf
   youtube: https://youtu.be/Opa5nORJEO0
-  download: 
+  download: https://disk.yandex.ru/i/N61YYA_4gGfMvg
 
 - title: Двойственность в линейном программировании. Анализ чувствительности. 
   number: 11
   materials: /lectures/11.pdf
   notes: /notes/11.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/LTq0gs3exo0
+  download: https://disk.yandex.ru/i/NXBd7hl9NU_lYg
 
 - title: Классификация и обозначения в задачах оптимизации. Скорость сходимости. Линейный поиск. Неточная одномерная оптимизация. Правила Армихо  - Гольдштейна. Условие Вульфа
   number: 12
