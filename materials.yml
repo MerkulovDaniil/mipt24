@@ -79,8 +79,8 @@
   number: 12
   materials: /lectures/12.pdf
   notes: /notes/12.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/oaeZkbJ4lDs
+  download: https://disk.yandex.com/i/XyXXtjoQzPw6Ww
 
 - title: Методы нулевого порядка. Безградиентные методы. Оптимизация гиперпараметров модели машинного обучения. Генетический алгоритм. Эволюционные алгоритмы
   number: 13
