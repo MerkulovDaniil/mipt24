@@ -1,10 +1,325 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Методы оптимизации. МФТИ 2023-2024",
-    "section": "",
-    "text": "Методы оптимизации. МФТИ 2023-2024\nКурс представляет собой систематическое введение в разные области оптимизации. Рассматриваются начала выпуклого анализа, излагаются современные результаты и подходы в решении прикладных задач оптимизации. Курс содержит набор теоретических основ для того, чтобы понимать почему и как определенные методы работают. В начале курса основной упор делается на теоретический аппарат, в конце уделяется большее внимание методам оптимизации. Каждое занятие начинается с тестирования по материалам предыдущего занятия. Первая часть курса больше сфокусирована не теорию, необходимую для последующего использования. Во второй части делается упор на методы оптимизации, начиная c классических результатов, заканчивая самыми актуальными приложениями.\n                        \n                                            \n\n\nКоманда курса\n\n\n    \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Даниил Меркулов\n                    \n                    Преподаватель\n                  \n                \n              \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Александр Тришин\n                    \n                    Ассистент\n                  \n                \n              \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Денис Рубцов\n                    \n                    Ассистент\n                  \n                \n              \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Илья Забара\n                    \n                    Ассистент\n                  \n                \n              \n        \n    \n\n\nNo matching items\n\n\n\n\nОценка за курс\n\nКурс длится 2 семестра. За каждый семестр отдельная оценка\nИтоговая оценка за курс считается по формуле 50% работа в семестре + 50% экзамен + бонусы\nРабота в семестре складывается из еженедельных тестов и домашней работы по формуле 50/50\nЭкзамен проводится в конце семестра и состоит в устном опросе формулировок, проверке доказательства теоремы, задачи и доп.вопроса\nВ качестве бонусов засчитываются коммиты в основной репозиторий с материалами, проектная работа, а также другая образовательная активность, о которой можно договориться в индивидуальном порядке"
+    "objectID": "lectures/optml_reveal.html#градиентный-спуск-для-линейной-регрессии",
+    "href": "lectures/optml_reveal.html#градиентный-спуск-для-линейной-регрессии",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Градиентный спуск для линейной регрессии",
+    "text": "Градиентный спуск для линейной регрессии\nYour browser does not support the video tag."
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#методы-оптимизации",
+    "href": "lectures/optml_reveal.html#методы-оптимизации",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Методы оптимизации",
+    "text": "Методы оптимизации\n\n\\min_{x \\in \\mathbb{R}^n} f(x)\n\n\n\n\nМетоды нулевого порядка\n\nМетод Нелдера - Мида\nЭволюционные методы\nГенетические алгоритмы\nБезградиентные методы\nи другие…\n\n\n\n\nМетоды первого порядка\n\nx_{k+1} = x_k - \\alpha_k \\nabla f(x_k) \\hphantom{\\left[\\nabla^2 f(x_k)\\right]^{-1}}\n\n\n\n\nМетоды второго порядка\n\nx_{k+1} = x_k - \\alpha_k \\left[\\nabla^2 f(x_k)\\right]^{-1}\\nabla f(x_k)"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#проклятие-размерности-методов-нулевого-порядка",
+    "href": "lectures/optml_reveal.html#проклятие-размерности-методов-нулевого-порядка",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Проклятие размерности методов нулевого порядка",
+    "text": "Проклятие размерности методов нулевого порядка\n\n\\min_{x \\in \\mathbb{R}^n} f(x)\n\n\n\n\\text{GD: } x_{k+1} = x_k - \\alpha_k \\nabla f(x_k) \\qquad \\qquad \\text{Zero order GD: } x_{k+1} = x_k - \\alpha_k G,\n\nгде G - двухточеченая или многоточечная оценка градиента по значениям функции\n\n\n\n\n\n\n\n\n\n\n\n\nf(x) - гладкая\nf(x) - гладкая и выпуклая\nf(x) - гладкая и сильно выпуклая\n\n\n\n\nGD\n\\|\\nabla f(x_k)\\|^2 \\approx \\mathcal{O} \\left( \\dfrac{1}{k} \\right)\nf(x_k) - f^* \\approx  \\mathcal{O} \\left( \\dfrac{1}{k} \\right)\n\\|x_k - x^*\\|^2 \\approx \\mathcal{O} \\left( \\left(1 - \\dfrac{\\mu}{L}\\right)^k \\right)\n\n\nZero order GD\n\\|\\nabla f(x_k)\\|^2 \\approx \\mathcal{O} \\left( \\dfrac{n}{k} \\right)\nf(x_k) - f^* \\approx  \\mathcal{O} \\left( \\dfrac{n}{k} \\right)\n\\|x_k - x^*\\|^2 \\approx \\mathcal{O} \\left( \\left(1 - \\dfrac{\\mu}{n L}\\right)^k \\right)"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#пример-задача-многомерного-шкалирования",
+    "href": "lectures/optml_reveal.html#пример-задача-многомерного-шкалирования",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Пример: задача многомерного шкалирования",
+    "text": "Пример: задача многомерного шкалирования\nПусть у нас есть матрица попарных расстояний для N d-мерных объектов D \\in \\mathbb{R}^{N \\times N}. По этой матрице мы должны восстановить начальные координаты W_i \\in \\mathbb{R}^d, \\; i = 1, \\ldots, N.\n\n\nL(W) = \\sum_{i, j = 1}^N \\left(\\|W_i - W_j\\|^2_2 - D_{i,j}\\right)^2 \\to \\min_{W \\in \\mathbb{R}^{N \\times d}}"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#пример-задача-многомерного-шкалирования-1",
+    "href": "lectures/optml_reveal.html#пример-задача-многомерного-шкалирования-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Пример: задача многомерного шкалирования",
+    "text": "Пример: задача многомерного шкалирования\nYour browser does not support the video tag."
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#в-машинном-обучении-задача-оптимизации-часто-имеет-особенный-вид",
+    "href": "lectures/optml_reveal.html#в-машинном-обучении-задача-оптимизации-часто-имеет-особенный-вид",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "В машинном обучении задача оптимизации часто имеет особенный вид",
+    "text": "В машинном обучении задача оптимизации часто имеет особенный вид\n\n\\min_{x \\in \\mathbb{R}^n} f(x) = \\min_{x \\in \\mathbb{R}^n}\\frac{1}{N} \\sum_{i=1}^N f_i(x)\n\n\nf_i(x) - значение функции потерь модели при весах x на i-ом объекте обучающей выборки\nn - число обучаемых параметров модели (175 \\cdot 10^9 для GPT-3.5, 405 \\cdot 10^9 для Llama 3.2)\nN - размер обучающей выборки (для ImageNet \\approx 1.4 \\cdot 10^7, для WikiText \\approx 10^8, для FineWeb-Edu \\approx 1.3 \\cdot 10^{12}).\n\n\n\n\\nabla f(x_k) = \\frac{1}{N} \\sum_{i=1}^N \\nabla f_i(x)\n\n\n\n\n\\tag{GD}\nx_{k+1} = x_k - \\frac{\\alpha_k}{N} \\sum_{i=1}^N \\nabla f_i(x)\n\nТяжело считать при больших N!"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#в-машинном-обучении-задача-оптимизации-часто-имеет-особенный-вид-1",
+    "href": "lectures/optml_reveal.html#в-машинном-обучении-задача-оптимизации-часто-имеет-особенный-вид-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "В машинном обучении задача оптимизации часто имеет особенный вид",
+    "text": "В машинном обучении задача оптимизации часто имеет особенный вид\n\n\\min_{x \\in \\mathbb{R}^n} f(x) = \\min_{x \\in \\mathbb{R}^n}\\frac{1}{N} \\sum_{i=1}^N f_i(x)\n\n\n\nf_i(x) - значение функции потерь модели при весах x на i-ом объекте обучающей выборки\nn - число обучаемых параметров модели (175 \\cdot 10^9 для GPT-3.5, 405 \\cdot 10^9 для Llama 3.2)\nN - размер обучающей выборки (для ImageNet \\approx 1.4 \\cdot 10^7, для WikiText \\approx 10^8, для FineWeb-Edu \\approx 1.3 \\cdot 10^{12}).\n\n\n\n\\nabla f(x_k) \\approx \\frac{1}{b} \\sum_{i=1}^b \\nabla f_{j_i}(x)\n\n\n\\tag{SGD}\nx_{k+1} = x_k - \\frac{\\alpha_k}{b} \\sum_{i=1}^b \\nabla f_{j_i}(x)\n\nМожно считать при больших N!"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#идея-sgd-и-батчей",
+    "href": "lectures/optml_reveal.html#идея-sgd-и-батчей",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Идея SGD и батчей",
+    "text": "Идея SGD и батчей"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#идея-sgd-и-батчей-1",
+    "href": "lectures/optml_reveal.html#идея-sgd-и-батчей-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Идея SGD и батчей",
+    "text": "Идея SGD и батчей"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#идея-sgd-и-батчей-2",
+    "href": "lectures/optml_reveal.html#идея-sgd-и-батчей-2",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Идея SGD и батчей",
+    "text": "Идея SGD и батчей"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#идея-sgd-и-батчей-3",
+    "href": "lectures/optml_reveal.html#идея-sgd-и-батчей-3",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Идея SGD и батчей",
+    "text": "Идея SGD и батчей"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#идея-sgd-и-батчей-4",
+    "href": "lectures/optml_reveal.html#идея-sgd-и-батчей-4",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Идея SGD и батчей",
+    "text": "Идея SGD и батчей"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#sgd-не-сходится-с-постоянным-шагом-для-выпуклой-функции",
+    "href": "lectures/optml_reveal.html#sgd-не-сходится-с-постоянным-шагом-для-выпуклой-функции",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "SGD не сходится с постоянным шагом для выпуклой функции",
+    "text": "SGD не сходится с постоянным шагом для выпуклой функции"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#основные-результаты-сходимости-sgd",
+    "href": "lectures/optml_reveal.html#основные-результаты-сходимости-sgd",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Основные результаты сходимости SGD",
+    "text": "Основные результаты сходимости SGD\n\n\n\n\n\n\nПусть f - L-гладкая \\mu-сильно выпуклая функция, а дисперсия стохастического градиента конечна (\\mathbb{E}[\\|\\nabla f_i(x_k)\\|^2] \\leq \\sigma^2). Тогда траектория стохастического градиентного спуска с постоянным шагом \\alpha &lt; \\frac{1}{2\\mu} будет гарантировать:\n\n\\mathbb{E}[f(x_{k+1}) - f^*] \\leq (1 - 2\\alpha \\mu)^k[f(x_{0}) - f^*]  + \\frac{L \\sigma^2 \\alpha }{ 4 \\mu}.\n\n\n\n\n\n\n\n\n\n\n\nПусть f - L-гладкая \\mu-сильно выпуклая функция, а дисперсия стохастического градиента конечна (\\mathbb{E}[\\|\\nabla f_i(x_k)\\|^2] \\leq \\sigma^2). Тогда стохастический градиентный шум с уменьшающимся шагом \\alpha_k = \\frac{2k + 1 }{ 2\\mu(k+1)^2} будет сходиться сублинейно:\n\n\\mathbb{E}[f(x_{k+1}) - f^*] \\leq \\frac{L \\sigma^2}{ 2 \\mu^2 (k+1)}"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#сходимость-в-зависимости-от-размера-батча",
+    "href": "lectures/optml_reveal.html#сходимость-в-зависимости-от-размера-батча",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Сходимость в зависимости от размера батча",
+    "text": "Сходимость в зависимости от размера батча\n\nf(x) = \\frac{\\mu}{2} \\|x\\|_2^2 + \\frac1m \\sum_{i=1}^m \\log (1 + \\exp(- y_i \\langle a_i, x \\rangle)) \\to \\min_{x \\in \\mathbb{R}^n}"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#улучшаем-sgd---адаптивные-методы-adam",
+    "href": "lectures/optml_reveal.html#улучшаем-sgd---адаптивные-методы-adam",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Улучшаем SGD - адаптивные методы (Adam) 1 2",
+    "text": "Улучшаем SGD - адаптивные методы (Adam) 1 2\n\n\n\nОдна из самых цитируемых научных работ в мире\nВ 2018-2019 годах вышли статьи, указывающие на ошибку в оригинальной статье\nНе сходится для некоторых простых задач (даже выпуклых)\nПочему-то очень хорошо работает для некоторых сложных задач\nГораздо лучше работает для языковых моделей, чем для задач компьютерного зрения - почему?\n\n\n\nm_j^{(k)} = \\beta_1 m_j^{(k-1)} + (1-\\beta_1) g_j^{(k)}\n\n\nv_j^{(k)} = \\beta_2 v_j^{(k-1)} + (1-\\beta_2) (g_j^{(k)})^2\n\n\n\\hat{m}_j = \\frac{m_j^{(k)}}{1-\\beta_1^k}, \\quad \\hat{v}_j = \\frac{v_j^{(k)} }{1-\\beta_2^k}\n\n\nx_j^{(k)} = x_j^{(k-1)} - \\alpha \\frac{\\hat{m}_j}{\\sqrt{\\hat{v}_j} + \\epsilon}\n\n\n\nAdam: A Method for Stochastic OptimizationOn the Convergence of Adam and Beyond"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#adam-работает-хуже-для-cv-чем-для-llm",
+    "href": "lectures/optml_reveal.html#adam-работает-хуже-для-cv-чем-для-llm",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Adam работает хуже для CV, чем для LLM? 1",
+    "text": "Adam работает хуже для CV, чем для LLM? 1\n\n\n\n\n\nCNNs on MNIST and CIFAR10\n\n\n\n\n\n\nTransformers on PTB, WikiText2, and SQuAD\n\n\n\n\nLinear attention is (maybe) all you need (to understand transformer optimization)"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#почему-adam-работает-хуже-для-cv-чем-для-llm",
+    "href": "lectures/optml_reveal.html#почему-adam-работает-хуже-для-cv-чем-для-llm",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Почему Adam работает хуже для CV, чем для LLM? 1",
+    "text": "Почему Adam работает хуже для CV, чем для LLM? 1\nПотому что шум градиентов в языковых моделях имеет тяжелые хвосты?\nХ\nLinear attention is (maybe) all you need (to understand transformer optimization)"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#почему-adam-работает-хуже-для-cv-чем-для-llm-1",
+    "href": "lectures/optml_reveal.html#почему-adam-работает-хуже-для-cv-чем-для-llm-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Почему Adam работает хуже для CV, чем для LLM? 1",
+    "text": "Почему Adam работает хуже для CV, чем для LLM? 1\nНет! Метки имеют тяжелые хвосты!\n\n\nВ компьютерном зрении датасеты часто сбалансированы: 1000 котиков, 1000 песелей и т.д.\nВ языковых датасетах почти всегда не так: слово the встречается часто, слово tie на порядки реже\n\n\n\n\nРаспределение частоты токенов в PTB\n\n\n\n\nHeavy-Tailed Class Imbalance and Why Adam Outperforms Gradient Descent on Language Models"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#почему-adam-работает-хуже-для-cv-чем-для-llm-2",
+    "href": "lectures/optml_reveal.html#почему-adam-работает-хуже-для-cv-чем-для-llm-2",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Почему Adam работает хуже для CV, чем для LLM? 1",
+    "text": "Почему Adam работает хуже для CV, чем для LLM? 1\nSGD медленно прогрессирует на редких классах\n \nSGD не добивается прогресса на низкочастотных классах, в то время как Adam добивается. Обучение GPT-2 S на WikiText-103. (a) Распределение классов, отсортированных по частоте встречаемости, разбитых на группы, соответствующие ≈10 % данных. (b) Значение функции потерь при обучении. (c, d) Значение функции потерь при обучении для каждой группы при использовании SGD и Adam.\nHeavy-Tailed Class Imbalance and Why Adam Outperforms Gradient Descent on Language Models"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#nag-gs",
+    "href": "lectures/optml_reveal.html#nag-gs",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "NAG-GS 1",
+    "text": "NAG-GS 1\n\n\n\nТребует хранения одного дополнительного вектора, вместо двух, как в Adam.\nКачество в ряде задач сопоставимо с AdamW\n\n\n\n\n\nNAG-GS: Semi-Implicit, Accelerated and Robust Stochastic Optimizer"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#визуализация-с-помощью-проекции-на-прямую",
+    "href": "lectures/optml_reveal.html#визуализация-с-помощью-проекции-на-прямую",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Визуализация с помощью проекции на прямую",
+    "text": "Визуализация с помощью проекции на прямую\n\nОбозначим начальную точку как w_0, представляющую собой веса нейронной сети при инициализации. Веса, полученные после обучения, обозначим как \\hat{w}.\nГенерируем случайный вектор такой же размерности и нормы w_1 \\in \\mathbb{R}^p, затем вычисляем значение функции потерь вдоль этого вектора:\n\n\nL (\\alpha) = L (w_0 + \\alpha w_1), \\text{ where } \\alpha \\in [-b, b]."
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#проекция-функции-потерь-нейронной-сети-на-прямую",
+    "href": "lectures/optml_reveal.html#проекция-функции-потерь-нейронной-сети-на-прямую",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Проекция функции потерь нейронной сети на прямую",
+    "text": "Проекция функции потерь нейронной сети на прямую\n\n\n\nOpen in colab"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#проекция-функции-потерь-нейронной-сети-на-прямую-1",
+    "href": "lectures/optml_reveal.html#проекция-функции-потерь-нейронной-сети-на-прямую-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Проекция функции потерь нейронной сети на прямую",
+    "text": "Проекция функции потерь нейронной сети на прямую\n\n\n\nOpen in colab"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#проекция-функции-потерь-нейронной-сети-на-плоскость",
+    "href": "lectures/optml_reveal.html#проекция-функции-потерь-нейронной-сети-на-плоскость",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Проекция функции потерь нейронной сети на плоскость",
+    "text": "Проекция функции потерь нейронной сети на плоскость\n\nМы можем расширить эту идею и построить проекцию поверхности потерь на плоскость, которая задается 2 случайными векторами.\nДва случайных гауссовых вектора в пространстве большой размерности с высокой вероятностью ортогональны.\n\n\nL (\\alpha, \\beta) = L (w_0 + \\alpha w_1 + \\beta w_2), \\text{ where } \\alpha, \\beta \\in [-b, b]^2.\n\n\nOpen in colab"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#может-ли-быть-полезно-изучение-таких-проекций",
+    "href": "lectures/optml_reveal.html#может-ли-быть-полезно-изучение-таких-проекций",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Может ли быть полезно изучение таких проекций? 1",
+    "text": "Может ли быть полезно изучение таких проекций? 1\n\n\n\n\n\nThe loss surface of ResNet-56 without skip connections\n\n\n\n\n\n\nThe loss surface of ResNet-56 with skip connections\n\n\n\n\nVisualizing the Loss Landscape of Neural Nets, Hao Li, Zheng Xu, Gavin Taylor, Christoph Studer, Tom Goldstein"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#может-ли-быть-полезно-изучение-таких-проекций-если-серьезно",
+    "href": "lectures/optml_reveal.html#может-ли-быть-полезно-изучение-таких-проекций-если-серьезно",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Может ли быть полезно изучение таких проекций, если серьезно? 1",
+    "text": "Может ли быть полезно изучение таких проекций, если серьезно? 1\n\n\n\nExamples of a loss landscape of a typical CNN model on FashionMNIST and CIFAR10 datasets found with MPO. Loss values are color-coded according to a logarithmic scale\n\n\nLoss Landscape Sightseeing with Multi-Point Optimization, Ivan Skorokhodov, Mikhail Burtsev"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#ширина-локальных-минимумов",
+    "href": "lectures/optml_reveal.html#ширина-локальных-минимумов",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Ширина локальных минимумов",
+    "text": "Ширина локальных минимумов"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#ширина-локальных-минимумов-1",
+    "href": "lectures/optml_reveal.html#ширина-локальных-минимумов-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Ширина локальных минимумов",
+    "text": "Ширина локальных минимумов"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#ширина-локальных-минимумов-2",
+    "href": "lectures/optml_reveal.html#ширина-локальных-минимумов-2",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Ширина локальных минимумов",
+    "text": "Ширина локальных минимумов"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#модели-не-сходятся-к-стационарным-точкам-но-это-не-страшно",
+    "href": "lectures/optml_reveal.html#модели-не-сходятся-к-стационарным-точкам-но-это-не-страшно",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Модели не сходятся к стационарным точкам, но это не страшно 1",
+    "text": "Модели не сходятся к стационарным точкам, но это не страшно 1\n\n\n\n\n\n\n\n\n\nNN Weights Do Not Converge to Stationary Points"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#grokking",
+    "href": "lectures/optml_reveal.html#grokking",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Grokking 1",
+    "text": "Grokking 1\n\n\n\nTraining transformer with 2 layers, width 128, and 4 attention heads, with a total of about 4 \\cdot 10^5 non-embedding parameters. Reproduction of experiments (~ half an hour) is available here\n\n\nGrokking: Generalization Beyond Overfitting on Small Algorithmic Datasets, Alethea Power, Yuri Burda, Harri Edwards, Igor Babuschkin, Vedant Misra"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#double-descent",
+    "href": "lectures/optml_reveal.html#double-descent",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Double Descent 1",
+    "text": "Double Descent 1\n\nReconciling modern machine learning practice and the bias-variance trade-off, Mikhail Belkin, Daniel Hsu, Siyuan Ma, Soumik Mandal"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#потребление-памяти-при-обучении-gpt-2",
+    "href": "lectures/optml_reveal.html#потребление-памяти-при-обучении-gpt-2",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Потребление памяти при обучении GPT-2 1",
+    "text": "Потребление памяти при обучении GPT-2 1\n\n\nРазмер модели 1.5 B. Веса модели в fp16 занимают всего 3 GB, однако, для наивного обучения не хватит GPU даже на 32 GB\nДля использования Adam в режиме mixed precision необходимо хранить 3 (!) копии модели в fp32.\nАктивации в наивном режиме могут занимать гораздо больше памяти: для длины последовательности 1K и размера батча 32 нужно 60 GB для хранения всех промежуточных активаций. Чекпоинтинг активаций позволяет сократить потребление до 8 GB за счёт их перевычисления (33% computational overhead)\n\nZeRO: Memory Optimizations Toward Training Trillion Parameter Models"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#large-batch-training",
+    "href": "lectures/optml_reveal.html#large-batch-training",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Large batch training 1",
+    "text": "Large batch training 1\n\nAccurate, Large Minibatch SGD: Training ImageNet in 1 Hour"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#large-batch-training-1",
+    "href": "lectures/optml_reveal.html#large-batch-training-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Large batch training 1",
+    "text": "Large batch training 1\n\nAn Empirical Model of Large-Batch Training"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#large-batch-training-2",
+    "href": "lectures/optml_reveal.html#large-batch-training-2",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Large batch training 1",
+    "text": "Large batch training 1\n\nAccurate, Large Minibatch SGD: Training ImageNet in 1 Hour"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#linear-and-square-root-scaling-rules",
+    "href": "lectures/optml_reveal.html#linear-and-square-root-scaling-rules",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Linear and square root scaling rules",
+    "text": "Linear and square root scaling rules\nWhen training with large batches, the learning rate must be adjusted to maintain convergence speed and stability. The linear scaling rule1 suggests multiplying the learning rate by the same factor as the increase in batch size: \n\\alpha_{\\text{new}} = \\alpha_{\\text{base}} \\cdot \\frac{\\text{Batch Size}_{\\text{new}}}{\\text{Batch Size}_{\\text{base}}}\n The square root scaling rule2 proposes scaling the learning rate with the square root of the batch size increase: \n\\alpha_{\\text{new}} = \\alpha_{\\text{base}} \\cdot \\sqrt{\\frac{\\text{Batch Size}_{\\text{new}}}{\\text{Batch Size}_{\\text{base}}}}\n Authors claimed, that it suits for adaptive optimizers like Adam, RMSProp and etc. while linear scaling rule serves well for SGD.\nAccurate, Large Minibatch SGD: Training ImageNet in 1 HourLearning Rates as a Function of Batch Size: A Random Matrix Theory Approach to Neural Network Training"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#gradual-warmup",
+    "href": "lectures/optml_reveal.html#gradual-warmup",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Gradual warmup 1",
+    "text": "Gradual warmup 1\nGradual warmup helps to avoid instability when starting with large learning rates by slowly increasing the learning rate from a small value to the target value over a few epochs. This is defined as: \n\\alpha_t = \\alpha_{\\text{max}} \\cdot \\frac{t}{T_w}\n where t is the current iteration and T_w is the warmup duration in iterations. In the original paper, authors used first 5 epochs for gradual warmup.\n\n\n\n\n\nno warmup\n\n\n\n\n\n\nconstant warmup\n\n\n\n\n\n\ngradual warmup\n\n\n\n\nAccurate, Large Minibatch SGD: Training ImageNet in 1 Hour"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#cooldown",
+    "href": "lectures/optml_reveal.html#cooldown",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Cooldown1 2",
+    "text": "Cooldown1 2\n\n\n\n\n\n\n\nScaling Laws and Compute-Optimal Training Beyond Fixed Training DurationsScaling Vision Transformers"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#nanogpt-speedrun",
+    "href": "lectures/optml_reveal.html#nanogpt-speedrun",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "NanoGPT speedrun",
+    "text": "NanoGPT speedrun\n\n\n\n Источник"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#работают-ли-трюки-если-увеличить-размер-модели",
+    "href": "lectures/optml_reveal.html#работают-ли-трюки-если-увеличить-размер-модели",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Работают ли трюки, если увеличить размер модели?",
+    "text": "Работают ли трюки, если увеличить размер модели?\n\n Источник"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#работают-ли-трюки-если-увеличить-размер-модели-1",
+    "href": "lectures/optml_reveal.html#работают-ли-трюки-если-увеличить-размер-модели-1",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Работают ли трюки, если увеличить размер модели?",
+    "text": "Работают ли трюки, если увеличить размер модели?\n\n Источник"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#спаcибо-за-внимание",
+    "href": "lectures/optml_reveal.html#спаcибо-за-внимание",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Спаcибо за внимание!",
+    "text": "Спаcибо за внимание!\n\nМои контакты"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#влияние-инициализации-весов-нейронной-сети-на-сходимость-методов",
+    "href": "lectures/optml_reveal.html#влияние-инициализации-весов-нейронной-сети-на-сходимость-методов",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Влияние инициализации весов нейронной сети на сходимость методов 1",
+    "text": "Влияние инициализации весов нейронной сети на сходимость методов 1\n\n\n\n\n\n22-layer ReLU net: good init converges faster\n\n\n\n\n\n\n30-layer ReLU net: good init is able to converge\n\n\n\n\nDelving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification, Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun"
+  },
+  {
+    "objectID": "lectures/optml_reveal.html#методы-уменьшения-дисперсии-не-всё-так-просто-на-практике",
+    "href": "lectures/optml_reveal.html#методы-уменьшения-дисперсии-не-всё-так-просто-на-практике",
+    "title": "Обучение здоровенных моделей с точки зрения методов оптимизации",
+    "section": "Методы уменьшения дисперсии? Не всё так просто на практике 1 –>",
+    "text": "Методы уменьшения дисперсии? Не всё так просто на практике 1 –&gt;\n\n\n\n\n\n\n\nOn the Ineffectiveness of Variance Reduced Optimization for Deep Learning"
   },
   {
     "objectID": "files/mds.html",
@@ -12,13 +327,6 @@
     "title": "",
     "section": "",
     "text": "!pip install -q geopy\n\n\n[notice] A new release of pip is available: 23.2.1 -&gt; 23.3.2\n[notice] To update, run: python3.9 -m pip install --upgrade pip\n\n\n\nimport numpy as np\nfrom geopy.distance import geodesic\n\n# Estimated GPS coordinates for the specified Moscow Metro stations\n# Format: \"Station Name\": (Latitude, Longitude)\nstations_coordinates = {\n    \"Fizteh\": (55.5518, 37.3247),           # Estimated coordinates for Fizteh\n    \"Chkalovskaya\": (55.4523, 37.3926),\n    \"Slavyanski Boulevard\": (55.4347, 37.2814),\n    \"Park Kultury\": (55.4409, 37.3529),\n    \"Komsomolskaya\": (55.4629, 37.3918),\n    \"Yugo-Zapadnaya\": (55.3949, 37.2900),\n    \"Kievskaya\": (55.4440, 37.3356),\n    \"Strogino\": (55.4814, 37.2411),\n    \"Konkovo\": (55.3800, 37.3108),\n    \"VDNKh\": (55.4916, 37.3828),\n    \"Tekstilshiki\": (55.4232, 37.4354)\n}\n\n# Calculate the pairwise distance matrix\ndef calculate_distance_matrix(coords_dict):\n    station_names = list(coords_dict.keys())\n    n_stations = len(station_names)\n    distance_matrix = np.zeros((n_stations, n_stations))\n\n    for i in range(n_stations):\n        for j in range(n_stations):\n            if i != j:\n                distance_matrix[i][j] = geodesic(coords_dict[station_names[i]], coords_dict[station_names[j]]).kilometers\n            else:\n                distance_matrix[i][j] = 0\n\n    return station_names, distance_matrix\n\nstation_names, distance_matrix = calculate_distance_matrix(stations_coordinates)\ndistance_matrix, station_names\n\n\n(array([[ 0.        , 11.8795683 , 13.32121955, 12.47476534, 10.76730899,\n         17.60531703, 12.02141556,  9.45093857, 19.14704757,  7.64111262,\n         15.93607716],\n        [11.8795683 ,  0.        ,  7.30513134,  2.81466242,  1.18120326,\n          9.11269391,  3.72338261, 10.11508331,  9.57219188,  4.41903113,\n          4.22314047],\n        [13.32121955,  7.30513134,  0.        ,  4.57796148,  7.6589319 ,\n          4.46432896,  3.58332329,  5.79065187,  6.36819994,  9.01496207,\n          9.83338314],\n        [12.47476534,  2.81466242,  4.57796148,  0.        ,  3.47233987,\n          6.48795948,  1.14799012,  8.3873321 ,  7.28559471,  5.95292621,\n          5.58202776],\n        [10.76730899,  1.18120326,  7.6589319 ,  3.47233987,  0.        ,\n          9.94233619,  4.13173454,  9.75035755, 10.55879981,  3.24552038,\n          5.21047455],\n        [17.60531703,  9.11269391,  4.46432896,  6.48795948,  9.94233619,\n          0.        ,  6.18218626, 10.11534229,  2.11882318, 12.26352411,\n          9.73385562],\n        [12.02141556,  3.72338261,  3.58332329,  1.14799012,  4.13173454,\n          6.18218626,  0.        ,  7.28489644,  7.29627254,  6.08240265,\n          6.72859259],\n        [ 9.45093857, 10.11508331,  5.79065187,  8.3873321 ,  9.75035755,\n         10.11534229,  7.28489644,  0.        , 12.12071314,  9.02961058,\n         13.89681105],\n        [19.14704757,  9.57219188,  6.36819994,  7.28559471, 10.55879981,\n          2.11882318,  7.29627254, 12.12071314,  0.        , 13.23410172,\n          9.24357874],\n        [ 7.64111262,  4.41903113,  9.01496207,  5.95292621,  3.24552038,\n         12.26352411,  6.08240265,  9.02961058, 13.23410172,  0.        ,\n          8.31043471],\n        [15.93607716,  4.22314047,  9.83338314,  5.58202776,  5.21047455,\n          9.73385562,  6.72859259, 13.89681105,  9.24357874,  8.31043471,\n          0.        ]]),\n ['Fizteh',\n  'Chkalovskaya',\n  'Slavyanski Boulevard',\n  'Park Kultury',\n  'Komsomolskaya',\n  'Yugo-Zapadnaya',\n  'Kievskaya',\n  'Strogino',\n  'Konkovo',\n  'VDNKh',\n  'Tekstilshiki'])\n\n\n\nimport matplotlib.pyplot as plt\n\ndef gradient_descent_mds(D, dimensions=2, learning_rate=0.01, iterations=1000):\n    \"\"\"\n    Perform Multidimensional Scaling using Gradient Descent.\n\n    :param D: NxN distance matrix.\n    :param dimensions: Number of dimensions for the output coordinates.\n    :param learning_rate: Learning rate for gradient descent.\n    :param iterations: Number of iterations.\n    :return: Nx2 matrix of coordinates.\n    \"\"\"\n    N = D.shape[0]\n    # Random initialization of coordinates\n    X = np.random.rand(N, dimensions)\n\n    for iteration in range(iterations):\n        # Compute distance matrix for current coordinates\n        D_hat = np.sqrt(np.sum((X[:, np.newaxis, :] - X[np.newaxis, :, :]) ** 2, axis=2))\n\n        # Compute gradient\n        delta = D_hat - D\n        for i in range(N):\n            for j in range(N):\n                if i != j:\n                    grad = (delta[i, j] / D_hat[i, j]) * (X[i, :] - X[j, :])\n                    X[i, :] -= learning_rate * grad\n\n    return X\n\n# Perform MDS\ncoordinates_mds = gradient_descent_mds(distance_matrix)\n\n# Plotting the results\nplt.figure(figsize=(10, 8))\nplt.scatter(coordinates_mds[:, 0], coordinates_mds[:, 1])\nfor i, name in enumerate(station_names):\n    plt.annotate(name, (coordinates_mds[i, 0], coordinates_mds[i, 1]))\nplt.title(\"2D Representation of Moscow Metro Stations using MDS\")\nplt.xlabel(\"X Coordinate\")\nplt.ylabel(\"Y Coordinate\")\nplt.grid(True)\nplt.show()\n\n\n\n\n\n\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport matplotlib.animation as animation\nfrom geopy.distance import geodesic\n\n# Estimated GPS coordinates for the specified Moscow Metro stations\nstations_coordinates = {\n    \"Fizteh\": (55.5518, 37.3247),\n    \"Chkalovskaya\": (55.4523, 37.3926),\n    \"Slavyanski Boulevard\": (55.4347, 37.2814),\n    \"Park Kultury\": (55.4409, 37.3529),\n    \"Komsomolskaya\": (55.4629, 37.3918),\n    \"Yugo-Zapadnaya\": (55.3949, 37.2900),\n    \"Kievskaya\": (55.4440, 37.3356),\n    \"Strogino\": (55.4814, 37.2411),\n    \"Konkovo\": (55.3800, 37.3108),\n    \"VDNKh\": (55.4916, 37.3828),\n    \"Tekstilshiki\": (55.4232, 37.4354)\n}\n\n# Calculate the pairwise distance matrix\ndef calculate_distance_matrix(coords_dict):\n    station_names = list(coords_dict.keys())\n    n_stations = len(station_names)\n    distance_matrix = np.zeros((n_stations, n_stations))\n\n    for i in range(n_stations):\n        for j in range(n_stations):\n            if i != j:\n                distance_matrix[i][j] = geodesic(coords_dict[station_names[i]], coords_dict[station_names[j]]).kilometers\n            else:\n                distance_matrix[i][j] = 0\n\n    return station_names, distance_matrix\n\nstation_names, distance_matrix = calculate_distance_matrix(stations_coordinates)\n\n# Gradient Descent MDS with data collection for animation\ndef gradient_descent_mds(D, dimensions=2, learning_rate=0.01, iterations=1000):\n    N = D.shape[0]\n    X = np.random.rand(N, dimensions)\n\n    # Records for animation\n    positions_record = []\n    loss_record = []\n\n    for iteration in range(iterations):\n        D_hat = np.sqrt(np.sum((X[:, np.newaxis, :] - X[np.newaxis, :, :]) ** 2, axis=2))\n        delta = D_hat - D\n        loss = np.sum(delta**2)  # Loss calculation\n        positions_record.append(X.copy())\n        loss_record.append(loss)\n\n        # Gradient descent update\n        for i in range(N):\n            for j in range(N):\n                if i != j:\n                    grad = (delta[i, j] / D_hat[i, j]) * (X[i, :] - X[j, :])\n                    X[i, :] -= learning_rate * grad\n\n    return positions_record, loss_record\n\n# Perform MDS and collect data for animation\npositions_record, loss_record = gradient_descent_mds(distance_matrix, iterations=100)\n\n# Function to update each frame in the animation\ndef update_frame(num, positions_record, loss_record, station_names, scat, line, ax1, ax2):\n    # Clear previous station labels and tails\n    ax1.clear()\n    ax1.set_xlim(-10, 10)\n    ax1.set_ylim(-10, 10)\n    ax1.set_title('Station Positions')\n    ax1.set_xlabel('X Coordinate')\n    ax1.set_ylabel('Y Coordinate')\n\n    # Update station positions and draw tails\n    scat.set_offsets(positions_record[num])\n    for i, name in enumerate(station_names):\n        # Draw the tail for each station\n        if num &gt; 0:\n            for past in range(num):\n                ax1.plot([positions_record[past][i, 0], positions_record[past+1][i, 0]],\n                         [positions_record[past][i, 1], positions_record[past+1][i, 1]],\n                         color='gray', alpha=0.5)\n\n        # Label the final position of the station\n        if num == len(positions_record) - 1:\n            ax1.text(positions_record[num][i, 0], positions_record[num][i, 1], name, fontsize=8)\n\n    # Update loss evolution plot\n    line.set_data(range(num + 1), loss_record[:num + 1])\n    ax2.set_xlim(0, 100)\n    ax2.set_ylim(min(loss_record), max(loss_record))\n    ax2.set_title('Loss Evolution')\n    ax2.set_xlabel('Iteration')\n    ax2.set_ylabel('Loss')\n\n    return scat, line\n\n# Create the figure for animation\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))\n\n# Scatter plot for station positions\nscat = ax1.scatter([], [], s=30)\nax1.set_xlim(-10, 10)\nax1.set_ylim(-10, 10)\nax1.set_title('Station Positions')\nax1.set_xlabel('X Coordinate')\nax1.set_ylabel('Y Coordinate')\n\n# Line plot for loss evolution\nline, = ax2.semilogy([], [], lw=2)\nax2.set_xlim(0, 100)\nax2.set_ylim(min(loss_record), max(loss_record))\nax2.set_title('Loss Evolution')\nax2.set_xlabel('Iteration')\nax2.set_ylabel('Loss')\n\n# Creating the animation\nani = animation.FuncAnimation(fig, update_frame, frames=100, fargs=(positions_record, loss_record, station_names, scat, line, ax1, ax2), blit=False, repeat=False)\n\n# Saving the animation\nani.save('moscow_metro_mds_animation.mp4', writer='ffmpeg', fps=10)\n\n\n\n\n\n\n\n\n\npositions_record[-1]\n\narray([[ 8.02981262,  8.63001461],\n       [ 2.25518938, -2.67734712],\n       [-3.33834951,  1.74376926],\n       [-0.07801013, -1.44497825],\n       [ 3.09715112, -2.01602395],\n       [-6.46246911, -1.07594008],\n       [-0.48882653, -0.35399986],\n       [-1.32473107,  7.16441546],\n       [-6.86842661, -3.2663034 ],\n       [ 5.7281098 ,  1.15859194],\n       [ 4.50067386, -4.182293  ]])\n\n\n\nnp.max()\n\n100"
-  },
-  {
-    "objectID": "files/nanogpt.html",
-    "href": "files/nanogpt.html",
-    "title": "",
-    "section": "",
-    "text": "# Re-import necessary libraries and re-define data since the execution state was reset\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfrom datetime import datetime\nimport pandas as pd\n\n# Data from the table\ndata = {\n    \"Record Time (minutes)\": [45, 31.4, 24.9, 22.3, 15.2, 13.1, 12.0, 10.8, 8.2, 7.8, 7.2, 5.03, 4.66],\n    \"Description\": [\n        \"llm.c baseline\",\n        \"Architectural modernizations & tuned learning rate\",\n        \"Introduced the Muon optimizer\",\n        \"Muon improvements\",\n        \"Pad embeddings & architectural improvements\",\n        \"Distributed the overhead of Muon\",\n        \"Upgraded PyTorch from 2.4.1 to 2.5.0\",\n        \"Untied embed and lm_head\",\n        \"Shortcuts & tweaks\",\n        \"Bfloat16 activations\",\n        \"U-net & 2x lr\",\n        \"FlexAttention\",\n        \"Attention window warmup\"\n    ],\n    \"Date\": [\n        \"05/28/24\", \"06/06/24\", \"10/04/24\", \"10/11/24\", \"10/14/24\", \"10/18/24\", \"10/18/24\", \n        \"11/03/24\", \"11/06/24\", \"11/08/24\", \"11/10/24\", \"11/19/24\", \"11/24/24\"\n    ]\n}\n\n# Convert to a DataFrame\ndf = pd.DataFrame(data)\ndf[\"Date\"] = pd.to_datetime(df[\"Date\"], format=\"%m/%d/%y\")\n\n# Sort the data by date to ensure proper plotting\ndf = df.sort_values(\"Date\")\n\n# Prepare data for plotting\ndates = df[\"Date\"]\ntimes = df[\"Record Time (minutes)\"]\ndescriptions = df[\"Description\"]\n\n# Adjust the plot to spread labels further and use more of the available space\nplt.figure(figsize=(12, 6))\nplt.plot(dates, times, linestyle=\"--\", zorder=0)\nplt.scatter(dates, times, label=\"Training Time\", marker=\"o\", s=70, zorder=100)\n\n# Add labels with arrows for clear separation, spreading them out further\nfor i, (date, time, desc) in enumerate(zip(dates, times, descriptions)):\n    # Larger offset for labels\n    if i &lt;= 1:\n        y_offset = 0\n        x_offset = pd.Timedelta(days=5)\n    elif desc == \"U-net & 2x lr\":\n        y_offset = 16 if i % 2 == 0 else 7\n        y_offset = int(y_offset*(1 - i/20))*0.8\n        x_offset = pd.Timedelta(days=0 if i % 2 == 0 else -100)\n    else:\n        y_offset = 16 if i % 2 == 0 else 7\n        y_offset = int(y_offset*(1 - i/20))\n        x_offset = pd.Timedelta(days=0 if i % 2 == 0 else -100)\n    # Plot the arrow\n    plt.annotate(\n        desc,\n        xy=(date, time),\n        xytext=(date + x_offset, time + y_offset),\n        arrowprops=dict(facecolor='black', arrowstyle=\"-\", lw=0.5),\n        fontsize=14,\n        bbox=dict(boxstyle=\"round,pad=0.3\", edgecolor=\"gray\", facecolor=\"white\", alpha=0.9, zorder=-100)\n    )\n\n# Formatting the plot\nplt.title(\"Ускорение обучения NanoGPT - 125M\")\nplt.xlabel(\"Дата, 2024\")\nplt.ylabel(\"Время обучения на 8xH100, минуты\")\nplt.gca().xaxis.set_major_formatter(mdates.DateFormatter(\"%d.%m\"))\nplt.gca().xaxis.set_major_locator(mda tes.MonthLocator())\nplt.xticks(rotation=45)\nplt.grid(alpha=0.3, linestyle=\":\")\n# plt.legend()\nplt.tight_layout()\n\n# Show the plot\nplt.savefig(\"nanogpt_speedrun.pdf\")\nplt.show()"
   },
   {
     "objectID": "homework.html",
@@ -32,6 +340,20 @@
     "href": "program.html",
     "title": "",
     "section": "",
-    "text": "Занятие 1\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Вспоминаем линейную алгебру. Некоторые матричные разложения. Спектр матрицы. SVD. Skeleton. Градиент. Гессиан. Матрично-векторное дифференцирование\n\n    Занятие 2\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Повторяем матричные производные. Проклятие размерности методов нулевого порядка\n\n    Занятие 3\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Автоматическое дифференцирование. Forward\\Reverse Mode. Вычислительный граф.\n\n    Занятие 4\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Выпуклость. Выпуклые, афинные множества. Сумма Минковского. Выпуклые функции. Неравенство Йенсена\n\n    Занятие 5\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация.\n\n    Занятие 6\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Сопряженные множества. Сопряженные конусы. Многогранники. Сопряженные функции. Преобразование Лежандра. Субградиент. Субдифференциал. Теоремы Моро-Рокафеллара, Дубовицкого-Милютина\n\n    Занятие 7\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Субдифференциал. Условия оптимальности в субдифференциальной форме. Функция Лагранжа. Множители Лагранжа. Задачи с ограничениями типа равенств.\n\n    Занятие 8\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера\n\n    Занятие 9\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Двойственность. Введение в двойственность. Двойственная задача. Two-way partitioning problem. Решение прямой задачи с помощью двойственной\n\n    Занятие 10\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Линейное программирование. Транспортная задача и другие формулировки прикладных задач как ЛП. Симплекс метод для решения ЛП\n\n    Занятие 11\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Двойственность в линейном программировании. Анализ чувствительности.\n\n    Занятие 12\n    \n        📄 Презентация • 📝 Заметки\n    \n    Классификация и обозначения в задачах оптимизации. Скорость сходимости. Линейный поиск. Неточная одномерная оптимизация. Правила Армихо  - Гольдштейна. Условие Вульфа\n\n    Занятие 13\n    \n        📄 Презентация • 📝 Заметки\n    \n    Методы нулевого порядка. Безградиентные методы. Оптимизация гиперпараметров модели машинного обучения. Генетический алгоритм. Эволюционные алгоритмы\n\n    Занятие 14\n    \n        📄 Презентация • 📝 Заметки\n    \n    Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL). Верхние и нижние оценки сходимости\n\n    Занятие 15\n    \n        📄 Презентация • 📝 Заметки\n    \n    Ускоренные градиентные методы. Метод Поляка, Нестерова\n\n    Занятие 16\n    \n        📄 Презентация • 📝 Заметки\n    \n    Метод сопряженных направлений. Ортогонализация Грамма - Шмидта. Понятие $A$-ортогональных векторов. Метод сопряженных градиентов\n\n    Занятие 17\n    \n        📄 Презентация • 📝 Заметки\n    \n    Субградиентный метод. Теоремы сходимости в негладком случае (выпуклый случай). Особенности работы градиентного метода в практических негладких задачах. Задача наименьших квадратов с $l_1$ регуляризацией\n\n    Занятие 18\n    \n        📄 Презентация • 📝 Заметки\n    \n    Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Метод зеркального спуска\n\n    Занятие 19\n    \n        📄 Презентация • 📝 Заметки\n    \n    Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы\n\n    Занятие 20\n    \n        📄 Презентация • 📝 Заметки\n    \n    Проксимальный градиентный метод\n\n    Занятие 21\n    \n        📄 Презентация • 📝 Заметки\n    \n    Введение в стохастические градиентные методы. Батч, эпоха. Сходимость SGD\n\n    Занятие 22\n    \n        📄 Презентация • 📝 Заметки\n    \n    Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы\n\n    Занятие 23\n    \n        📄 Презентация • 📝 Заметки\n    \n    Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity\n\n    Занятие 24\n    \n        📄 Презентация • 📝 Заметки\n    \n    Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций.\n\n    Занятие 25\n    \n        📄 Презентация • 📝 Заметки\n    \n    Вопросы обучения больших моделей. Lars, Lamb. Learning rate schedulers. Warm-up. MultiGPU training. LoRa адаптеры. Квантизация.\n\n    Занятие 26\n    \n        📄 Презентация • 📝 Заметки\n    \n    Методы оптимизации в непрерывном времени. Gradient Flow. Accelerated Gradient Flow. Stochastic gradient flow.\n\n    Занятие 27\n    \n        📄 Презентация • 📝 Заметки\n    \n    Введение в двойственные методы оптимизации. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.\n\n\nNo matching items"
+    "text": "Занятие 1\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Вспоминаем линейную алгебру. Некоторые матричные разложения. Спектр матрицы. SVD. Skeleton. Градиент. Гессиан. Матрично-векторное дифференцирование\n\n    Занятие 2\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Повторяем матричные производные. Проклятие размерности методов нулевого порядка\n\n    Занятие 3\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Автоматическое дифференцирование. Forward\\Reverse Mode. Вычислительный граф.\n\n    Занятие 4\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Выпуклость. Выпуклые, афинные множества. Сумма Минковского. Выпуклые функции. Неравенство Йенсена\n\n    Занятие 5\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Сильно выпуклые функции. Условие Поляка - Лоясиевича. Линейная регрессия. Регуляризация.\n\n    Занятие 6\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Сопряженные множества. Сопряженные конусы. Многогранники. Сопряженные функции. Преобразование Лежандра. Субградиент. Субдифференциал. Теоремы Моро-Рокафеллара, Дубовицкого-Милютина\n\n    Занятие 7\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Субдифференциал. Условия оптимальности в субдифференциальной форме. Функция Лагранжа. Множители Лагранжа. Задачи с ограничениями типа равенств.\n\n    Занятие 8\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Условия оптимальности. Функция Лагранжа. Множители Лагранжа. Теорема Каруша - Куна - Таккера\n\n    Занятие 9\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Двойственность. Введение в двойственность. Двойственная задача. Two-way partitioning problem. Решение прямой задачи с помощью двойственной\n\n    Занятие 10\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Линейное программирование. Транспортная задача и другие формулировки прикладных задач как ЛП. Симплекс метод для решения ЛП\n\n    Занятие 11\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Двойственность в линейном программировании. Анализ чувствительности.\n\n    Занятие 12\n    \n        📄 Презентация • 📝 Заметки • ▶️ Youtube • 💿 Скачать\n    \n    Классификация и обозначения в задачах оптимизации. Скорость сходимости. Линейный поиск. Неточная одномерная оптимизация. Правила Армихо  - Гольдштейна. Условие Вульфа\n\n    Занятие 13\n    \n        📄 Презентация • 📝 Заметки\n    \n    Методы нулевого порядка. Безградиентные методы. Оптимизация гиперпараметров модели машинного обучения. Генетический алгоритм. Эволюционные алгоритмы\n\n    Занятие 14\n    \n        📄 Презентация • 📝 Заметки\n    \n    Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL). Верхние и нижние оценки сходимости\n\n    Занятие 15\n    \n        📄 Презентация • 📝 Заметки\n    \n    Ускоренные градиентные методы. Метод Поляка, Нестерова\n\n    Занятие 16\n    \n        📄 Презентация • 📝 Заметки\n    \n    Метод сопряженных направлений. Ортогонализация Грамма - Шмидта. Понятие $A$-ортогональных векторов. Метод сопряженных градиентов\n\n    Занятие 17\n    \n        📄 Презентация • 📝 Заметки\n    \n    Субградиентный метод. Теоремы сходимости в негладком случае (выпуклый случай). Особенности работы градиентного метода в практических негладких задачах. Задача наименьших квадратов с $l_1$ регуляризацией\n\n    Занятие 18\n    \n        📄 Презентация • 📝 Заметки\n    \n    Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Метод зеркального спуска\n\n    Занятие 19\n    \n        📄 Презентация • 📝 Заметки\n    \n    Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы\n\n    Занятие 20\n    \n        📄 Презентация • 📝 Заметки\n    \n    Проксимальный градиентный метод\n\n    Занятие 21\n    \n        📄 Презентация • 📝 Заметки\n    \n    Введение в стохастические градиентные методы. Батч, эпоха. Сходимость SGD\n\n    Занятие 22\n    \n        📄 Презентация • 📝 Заметки\n    \n    Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы\n\n    Занятие 23\n    \n        📄 Презентация • 📝 Заметки\n    \n    Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity\n\n    Занятие 24\n    \n        📄 Презентация • 📝 Заметки\n    \n    Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций.\n\n    Занятие 25\n    \n        📄 Презентация • 📝 Заметки\n    \n    Вопросы обучения больших моделей. Lars, Lamb. Learning rate schedulers. Warm-up. MultiGPU training. LoRa адаптеры. Квантизация.\n\n    Занятие 26\n    \n        📄 Презентация • 📝 Заметки\n    \n    Методы оптимизации в непрерывном времени. Gradient Flow. Accelerated Gradient Flow. Stochastic gradient flow.\n\n    Занятие 27\n    \n        📄 Презентация • 📝 Заметки\n    \n    Введение в двойственные методы оптимизации. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Методы оптимизации. МФТИ 2024-2025",
+    "section": "",
+    "text": "Методы оптимизации. МФТИ 2024-2025\nКурс представляет собой систематическое введение в разные области оптимизации. Рассматриваются начала выпуклого анализа, излагаются современные результаты и подходы в решении прикладных задач оптимизации. Курс содержит набор теоретических основ для того, чтобы понимать почему и как определенные методы работают. В начале курса основной упор делается на теоретический аппарат, в конце уделяется большее внимание методам оптимизации. Каждое занятие начинается с тестирования по материалам предыдущего занятия. Первая часть курса больше сфокусирована не теорию, необходимую для последующего использования. Во второй части делается упор на методы оптимизации, начиная c классических результатов, заканчивая самыми актуальными приложениями.\n                        \n                                            \n\n\nКоманда курса\n\n\n    \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Даниил Меркулов\n                    \n                    Преподаватель\n                  \n                \n              \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Александр Тришин\n                    \n                    Ассистент\n                  \n                \n              \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Денис Рубцов\n                    \n                    Ассистент\n                  \n                \n              \n        \n            \n                \n                  \n                    \n                  \n                  \n                    \n                      Илья Забара\n                    \n                    Ассистент\n                  \n                \n              \n        \n    \n\n\nNo matching items\n\n\n\n\nОценка за курс\n\nКурс длится 2 семестра. За каждый семестр отдельная оценка\nИтоговая оценка за курс считается по формуле 50% работа в семестре + 50% экзамен + бонусы\nРабота в семестре складывается из еженедельных тестов и домашней работы по формуле 50/50\nЭкзамен проводится в конце семестра и состоит в устном опросе формулировок, проверке доказательства теоремы, задачи и доп.вопроса\nВ качестве бонусов засчитываются коммиты в основной репозиторий с материалами, проектная работа, а также другая образовательная активность, о которой можно договориться в индивидуальном порядке\n\n\n\nОсенний экзамен\n📜 Список формулировок и теорем\nОценка за экзамен складывается из 4 частей:\n\nВопросы по формулировкам - 2 балла\nСначала выдаются 5 случайных определений/формулировок из списка. На подготовку дается 10 минут. При правильном ответе хотя бы на 3 из 5 определений/формулировок экзамен продолжается дальше, и вы получаете x − 3 баллов, где x – число верно отвеченных вопросов. В противном случае за экзамен выставляется 0 баллов.\nТеорема с доказательством - 3 балла\nРешение задач - 3 балла\nПри успешной сдаче определений вам выдается билет, содержащий теоретический вопрос на доказательство, а также задачи. На подготовку к ответу дается 30 минут. Теоретический вопрос на доказательства будет по теоремам из списка. Для подготовки к задачам советуем повторить домашние задания, а также задачи с семинаров. В процессе беседы по предыдущим пунктам экзаменатор может задавать уточняющие вопросы.\nДополнительный вопрос - 2 балла\nПосле ответа на предыдущие этапы экзаменатор задает дополнительный вопрос, например, задачу или вопрос, связанный с теорией. Ответ на дополнительный вопрос оценивается в 2 балла.\nВо время вопросов по формулировкам нельзя пользоваться никакими источниками.\nВо время подготовки ответа на остальные вопросы можно пользоваться рукописными записями размера одной страницы А4 или одного листа с двух сторон А5.\nЕсли во время экзамена человек не может написать формулировку неравенства Йенсена для выпуклой функции и условия локального экстремума для задачи безусловной оптимизации, за курс ставится 0."
+  },
+  {
+    "objectID": "files/nanogpt.html",
+    "href": "files/nanogpt.html",
+    "title": "",
+    "section": "",
+    "text": "# Re-import necessary libraries and re-define data since the execution state was reset\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nfrom datetime import datetime\nimport pandas as pd\n\n# Data from the table\ndata = {\n    \"Record Time (minutes)\": [45, 31.4, 24.9, 22.3, 15.2, 13.1, 12.0, 10.8, 8.2, 7.8, 7.2, 5.03, 4.66],\n    \"Description\": [\n        \"llm.c baseline\",\n        \"Architectural modernizations & tuned learning rate\",\n        \"Introduced the Muon optimizer\",\n        \"Muon improvements\",\n        \"Pad embeddings & architectural improvements\",\n        \"Distributed the overhead of Muon\",\n        \"Upgraded PyTorch from 2.4.1 to 2.5.0\",\n        \"Untied embed and lm_head\",\n        \"Shortcuts & tweaks\",\n        \"Bfloat16 activations\",\n        \"U-net & 2x lr\",\n        \"FlexAttention\",\n        \"Attention window warmup\"\n    ],\n    \"Date\": [\n        \"05/28/24\", \"06/06/24\", \"10/04/24\", \"10/11/24\", \"10/14/24\", \"10/18/24\", \"10/18/24\", \n        \"11/03/24\", \"11/06/24\", \"11/08/24\", \"11/10/24\", \"11/19/24\", \"11/24/24\"\n    ]\n}\n\n# Convert to a DataFrame\ndf = pd.DataFrame(data)\ndf[\"Date\"] = pd.to_datetime(df[\"Date\"], format=\"%m/%d/%y\")\n\n# Sort the data by date to ensure proper plotting\ndf = df.sort_values(\"Date\")\n\n# Prepare data for plotting\ndates = df[\"Date\"]\ntimes = df[\"Record Time (minutes)\"]\ndescriptions = df[\"Description\"]\n\n# Adjust the plot to spread labels further and use more of the available space\nplt.figure(figsize=(12, 6))\nplt.plot(dates, times, linestyle=\"--\", zorder=0)\nplt.scatter(dates, times, label=\"Training Time\", marker=\"o\", s=70, zorder=100)\n\n# Add labels with arrows for clear separation, spreading them out further\nfor i, (date, time, desc) in enumerate(zip(dates, times, descriptions)):\n    # Larger offset for labels\n    if i &lt;= 1:\n        y_offset = 0\n        x_offset = pd.Timedelta(days=5)\n    elif desc == \"U-net & 2x lr\":\n        y_offset = 16 if i % 2 == 0 else 7\n        y_offset = int(y_offset*(1 - i/20))*0.8\n        x_offset = pd.Timedelta(days=0 if i % 2 == 0 else -100)\n    else:\n        y_offset = 16 if i % 2 == 0 else 7\n        y_offset = int(y_offset*(1 - i/20))\n        x_offset = pd.Timedelta(days=0 if i % 2 == 0 else -100)\n    # Plot the arrow\n    plt.annotate(\n        desc,\n        xy=(date, time),\n        xytext=(date + x_offset, time + y_offset),\n        arrowprops=dict(facecolor='black', arrowstyle=\"-\", lw=0.5),\n        fontsize=14,\n        bbox=dict(boxstyle=\"round,pad=0.3\", edgecolor=\"gray\", facecolor=\"white\", alpha=0.9, zorder=-100)\n    )\n\n# Formatting the plot\nplt.title(\"Ускорение обучения NanoGPT - 125M\")\nplt.xlabel(\"Дата, 2024\")\nplt.ylabel(\"Время обучения на 8xH100, минуты\")\nplt.gca().xaxis.set_major_formatter(mdates.DateFormatter(\"%d.%m\"))\nplt.gca().xaxis.set_major_locator(mda tes.MonthLocator())\nplt.xticks(rotation=45)\nplt.grid(alpha=0.3, linestyle=\":\")\n# plt.legend()\nplt.tight_layout()\n\n# Show the plot\nplt.savefig(\"nanogpt_speedrun.pdf\")\nplt.show()"
   }
 ]
