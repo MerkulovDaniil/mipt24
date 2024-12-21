@@ -149,7 +149,7 @@ format:
 1.  Связь следа и собственных чисел для квадратной матрицы.
 
     :::{.callout-tip appearance="simple"}
-    Если у матрицы $A$ собственные значения $\lambda_1, \lambda_2, \ldots, \lambda_n, то её след равен:
+    Если у матрицы $A$ собственные значения $\lambda_1, \lambda_2, \ldots, \lambda_n$, то её след равен:
 
     $$
     \text{tr}(A) = \lambda_1 + \lambda_2 + \ldots + \lambda_n
