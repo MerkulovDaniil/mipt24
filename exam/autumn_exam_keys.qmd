@@ -1232,7 +1232,7 @@ format:
         $$
         x=\lambda_{k+1} x_{k+1} + (1-\lambda_{k+1}) \sum \limits_{i=1}^{k} \frac{\lambda_i}{1-\lambda_{k+1}} x_i =\lambda_{k+1} x_{k+1} + (1-\lambda_{k+1}) \hat{x}
         $$
-    где $\hat{x} = \sum \limits_{i=1}^{k} \gamma_i x_i$ и $\gamma_i=\frac{\lambda_i}{1-\lambda_{k+1}} \geq 0,\,\, 1\geq i \geq k$.
+    где $\hat{x} = \sum \limits_{i=1}^{k} \gamma_i x_i$ и $\gamma_i=\frac{\lambda_i}{1-\lambda_{k+1}} \geq 0,\,\, 1\leq i \leq k$.
 
     4. Так как $\lambda \in \Delta_{k+1}$, то $\gamma=[\gamma_1, \dots, \gamma_k] \in \Delta_k$. Значит, $\hat{x} \in S$, из выпуклости $f(x)$ и предположения индукции следует:
         $$
