@@ -1410,46 +1410,47 @@ format:
 
     Таким образом, по критерию первого порядка сильной выпуклости, функция $f(x)$ является сильно выпуклой с константой $\mu$. Важно отметить, что $\mu = 0$ соответствует случаю выпуклости и соответствующему дифференциальному критерию.
 1.  Теорема о построении сопряженного множества к многогранному множеству.
-:::{.callout-note appearance="simple"}
-Пусть $x_1, \ldots, x_m \in \mathbb{R}^n$. Сопряжённое к многогранному множеству:
 
-$$
-S = \mathbf{conv}(x_1, \ldots, x_k) + \mathbf{cone}(x_{k+1}, \ldots, x_m) 
-$$
-
-будет многогранным множеством:
-
-$$
-S^* = \left\{ p \in \mathbb{R}^n \mid \langle p, x_i\rangle \ge -1, i = \overline{1,k} ; \langle p, x_i\rangle \ge 0, i = \overline{k+1,m} \right\}
-$$
-
-:::
-
-* Пусть $S = X, S^* = Y$. Возьмём произвольный $p \in X^*$, тогда $\langle p, x_i\rangle \ge -1, i = \overline{1,k}$. В то же время, для любого $\theta > 0, i = \overline{k+1,m}$: 
-  
-    $$
-    \langle p, x_i\rangle \ge -1 \to \langle p, \theta x_i\rangle \ge -1
-    $$
+    :::{.callout-note appearance="simple"}
+    Пусть $x_1, \ldots, x_m \in \mathbb{R}^n$. Сопряжённое к многогранному множеству:
 
     $$
-    \langle p, x_i\rangle \ge -\frac{1}{\theta} \to \langle p, x_i\rangle \geq 0. 
+    S = \mathbf{conv}(x_1, \ldots, x_k) + \mathbf{cone}(x_{k+1}, \ldots, x_m) 
     $$
 
-    Таким образом, $p \in Y \to X^* \subset Y$.
-
-* В обратную сторону: пусть $p \in Y$. Для любого $x \in X$:
+    будет многогранным множеством:
 
     $$
-     x = \sum\limits_{i=1}^m\theta_i x_i \;\;\;\;\;\;\; \sum\limits_{i=1}^k\theta_i = 1, \theta_i \ge 0
-    $$
-  
-    Тогда:
-
-    $$
-    \langle p, x\rangle = \sum\limits_{i=1}^m\theta_i \langle p, x_i\rangle = \sum\limits_{i=1}^k\theta_i \langle p, x_i\rangle + \sum\limits_{i=k+1}^m\theta_i \langle p, x_i\rangle \ge \sum\limits_{i=1}^k\theta_i (-1) + \sum\limits_{i=1}^k\theta_i \cdot 0 = -1.
+    S^* = \left\{ p \in \mathbb{R}^n \mid \langle p, x_i\rangle \ge -1, i = \overline{1,k} ; \langle p, x_i\rangle \ge 0, i = \overline{k+1,m} \right\}
     $$
 
-    Значит, $p \in X^* \to Y \subset X^*$.
+    :::
+
+    * Пусть $S = X, S^* = Y$. Возьмём произвольный $p \in X^*$, тогда $\langle p, x_i\rangle \ge -1, i = \overline{1,k}$. В то же время, для любого $\theta > 0, i = \overline{k+1,m}$: 
+    
+        $$
+        \langle p, x_i\rangle \ge -1 \to \langle p, \theta x_i\rangle \ge -1
+        $$
+
+        $$
+        \langle p, x_i\rangle \ge -\frac{1}{\theta} \to \langle p, x_i\rangle \geq 0. 
+        $$
+
+        Таким образом, $p \in Y \to X^* \subset Y$.
+
+    * В обратную сторону: пусть $p \in Y$. Для любого $x \in X$:
+
+        $$
+        x = \sum\limits_{i=1}^m\theta_i x_i \;\;\;\;\;\;\; \sum\limits_{i=1}^k\theta_i = 1, \theta_i \ge 0
+        $$
+    
+        Тогда:
+
+        $$
+        \langle p, x\rangle = \sum\limits_{i=1}^m\theta_i \langle p, x_i\rangle = \sum\limits_{i=1}^k\theta_i \langle p, x_i\rangle + \sum\limits_{i=k+1}^m\theta_i \langle p, x_i\rangle \ge \sum\limits_{i=1}^k\theta_i (-1) + \sum\limits_{i=1}^k\theta_i \cdot 0 = -1.
+        $$
+
+        Значит, $p \in X^* \to Y \subset X^*$.
 
 1.  Вывод сопряженной функции к норме.
 1.  Вывод субдифференциала нормы.
