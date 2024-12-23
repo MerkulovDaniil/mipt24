@@ -1107,7 +1107,7 @@ format:
 
     :::{.callout-note appearance="simple"}
     $$
-    \dfrac{\partial L}{\partial W} = U\dfrac{\partial L}{\partial \Sigma}V
+    \dfrac{\partial L}{\partial W} = U\dfrac{\partial L}{\partial \Sigma}V^T
     $$ 
     :::
 
