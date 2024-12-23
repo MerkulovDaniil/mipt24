@@ -1453,9 +1453,198 @@ format:
         Значит, $p \in X^* \to Y \subset X^*$.
 
 1.  Вывод сопряженной функции к норме.
+
+    :::{.callout-note appearance="simple"}
+    Пусть $f(x) = \Vert x\Vert$. Тогда сопряженной функцией к норме является функция $f^\star(y) = \mathbb{O}_{\Vert y\Vert _\star \leq 1}$
+    :::
+
+    **Доказательство**
+    По определению сопряженной функции:
+    $$
+    f^*(y) = \sup_{x} \{ \langle y, x \rangle - f(x)\} = \sup_{x} \{ \langle y, x \rangle - \|x\| \}
+    $$
+    Рассмотрим случай $\|y\|_* > 1$. По определению двойственной нормы,
+    $$
+    \Vert y\Vert _* = \sup\limits_{\Vert x\Vert \leq 1} \langle y,x\rangle > 1
+    $$
+    Это означает, что существует некоторый $x^\dagger$, такой, что $\|x^\dagger\|\leq 1$, но $\langle y,x^\dagger\rangle > 1$. Теперь рассмотрим вектор $\bar{x} = tx^\dagger$, где $t \in \mathbb{R}^+$. Значение сопряженной функции является супремумом, поэтому мы имеем следующее соотношение:
+    $$
+    \begin{split}
+    f^*(y) &\geq \langle y, \bar{x} \rangle - \|\bar{x}\| = \langle y, tx^\dagger \rangle - t\|x^\dagger\|\\
+    &= t(\langle y, x^\dagger \rangle - \|x^\dagger\|) \to \infty \text{ with } t \to \infty
+    \end{split}
+    $$
+    Таким образом, $\|y\|_* > 1$ не принадлежит $\text{dom } f^*$.
+    Рассмотрим случай $\|y\|_* \leq 1$. Из определения двойственной нормы следует:
+    $$
+    \langle y, x \rangle \leq \| y \|_* \| x \| \leq \| x \|
+    $$
+    Равенство выполняется, когда $x=0$. Поэтому
+    $$
+    f^*(y) = \sup_{x} \{ \langle y, x \rangle - \|x\| \} = 0
+    $$
 1.  Вывод субдифференциала нормы.
+    
+    :::{.callout-note appearance="simple"}
+    Пусть $V$ - конечномерное евклидово пространство, и $x_0 \ в V$. Пусть $\lVert \cdot \rVert$ - произвольная норма в $V$ (не обязательно индуцированная скалярным произведением), и пусть $\lVert \cdot \rVert_*$ - соответствующая сопряженная норма. Тогда,
+
+    $$
+    \partial \lVert \cdot \rVert (x_0) = 
+    \begin{cases}
+    B_{\lVert \cdot \rVert_*}(0, 1),  \text{если } x_0 = 0, &\\
+    \{s \in V : \lVert s \rVert_* \leq 1; \langle s, x_0 \rangle = \lVert x_0 \rVert \} = \{s \in V : \lVert s \rVert_* = 1; \langle s, x_0 \rangle = \lVert x_0 \rVert \}, & \text{иначе.}
+    \end{cases}
+    $$
+
+    Где $B_{\lVert \cdot \rVert_*}(0,1)$ - замкнутый единичный шар, с центром в нуле относительно сопряженной нормы. Другими словами, вектор $s \in V$ с $\lVert s \rVert_* = 1$ является субградиентом нормы $\lVert \cdot \rVert$ в точке $x_0 \neq 0$ тогда и только тогда, когда неравенство из определения двойственной нормы $\langle s, x_0 \rangle \leq \lVert x_0 \rVert$ становится равенством.
+    :::
+
+    Пусть $s \in V$. По определению, $s \in \partial \lVert \cdot \rVert (x_0)$ тогда и только тогда, когда
+
+    $$
+    \langle s, x \rangle - \lVert x \rVert \leq \langle s, x_0 \rangle - \lVert x_0 \rVert, \text{ для всех } x \in V,
+    $$
+
+    или эквивалентно,
+
+    $$
+    \sup_{x \in V} \{\langle s, x \rangle - \lVert x \rVert\} \leq \langle s, x_0 \rangle - \lVert x_0 \rVert.
+    $$
+
+    По определению супремума, последнее эквивалентно
+
+    $$
+    \sup_{x \in V} \{\langle s, x \rangle - \lVert x \rVert\} = \langle s, x_0 \rangle - \lVert x_0 \rVert.
+    $$
+
+
+    Важно отметить, что выражение в левой части - это супремум из определения сопряженной функции для нормы, которая, как известно, равна
+
+    $$
+    \sup_{x \in V} \{\langle s, x \rangle - \lVert x \rVert\} = 
+    \begin{cases}
+    0, & \text{если } \lVert s \rVert_* \leq 1, \\
+    +\infty, & \text{иначе}
+    \end{cases}
+    $$
+
+    Таким образом, уравнение эквивалентно $\lVert s \rVert_* \leq 1$ и $\langle s, x_0 \rangle = \lVert x_0 \rVert$.
+
+    Следовательно, остается заметить, что для $x_0 \neq 0$ неравенство $\lVert s \rVert_* \leq 1$ должно превратиться в равенство, так как, когда $\lVert s \rVert_* < 1$, определение двойственной нормы подразумевает $\langle s, x_0 \rangle \leq \lVert s \rVert_* \lVert x_0 \rVert < \lVert x_0 \rVert$.
+
 1.  Связь субградиента сопряженной функции и субградиента функции.
+
+    :::{.callout-note appearance="simple"}
+
+    Если $f$ замкнута и выпукла, то $f^{**} = f$. Также,
+        $$
+        x \in \partial f^*(y)\Leftrightarrow y \in \partial f(x)\Leftrightarrow x \in \arg \min_z \left[ f(z) - y^T z \right]
+        $$
+    Кроме того, если $f$ строго выпуклая, то
+        $$
+        \nabla f^*(y) = \arg \min_z \left[ f(z) - y^T z \right]
+        $$
+    :::
+
+    Мы покажем, что $x \in \partial f^*(y)\Leftrightarrow y \in \partial f(x)$, предполагая, что $f$ выпуклая и замкнутая.
+
+    * **Доказательство $\Leftarrow$**: Предположим, что $y \in \partial f(x)$. Тогда $x \in M_y$, множество максимизаторов $y^T z - f(z)$ над $z$. Но 
+        $$
+        f^*(y) = \max_z \{y^T z - f(z)\}\quad\text{ и }\quad\partial f^*(y) = \text{cl}(\text{conv}(\bigcup_{z \in M_y} \{z\})).
+        $$
+        Таким образом, $x \in \partial f^*(y)$$.
+
+    * **Доказательство $\Rightarrow$**: Из того, что мы показали выше, если $x \in \partial f^*(y)$, то $y \in \partial f^*(x)$, но $f^{**} = f$.
+
+    * Ясно, что $y \in \partial f(x)\Leftrightarrow x \in \arg \min_z \{f(z) - y^T z\}$.
+
+    * Наконец, если $f$ строго выпуклая, то мы знаем, что $f(z) - y^T z$ имеет единственный минимизатор над $z$, и это должен быть $\nabla f^*(y)$. 
+
+
 1.  Субдифференциальное условие оптимальности для условных выпуклых задач.
+
+    :::{.callout-note appearance="simple"}
+
+    ![](general_first_order_local_optimality.pdf){width=75% fig-align="center"}
+
+    Пусть $f\colon \mathbb{R}^n \to \mathbb{R}$ — выпуклая функция, а $S \subset \mathbb{R}^n$ — некоторое (выпуклое) множество допустимых точек. Рассмотрим задачу оптимизации
+    $$
+    \min_{x \in S} f(x).
+    $$
+    Тогда точка $x^*$ является решением этой задачи тогда и только тогда, когда 
+    $$
+    0 \in \partial f(x^*) + \mathcal{N}_S(x^*),
+    $$
+    где $\partial f(x^*)$ — субдифференциал функции $f$ в точке $x^*$, а $\mathcal{N}_S(x^*)$ — нормальный конус к множеству $S$ в точке $x^*$.  
+
+    Если же $f$ дополнительно дифференцируема, то условие оптимальности принимает вид
+    $$
+    \nabla f(x^*)^T \bigl(y - x^*\bigr) \geq 0 \quad \text{для всех } y \in S.
+    $$
+    :::
+
+    Рассмотрим задачу
+        $$
+        \min_{x \in S} f(x).
+        $$
+    1. **Переход к неограниченной задаче:**  
+    Введём *индикаторную функцию* множества $S$, то есть
+        $$
+        I_S(x) = \begin{cases}
+        0, & x \in S, \\
+        +\infty, & x \notin S.
+        \end{cases}
+        $$
+    Тогда исходная задача эквивалентна безусловной (без явных ограничений) задаче
+        $$
+        \min_{x} \Bigl( f(x) + I_S(x) \Bigr).
+        $$
+
+    2. **Условие оптимальности через субградиент:**  
+    Из общего субдифференциального условия оптимальности следует, что точка $x$ является решением
+    $\min_x \{ f(x) + I_S(x) \}$ тогда и только тогда, когда
+        $$
+        0 \in \partial \bigl(f(x) + I_S(x)\bigr).
+        $$
+
+    3. **Свойство субградиента суммы:**  
+    Поскольку $f$ выпуклая и $I_S$ — тоже выпуклая (это индикаторная функция выпуклого множества $S$), имеем
+        $$
+        \partial \bigl(f(x) + I_S(x)\bigr) 
+        = \partial f(x) + \partial I_S(x).
+        $$
+    Но $\partial I_S(x) = \mathcal{N}_S(x)$, то есть *нормальный конус* к множеству $S$ в точке $x$. Следовательно, 
+        $$
+        0 \in \partial f(x) + \partial I_S(x)
+        \quad \Longleftrightarrow \quad
+        0 \in \partial f(x) + \mathcal{N}_S(x).
+        $$
+
+    4. **Интерпретация условия $0 \in \partial f(x) + \mathcal{N}_S(x)$:**  
+    Это означает, что существует субградиент $g \in \partial f(x)$ такой, что
+        $$
+        -g \in \mathcal{N}_S(x).
+        $$
+
+    5. **Частный случай дифференцируемой функции $f$:**  
+    Если $f$ дифференцируема, то $\partial f(x) = \{\nabla f(x)\}$. Условие  
+        $$
+        0 \in \{\nabla f(x)\} + \mathcal{N}_S(x)
+        \quad \Longleftrightarrow \quad
+        -\,\nabla f(x) \in \mathcal{N}_S(x).
+        $$
+        По определению нормального конуса,
+        $$
+        -\nabla f(x) \in \mathcal{N}_S(x)
+        \quad \Longleftrightarrow \quad
+        -\nabla f(x)^T x \geq -\nabla f(x)^T y \;\; \text{для всех } y \in S,
+        $$
+        что переписывается как
+        $$
+        \nabla f(x)^T (y - x) \geq 0 \;\; \text{для всех } y \in S.
+        $$
+        Это и есть классическое *первое условие оптимальности* для дифференцируемых выпуклых задач оптимизации с ограничениями. 
+
 1.  Необходимые условия безусловного экстремума.
 
     :::{.callout-note appearance="simple"}
@@ -1753,7 +1942,7 @@ format:
 
     Алгоритм:
 
-    ![Алгоритм дихотомии](Dichotomy4.pdf)
+    ![Алгоритм дихотомии](Dichotomy4.pdf){width=40% fig-align="center"}
 
     Можно заметить, что на каждой итерации требуется не более 2-х вычислений значения функции.
 
@@ -1784,7 +1973,6 @@ format:
     $$
 
     Теперь получим выражение для сходимости по количеству вычислений значения функции. Знаем, что на каждой итерации вычисляем значение не более 2-х раз, значит количество вычислений значения функции возьмём $N = 2k$:
-
     $$
     |x_{k+1} - x_*| \leq (0.5)^{\frac{N}{2}+1}(b - a)
     $$
