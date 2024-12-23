@@ -17,8 +17,7 @@ header-includes:
 # Основы линейной алгебры
 
 ## Векторы и матрицы
-
-We will treat all vectors as column vectors by default. The space of real vectors of length $n$ is denoted by $\mathbb{R}^n$, while the space of real-valued $m \times n$ matrices is denoted by $\mathbb{R}^{m \times n}$. That's it: [^1]
+По умолчанию мы будем рассматривать все векторы как векторы-столбцы. Линейное пространство вещественных векторов длины $n$ обозначается $\mathbb{R}^n$, а пространство вещественных матриц размера $m \times n$ обозначается $\mathbb{R}^{m \times n}$. То есть: [^1]
 
 [^1]: A full introduction to applied linear algebra can be found in [Introduction to Applied Linear Algebra -- Vectors, Matrices, and Least Squares](https://web.stanford.edu/~boyd/vmls/) - book by Stephen Boyd & Lieven Vandenberghe, which is indicated in the source. Also, a useful refresher for linear algebra is in Appendix A of the book Numerical Optimization by Jorge Nocedal Stephen J. Wright.
 
@@ -35,7 +34,7 @@ $$ {#eq-vector}
 
 . . .
 
-Similarly, if $A \in \mathbb{R}^{m \times n}$ we denote transposition as $A^T \in \mathbb{R}^{n \times m}$:
+Аналогично, если $A \in \mathbb{R}^{m \times n}$ мы обозначаем транспонированную матрицу как $A^T \in \mathbb{R}^{n \times m}$:
 $$
 A = \begin{bmatrix}
 a_{11} & a_{12} & \dots & a_{1n} \\
@@ -49,7 +48,7 @@ a_{12} & a_{22} & \dots & a_{m2} \\
 a_{1n} & a_{2n} & \dots & a_{mn}
 \end{bmatrix} \quad A \in \mathbb{R}^{m \times n}, a_{ij} \in \mathbb{R}
 $$
-We will write $x \geq 0$ and $x \neq 0$ to indicate componentwise relationships
+Будем писать $x \geq 0$ и $x \neq 0$, подразумевая покомпонентные соотношения.
 
 ---
 
@@ -57,30 +56,30 @@ We will write $x \geq 0$ and $x \neq 0$ to indicate componentwise relationships
 
 ---
 
-A matrix is symmetric if $A = A^T$. It is denoted as $A \in \mathbb{S}^n$ (set of square symmetric matrices of dimension $n$). Note, that only a square matrix could be symmetric by definition.
+Матрица называется симметричной(симметрической), если $A = A^T$. Это обозначается как $A \in \mathbb{S}^n$ (множество симметричных матриц размера $n \times n$). Из определения следует, что только квадратные матрицы могут быть симметричными.
 
 . . .
 
-A matrix $A \in \mathbb{S}^n$ is called **positive (negative) definite** if for all $x \neq 0 : x^T Ax > (<) 0$. We denote this as $A \succ (\prec) 0$. The set of such matrices is denoted as $\mathbb{S}^n_{++} (\mathbb{S}^n_{- -})$
+Матрица $A \in \mathbb{S}^n$ называется **положительно (отрицательно) определенной**, если для всех $x \neq 0 : x^T Ax > (<) 0$. Мы обозначаем это как $A \succ (\prec) 0$. Множество таких матриц обозначается  $\mathbb{S}^n_{++} (\mathbb{S}^n_{- -})$.
 
 . . .
 
-A matrix $A \in \mathbb{S}^n$ is called **positive (negative) semidefinite** if for all $x : x^T Ax \geq (\leq) 0$. We denote this as $A \succeq (\preceq) 0$. The set of such matrices is denoted as $\mathbb{S}^n_{+} (\mathbb{S}^n_{-})$
+Матрица $A \in \mathbb{S}^n$ называется **положительно (отрицательно) полуопределенной**, если для всех $x : x^T Ax \geq (\leq) 0$. Мы обозначаем это как $A \succeq (\preceq) 0$. Множество таких матриц обозначается $\mathbb{S}^n_{+} (\mathbb{S}^n_{-})$
 
 :::{.callout-question}
-Is it correct, that a positive definite matrix has all positive entries?
+Верно ли, что у положительно определенной матрицы все элементы положительны?
 :::
 
 . . .
 
 :::{.callout-question}
-Is it correct, that if a matrix is symmetric it should be positive definite?
+Верно ли, что симметричная матрица должна быть положительно определенной?
 :::
 
 . . .
 
 :::{.callout-question}
-Is it correct, that if a matrix is positive definite it should be symmetric?
+Верно ли, что положительно определенная матрица должна быть симметричной?
 :::
 
 
@@ -88,86 +87,86 @@ Is it correct, that if a matrix is positive definite it should be symmetric?
 
 ## Матричное умножение (matmul)
 
-Let $A$ be a matrix of size $m \times n$, and $B$ be a matrix of size $n \times p$, and let the product $AB$ be:
+Пусть $A$ - матрица размера $m \times n$, $B$ - матрица размера $n \times p$. Рассмотрим их произведение $AB$:
 $$
-C = AB
+C = AB ,
 $$
-then $C$ is a $m \times p$ matrix, with element $(i, j)$ given by:
+где $C$ - матрица размера $m \times p$ с элементами $(i, j)$ заданными следующим образом:
 $$
 c_{ij} = \sum_{k=1}^n a_{ik}b_{kj}.
 $$
 
-This operation in a naive form requires $\mathcal{O}(n^3)$ arithmetical operations, where $n$ is usually assumed as the largest dimension of matrices.
 
-. . .
+
+Наивная реализация матричного умножения требует $\mathcal{O}(n^3)$ арифметических операций, где в качестве $n$ берётся наибольший из размеров матриц.
+
 
 :::{.callout-question}
-Is it possible to multiply two matrices faster, than $\mathcal{O}(n^3)$? How about $\mathcal{O}(n^2)$, $\mathcal{O}(n)$?
+Возможно ли перемножить две матрицы быстрее, чем за $\mathcal{O}(n^3)$ операций? Что насчет $\mathcal{O}(n^2)$, $\mathcal{O}(n)$?
 :::
 
 ---
 
 ## Умножение матрицы на вектор (matvec)
-
-Let $A$ be a matrix of shape $m \times n$, and $x$ be $n \times 1$ vector, then the $i$-th component of the product:
+Пусть $A$ - матрица размера $m \times n$, $x$ - вектор размера $n$ (или, что то же самое, $x$ - матрица размера $n \times 1$). Тогда $i$-я компонента произведения:
 $$
 z = Ax
 $$
-is given by:
+задается выражением:
 $$
 z_i = \sum_{k=1}^n a_{ik}x_k
 $$
 
-This operation in a naive form requires $\mathcal{O}(n^2)$ arithmetical operations, where $n$ is usually assumed as the largest dimension of matrices.
+Наивная реализация матричного умножения требует $\mathcal{O}(n^2)$ арифметических операций, где в качестве $n$ берётся наибольший из размеров матриц.
 
-Remember, that:
+Следует помнить, что:
 
 * $C = AB \quad C^T = B^T A^T$
 * $AB \neq BA$
 * $e^{A} =\sum\limits_{k=0}^{\infty }{1 \over k!}A^{k}$
-* $e^{A+B} \neq e^{A} e^{B}$ (but if $A$ and $B$ are commuting matrices, which means that $AB = BA$, $e^{A+B} = e^{A} e^{B}$)
+* $e^{A+B} \neq e^{A} e^{B}$ (но если $A$ и $B$ - коммутирующие матрицы, то есть $AB = BA$, тогда  $e^{A+B} = e^{A} e^{B}$)
 * $\langle x, Ay\rangle = \langle A^T x, y\rangle$
 
 ## Пример. Простой, но важный сюжет про матричное умножение
 
-Suppose, you have the following expression
+Предположим, имеется следующее выражение
 
 $$
 b = A_1 A_2 A_3 x,
 $$
 
-where the $A_1, A_2, A_3 \in \mathbb{R}^{3 \times 3}$ - random square dense matrices and $x \in \mathbb{R}^n$ - vector. You need to compute b.
+где $A_1, A_2, A_3 \in \mathbb{R}^{3 \times 3}$ - какие-либо квадратные плотные(почти не содержащие нулевых элементов) матрицы и $x \in \mathbb{R}^n$ - какой-то вектор. Необходимо вычислить $b$.
 
-Which one way is the best to do it?
+Каким образом лучше это сделать?
 
-1. $A_1 A_2 A_3 x$ (from left to right)
-2. $\left(A_1 \left(A_2 \left(A_3 x\right)\right)\right)$ (from right to left)
-3. It does not matter
-4. The results of the first two options will not be the same.
+1. $A_1 A_2 A_3 x$ (слева направо)
+2. $\left(A_1 \left(A_2 \left(A_3 x\right)\right)\right)$ (справа налево)
+3. Без разницы
+4. Результаты, полученные первыми двумя предложенными способами, будут различаться.
 
-Check the simple [\faPython code snippet](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/stupid_important_idea_on_mm.ipynb) after all.
+Проверьте ответ на [\faPython примере кода](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/stupid_important_idea_on_mm.ipynb).
 
 ## Нормы
 
-Norm is a **qualitative measure of the smallness of a vector** and is typically denoted as $\Vert x \Vert$.
+Норма - это **качественная мера малости вектора**, обычно обозначаемая $\Vert x \Vert$.
 
-The norm should satisfy certain properties:
+Норма должна удовлетворять следующим свойствам:
 
 1.  $\Vert \alpha x \Vert = \vert \alpha\vert \Vert x \Vert$, $\alpha \in \mathbb{R}$
-2.  $\Vert x + y \Vert \leq \Vert x \Vert + \Vert y \Vert$ (triangle inequality)
-3.  If $\Vert x \Vert = 0$ then $x = 0$
+2.  $\Vert x + y \Vert \leq \Vert x \Vert + \Vert y \Vert$ (неравенство треугольника)
+3.  Если $\Vert x \Vert = 0$, то $x = 0$
 
 . . .
 
-The distance between two vectors is then defined as
+Тогда расстояние между двумя векторами определяется как:
 $$ 
 d(x, y) = \Vert x - y \Vert. 
 $$
-The most well-known and widely used norm is **Euclidean norm**:
+Наиболее известная и широко используемая норма - это **Евклидова норма**:
 $$
 \Vert x \Vert_2 = \sqrt{\sum_{i=1}^n |x_i|^2},
 $$
-which corresponds to the distance in our real life. If the vectors have complex elements, we use their modulus. Euclidean norm, or $2$-norm, is a subclass of an important class of $p$-norms:
+ которая соответствует расстоянию в нашей реальной жизни. Если векторы имеют комплексные компоненты, мы используем их модуль. Евклидова норма, или $2$-норма, - подкласс важного класса $p$-норм:
 
 $$
 \Vert x \Vert_p = \Big(\sum_{i=1}^n |x_i|^p\Big)^{1/p}. 
@@ -177,14 +176,14 @@ $$
 
 ## $p$-норма вектора
 
-There are two very important special cases. The infinity norm, or Chebyshev norm is defined as the element of the maximal absolute value:
+Имеется два очень важных особых случая. Бесконечная норма, или норма Чебышева, определяется как максимальный модуль компоненты вектора $x$:
 $$
 \Vert x \Vert_{\infty} = \max_i | x_i| 
 $$
 
 . . .
 
-$L_1$ norm (or **Manhattan distance**) which is defined as the sum of modules of the elements of $x$:
+$L_1$ норма (или **Манхэттенское расстояние, расстояние городских кварталов**), которая определяется как сумма модулей элементов $x$:
 
 $$
 \Vert x \Vert_1 = \sum_i |x_i| 
@@ -192,95 +191,95 @@ $$
 
 . . .
 
-$L_1$ norm plays a very important role: it all relates to the **compressed sensing** methods that emerged in the mid-00s as one of the most popular research topics. The code for the picture below is available [*here:*](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Balls_p_norm.ipynb). Check also [*this*](https://fmin.xyz/docs/theory/balls_norm.mp4) video.
+$L_1$ норма играет очень важную роль: она относится к методам **compressed sensing**, которые появились в середине 00-х годов как одна из самых популярных исследовательских тем. Код для картинок снизу доступен [*здесь:*](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Balls_p_norm.ipynb). Также посмотрите [*это*](https://fmin.xyz/docs/theory/balls_norm.mp4) видео.
 
 ![Balls in different norms on a plane](p_balls.pdf)
 
 ## Матричные нормы
+В каком-то смысле нет сильных отличий между матрицами и векторами(вы можете векторизовать матрицу). Отсюда и получается простейшая матричная норма - **Фробениусова норма**: 
 
-In some sense there is no big difference between matrices and vectors (you can vectorize the matrix), and here comes the simplest matrix norm **Frobenius** norm:
 $$
 \Vert A \Vert_F = \left(\sum_{i=1}^m \sum_{j=1}^n |a_{ij}|^2\right)^{1/2}
 $$
 
 . . .
 
-Spectral norm, $\Vert A \Vert_2$ is one of the most used matrix norms (along with the Frobenius norm).
+Спектральная норма, $\Vert A \Vert_2$ является одной из наиболее используемых матричных норм (наряду с Фробениусовой нормой).
 
 $$
 \Vert A \Vert_2 = \sup_{x \ne 0} \frac{\Vert A x \Vert_2}{\Vert x \Vert_{2}},
 $$
 
-It can not be computed directly from the entries using a simple formula, like the Frobenius norm, however, there are efficient algorithms to compute it. It is directly related to the **singular value decomposition** (SVD) of the matrix. It holds
+Она не может быть посчитана напрямую через элементы с использованием какой-либо простой формулы, как, например, Фробениусова норма, однако, существуют эффективные алгоритмы для ее вычисления. Это напрямую связано с **сингулярным разложением** (SVD) матрицы. Из него следует
 
 $$
 \Vert A \Vert_2 = \sigma_1(A) = \sqrt{\lambda_{\max}(A^TA)}
 $$
 
-where $\sigma_1(A)$ is the largest singular value of the matrix $A$.
+где $\sigma_1(A)$ - наибольшее сингулярное число матрицы $A$.
 
 ## Скалярное произведение
-
-The standard **scalar (inner) product** between vectors $x$ and $y$ from $\mathbb{R}^n$ is given by
+Стандартное **скалярное произведение (inner product)** векторов $x$ и $y$ из $\mathbb{R}^n$ задается как:
 $$
 \langle x, y \rangle = x^T y = \sum\limits_{i=1}^n x_i y_i = y^T x =  \langle y, x \rangle
 $$
 
-Here $x_i$ and $y_i$ are the scalar $i$-th components of corresponding vectors.
+Здесь $x_i$ и $y_i$ - значения $i$-й компоненты соответствующего вектора.
 
-::: {.callout-example}
-Prove, that you can switch the position of a matrix inside a scalar product with transposition: $\langle x, Ay\rangle = \langle A^Tx, y\rangle$ and $\langle x, yB\rangle = \langle xB^T, y\rangle$
+::: {.callout-example} 
+Докажите, что можно переносить матрицу с транспонированием внутри скалярного произведения : $\langle x, Ay\rangle = \langle A^Tx, y\rangle$ и $\langle x, yB\rangle = \langle xB^T, y\rangle$
 :::
 
 ## Скалярное произведение матриц
 
-The standard **scalar (inner) product** between matrices $X$ and $Y$ from $\mathbb{R}^{m \times n}$ is given by
+Стандартное **скалярное произведение (inner product)**  матриц $X$ и $Y$ из $\mathbb{R}^{m \times n}$ задается как:
 
 $$
 \langle X, Y \rangle = \text{tr}(X^T Y) = \sum\limits_{i=1}^m\sum\limits_{j=1}^n X_{ij} Y_{ij} =  \text{tr}(Y^T X) =  \langle Y, X \rangle
 $$
 
 ::: {.callout-question} 
-Is there any connection between the Frobenious norm $\Vert \cdot \Vert_F$ and scalar product between matrices $\langle \cdot, \cdot \rangle$?
+Существует ли какая-то связь между Фробениусовой нормой $\Vert \cdot \Vert_F$ и скалярным произведением матриц $\langle \cdot, \cdot \rangle$?
 :::
 
 
 ## Собственные числа и собственные вектора
 
-A scalar value $\lambda$ is an eigenvalue of the $n \times n$ matrix $A$ if there is a nonzero vector $q$ such that
+Скаляр $\lambda$ называется собственным числом матрицы $A$ размера $n \times n$, если существует ненулевой вектор $q$ такой, что
 $$ 
 Aq = \lambda q. 
 $$
 
-he vector $q$ is called an eigenvector of $A$. The matrix $A$ is nonsingular if none of its eigenvalues are zero. The eigenvalues of symmetric matrices are all real numbers, while nonsymmetric matrices may have imaginary eigenvalues. If the matrix is positive definite as well as symmetric, its eigenvalues are all positive real numbers.
+вектор $q$ называется собственным вектором матрицы $A$. Матрица $A$ невырожденная, если все ее собственные числа отличны от нуля. Все собственные числа симметричной матрицы являются вещественными, в то время как у несимметричной матрицы могут быть комплексные собственные числа. Если матрица положительно определена, а значит, и симметрична, ее собственные числа - вещественные.
 
 ## Собственные числа и собственные вектора
 
 :::{.callout-theorem}
 $$
-A \succeq (\succ) 0 \Leftrightarrow \text{all eigenvalues of } A \text{ are } \geq (>) 0 
+A \succeq (\succ) 0 \Leftrightarrow \text{все собственные числа матрицы } A  \geq (>) 0 
 $$
 
 :::{.callout-proof collapse="true"}
-1. $\rightarrow$ Suppose some eigenvalue $\lambda$ is negative and let $x$ denote its corresponding eigenvector. Then
+1. $\rightarrow$ Предположим, что собственное число $\lambda$ отрицательно и пусть $x$ - соответсвующий ему собственный вектор. Тогда
 $$
 Ax = \lambda x \rightarrow x^T Ax = \lambda x^T x < 0
 $$
-which contradicts the condition of $A \succeq 0$.
-2. $\leftarrow$ For any symmetric matrix, we can pick a set of eigenvectors $v_1, \dots, v_n$ that form an orthogonal basis of $\mathbb{R}^n$. Pick any $x \in \mathbb{R}^n$.
+что противоречит условию $A \succeq 0$.
+
+1. $\leftarrow$ Для любой симметричной матрицы мы можем выбрать множество собственных векторов $v_1, \dots, v_n$, составляющих ортогональный базис в $\mathbb{R}^n$. Рассмотрим любой $x \in \mathbb{R}^n$.
 $$
 \begin{split}
 x^T A x &= (\alpha_1 v_1 + \ldots + \alpha_n v_n)^T A (\alpha_1 v_1 + \ldots + \alpha_n v_n)\\
 &= \sum \alpha_i^2 v_i^T A v_i = \sum \alpha_i^2 \lambda_i v_i^T v_i \geq 0
 \end{split}
 $$
-here we have used the fact that $v_i^T v_j = 0$, for $i \neq j$.
+здесь мы использовали тот факт, что $v_i^T v_j = 0$ для $i \neq j$.
 :::
 :::
 
 ## Спектральное разложение матрицы
 
-Suppose $A \in S_n$, i.e., $A$ is a real symmetric $n \times n$ matrix. Then $A$ can be factorized as
+Предположим, что $A \in S_n$, то есть $A$ вещестенная симметричная матрица размера $n \times n$. Тогда $A$ может быть разложена как
 
 $$ 
 A = Q\Lambda Q^T,
@@ -288,17 +287,17 @@ $$
 
 . . .
 
-where $Q \in \mathbb{R}^{n \times n}$ is orthogonal, i.e., satisfies $Q^T Q = I$, and $\Lambda = \text{diag}(\lambda_1, \ldots , \lambda_n)$. The (real) numbers $\lambda_i$ are the eigenvalues of $A$ and are the roots of the characteristic polynomial $\text{det}(A - \lambda I)$. The columns of $Q$ form an orthonormal set of eigenvectors of $A$. The factorization is called the spectral decomposition or (symmetric) eigenvalue decomposition of $A$. [^2]
+где $Q \in \mathbb{R}^{n \times n}$ ортогональная, то есть удовлетворяет соотношению $Q^T Q = I$, и матрица $\Lambda = \text{diag}(\lambda_1, \ldots , \lambda_n)$. (Вещественные) числа $\lambda_i$ - собственные числа матрицы $A$ и корни характеристического многочлена $\text{det}(A - \lambda I)$. Столбцы $Q$ образуют ортонормированный базис из собственных векторов $A$. Такая факторизация матрицы $A$ называется спектральным разложением, или разложением матрицы на основе собственных векторов. [^2]
 
 [^2]: A good cheat sheet with matrix decomposition is available at the NLA course [website](https://nla.skoltech.ru/_files/decompositions.pdf).
 
 . . .
 
-We usually order the eigenvalues as $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n$. We use the notation $\lambda_i(A)$ to refer to the $i$-th largest eigenvalue of $A \in S$. We usually write the largest or maximum eigenvalue as $\lambda_1(A) = \lambda_{\text{max}}(A)$, and the least or minimum eigenvalue as $\lambda_n(A) = \lambda_{\text{min}}(A)$.
+Обычно собтвенные числа упорядочивают следующим образом: $\lambda_1 \geq \lambda_2 \geq \ldots \geq \lambda_n$. Будем использовать нотацию $\lambda_i(A)$ для обозначения i-го по значению собственного числа матрицы $A \in S$. Обычно будем обозначать наибольшее собственное число как $\lambda_1(A) = \lambda_{\text{max}}(A)$, a наименьшее как $\lambda_n(A) = \lambda_{\text{min}}(A)$.
 
 ## Ещё о собственных значениях
 
-The largest and smallest eigenvalues satisfy
+Максимальное и минимальное собственное значение удовлетворяют соотношениям
 
 $$
 \lambda_{\text{min}} (A) = \inf_{x \neq 0} \dfrac{x^T Ax}{x^T x}, \qquad \lambda_{\text{max}} (A) = \sup_{x \neq 0} \dfrac{x^T Ax}{x^T x}
@@ -306,7 +305,7 @@ $$
 
 . . .
 
-and consequently $\forall x \in \mathbb{R}^n$ (Rayleigh quotient):
+и, следовательно, $\forall x \in \mathbb{R}^n$ (отношение Рэлея):
 
 $$
 \lambda_{\text{min}} (A) x^T x \leq x^T Ax \leq \lambda_{\text{max}} (A) x^T x
@@ -314,7 +313,7 @@ $$
 
 . . .
 
-The **condition number** of a nonsingular matrix is defined as
+**Число обусловленности** невырожденной матрицы вводится следующим образом
 
 $$
 \kappa(A) = \|A\|\|A^{-1}\|
@@ -322,17 +321,17 @@ $$
 
 . . .
 
-If we use spectral matrix norm, we can get:
+Если мы используем спектральную норму, то можно получить:
 
 $$
 \kappa(A) = \dfrac{\sigma_{\text{max}}(A)}{\sigma _{\text{min}}(A)}
 $$
 
-If, moreover, $A \in \mathbb{S}^n_{++}$: $\kappa(A) = \dfrac{\lambda_{\text{max}}(A)}{\lambda_{\text{min}}(A)}$
+Если, более того, $A \in \mathbb{S}^n_{++}$: $\kappa(A) = \dfrac{\lambda_{\text{max}}(A)}{\lambda_{\text{min}}(A)}$
 
 ## Сингулярное разложение
 
-Suppose $A \in \mathbb{R}^{m \times n}$ with rank $A = r$. Then $A$ can be factored as
+Предположим, $A \in \mathbb{R}^{m \times n}$ и rank $A = r$. Тогда $A$ может быть представлена как
 
 $$
 A = U \Sigma V^T 
@@ -340,7 +339,7 @@ $$
 
 . . .
 
-where $U \in \mathbb{R}^{m \times r}$ satisfies $U^T U = I$, $V \in \mathbb{R}^{n \times r}$ satisfies $V^T V = I$, and $\Sigma$ is a diagonal matrix with $\Sigma = \text{diag}(\sigma_1, ..., \sigma_r)$, such that
+где $U \in \mathbb{R}^{m \times r}$ удовлетворяет $U^T U = I$, $V \in \mathbb{R}^{n \times r}$ удовлетворяет $V^T V = I$ и $\Sigma$ - диагональная матрица $\Sigma = \text{diag}(\sigma_1, ..., \sigma_r)$ такая, что
 
 . . .
 
@@ -350,24 +349,24 @@ $$
 
 . . .
 
-This factorization is called the **singular value decomposition (SVD)** of $A$. The columns of $U$ are called left singular vectors of $A$, the columns of $V$ are right singular vectors, and the numbers $\sigma_i$ are the singular values. The singular value decomposition can be written as
+Эта факторизация называется  **сингулярным разложением (SVD)** матрицы $A$. Столбцы $U$ называется левыми сингулярными векторами $A$, столбцы $V$ - правыми сингулярными векторами, и $\sigma_i$ являются сингулярными числами. Сингулярное разложение может быть записано как
 
 $$
 A = \sum_{i=1}^{r} \sigma_i u_i v_i^T,
 $$
 
-where $u_i \in \mathbb{R}^m$ are the left singular vectors, and $v_i \in \mathbb{R}^n$ are the right singular vectors.
+где $u_i \in \mathbb{R}^m$ - левые сингулярные векторы, а $v_i \in \mathbb{R}^n$ - правые сингулярные векторы.
 
 ## Сингулярное разложение
 
 ::: {.callout-question}
-Suppose, matrix $A \in \mathbb{S}^n_{++}$. What can we say about the connection between its eigenvalues and singular values?
+Предположим, матрица $A \in \mathbb{S}^n_{++}$. Что можно сказать о связи собственных чисел с сингулярными числами?
 :::
 
 . . .
 
 ::: {.callout-question}
-How do the singular values of a matrix relate to its eigenvalues, especially for a symmetric matrix?
+Как сингулярные числа матрицы связаны с собственными числами, главным образом, для симметричных матриц?
 :::
 
 ## Ранговое разложение (Skeleton)
@@ -375,7 +374,7 @@ How do the singular values of a matrix relate to its eigenvalues, especially for
 :::: {.columns}
 
 ::: {.column width="70%"}
-Simple, yet very interesting decomposition is Skeleton decomposition, which can be written in two forms:
+Простое, но очень интересное разложение матрицы - ранговое разложение, которое может быть записано в двух формах: 
 
 $$
 A = U V^T \quad A = \hat{C}\hat{A}^{-1}\hat{R}
@@ -383,15 +382,15 @@ $$
 
 . . .
 
-The latter expression refers to the fun fact: you can randomly choose $r$ linearly independent columns of a matrix and any $r$ linearly independent rows of a matrix and store only them with the ability to reconstruct the whole matrix exactly.
+Последнее выражение основано на забавном факте: можно случайно выбрать $r$ линейно независимых столбцов матрицы и любые $r$ линейно независимых строк матрицы и только по ним восстановить исходную матрицу.
 
 . . .
 
-Use cases for Skeleton decomposition are:
+Случаи применения рангового разложения:
 
-* Model reduction, data compression, and speedup of computations in numerical analysis: given rank-$r$ matrix with $r \ll n, m$ one needs to store $\mathcal{O}((n + m)r) \ll nm$ elements.
-* Feature extraction in machine learning, where it is also known as matrix factorization 
-* All applications where SVD applies, since Skeleton decomposition can be transformed into truncated SVD form.
+* Сокращение моделей, сжатие данных и ускорение вычислений в численных методах: заданная матрица с rank $r$, где $r \ll n, m$ требует для хранения $\mathcal{O}((n + m)r) \ll nm$ элементов.
+* Выделение признаков в машинном обучении, где это также известно как матричная факторизация 
+* Все приложения, где применяется SVD, поскольку ранговое разложение может быть преобразовано в усеченную форму SVD.
 :::
 
 ::: {.column width="30%"}
@@ -402,29 +401,29 @@ Use cases for Skeleton decomposition are:
 
 ## Каноническое тензорное разложение
 
-One can consider the generalization of Skeleton decomposition to the higher order data structure, like tensors, which implies representing the tensor as a sum of $r$ primitive tensors.
+Можно рассмотреть обобщение ранговой декомпозиции на структуры данных более высокого порядка, такие как тензоры, что подразумевает представление тензора в виде суммы $r$ примитивных тензоров.
 
 ![Illustration of Canonical Polyadic decomposition](cp.pdf){width=40%}
 
 ::: {.callout-example} 
-Note, that there are many tensor decompositions: Canonical, Tucker, Tensor Train (TT), Tensor Ring (TR), and others. In the tensor case, we do not have a straightforward definition of *rank* for all types of decompositions. For example, for TT decomposition rank is not a scalar, but a vector.
+Обратите внимание, что существует множество тензорных разложений: Canonical, Tucker, Tensor Train (TT), Tensor Ring (TR) и другие. В тензорном случае у нас нет прямого определения *ранга* для всех типов разложений. Например, для разложения TT ранг - это не скаляр, а вектор.
 :::
 
 ## Определитель и след матрицы
 
-The determinant and trace can be expressed in terms of the eigenvalues
+Определитель и след матрицы могут быть выражены через собственные числа матрицы
 $$
 \text{det} A = \prod\limits_{i=1}^n \lambda_i, \qquad \text{tr} A = \sum\limits_{i=1}^n \lambda_i
 $$
-The determinant has several appealing (and revealing) properties. For instance,  
+Определитель обладает несколькими привлекательными (и показательными) свойствами. Например,  
 
-* $\text{det} A = 0$ if and only if $A$ is singular; 
+* $\text{det} A = 0$ тогда и только тогда, когда $A$ вырожденная; 
 * $\text{det}  AB = (\text{det} A)(\text{det}  B)$; 
 * $\text{det}  A^{-1} = \frac{1}{\text{det} \ A}$.
 
 . . .
 
-Don't forget about the cyclic property of a trace for arbitrary matrices $A, B, C, D$ (assuming, that all dimensions are consistent):
+Не забывайте о циклическом свойстве следа для произвольных матриц $A, B, C, D$ (при условии, что все размерности согласованы).:
 
 $$
 \text{tr} (ABCD) = \text{tr} (DABC) = \text{tr} (CDAB) = \text{tr} (BCDA)
@@ -433,7 +432,7 @@ $$
 . . .
 
 ::: {.callout-question} 
-How does the determinant of a matrix relate to its invertibility?
+Как определитель матрицы связан с ее обратимостью?
 :::
 
 ## Аппроксимация Тейлора первого порядка
@@ -441,20 +440,20 @@ How does the determinant of a matrix relate to its invertibility?
 :::: {.columns}
 
 ::: {.column width="70%"}
-The first-order Taylor approximation, also known as the linear approximation, is centered around some point $x_0$. If $f: \mathbb{R}^n \rightarrow \mathbb{R}$ is a differentiable function, then its first-order Taylor approximation is given by:
+Аппроксимация Тейлора первого порядка, также известная как линейная аппроксимация, рассматривается вокруг некоторой точки $x_0$. Если $f: \mathbb{R}^n \rightarrow \mathbb{R}$ - дифференцируемая функция, то ее аппроксимация Тейлора первого порядка задается:
 
 $$
 f_{x_0}^I(x) = f(x_0) + \nabla f(x_0)^T (x - x_0)
 $$
 
-Where: 
+Где: 
 
-* $f(x_0)$ is the value of the function at the point $x_0$.
-* $\nabla f(x_0)$ is the gradient of the function at the point $x_0$.
+* $f(x_0)$ - значение функции в точке $x_0$.
+* $\nabla f(x_0)$ - градиент функции в точке $x_0$.
 
 . . .
 
-It is very usual to replace the $f(x)$ with $f_{x_0}^I(x)$ near the point $x_0$ for simple analysis of some approaches.
+Для простоты анализа некоторых подходов часто удобно заменить $f(x)$ на $f_{x_0}^I(x)$ вблизи точки $x_0$.
 :::
 
 ::: {.column width="30%"}
@@ -468,17 +467,17 @@ It is very usual to replace the $f(x)$ with $f_{x_0}^I(x)$ near the point $x_0$ 
 :::: {.columns}
 
 ::: {.column width="70%"}
-The second-order Taylor approximation, also known as the quadratic approximation, includes the curvature of the function. For a twice-differentiable function $f: \mathbb{R}^n \rightarrow \mathbb{R}$, its second-order Taylor approximation centered at some point $x_0$ is:
+Аппроксимация Тейлора второго порядка, также известная как квадратичная аппроксимация, учитывает кривизну функции. Для дважды дифференцируемой функции $f: \mathbb{R}^n \rightarrow \mathbb{R}$, ее аппроксимация Тейлора второго порядка в окрестности некоторой точки $x_0$ имеет вид:
 
 $$
 f_{x_0}^{II}(x) = f(x_0) + \nabla f(x_0)^T (x - x_0) + \frac{1}{2} (x - x_0)^T \nabla^2 f(x_0) (x - x_0)
 $$
 
-Where $\nabla^2 f(x_0)$ is the Hessian matrix of $f$ at the point $x_0$.
+Где $\nabla^2 f(x_0)$ - Гессиан функции $f$ в точке $x_0$.
 
 . . .
 
-When using the linear approximation of the function is not sufficient one can consider replacing the $f(x)$ with $f_{x_0}^{II}(x)$ near the point $x_0$. In general, Taylor approximations give us a way to locally approximate functions. The first-order approximation is a plane tangent to the function at the point $x_0$, while the second-order approximation includes the curvature and is represented by a parabola. These approximations are especially useful in optimization and numerical methods because they provide a tractable way to work with complex functions.
+Когда использование линейного приближения функции недостаточно, можно рассмотреть замену $f(x)$ на $f_{x_0}^{II}(x)$ вблизи точки $x_0$. В общем случае аппроксимации Тейлора дают нам возможность локально аппроксимировать функции. Аппроксимация первого порядка представляет собой плоскость, касательную к функции в точке $x_0$, а аппроксимация второго порядка включает кривизну и представлена параболой. Эти аппроксимации особенно полезны в оптимизации и численных методах, так как обеспечивают удобный способ работы со сложными функциями.
 :::
 
 ::: {.column width="30%"}
@@ -495,7 +494,7 @@ When using the linear approximation of the function is not sufficient one can co
 
 ::: {.column width="60%"}
 
-Let $f(x):\mathbb{R}^n\to\mathbb{R}$, then vector, which contains all first-order partial derivatives:
+Пусть $f(x):\mathbb{R}^n\to\mathbb{R}$. Тогда вектор, содержащий все частные производные первого порядка:
 
 $$
 \nabla f(x) = \dfrac{df}{dx} = \begin{pmatrix}
@@ -509,14 +508,14 @@ $$
 . . .
 
 
-named gradient of $f(x)$. This vector indicates the direction of the steepest ascent. Thus, vector $-\nabla f(x)$ means the direction of the steepest descent of the function in the point. Moreover, the gradient vector is always orthogonal to the contour line in the point.
+называется градиентом функции $f(x)$. Этот вектор указывает направление самого крутого подъема. Таким образом, вектор $-\nabla f(x)$ соответствует направлению наикрутейшего спуска функции в точке. Более того, вектор градиента всегда ортогонален линии уровня (изолинии) в точке.
 
 :::
 
 ::: {.column width="40%"}
 
 ::: {.callout-example}
-For the function $f(x, y) = x^2 + y^2$, the gradient is: 
+Для функции $f(x, y) = x^2 + y^2$ градиент равен: 
 $$
 \nabla f(x, y) =
 \begin{bmatrix}
@@ -524,11 +523,11 @@ $$
 2y \\
 \end{bmatrix}
 $$
-This gradient points in the direction of the steepest ascent of the function.
+Этот вектор указывается направление наибольшего роста функции в точке.
 :::
 
 ::: {.callout-question} 
-How does the magnitude of the gradient relate to the steepness of the function?
+Как величина градиента связана с крутизной функции?
 :::
 :::
 
@@ -541,7 +540,7 @@ How does the magnitude of the gradient relate to the steepness of the function?
 
 ::: {.column width="60%"}
 
-Let $f(x):\mathbb{R}^n\to\mathbb{R}$, then matrix, containing all the second order partial derivatives:
+Пусть $f(x):\mathbb{R}^n\to\mathbb{R}$. Тогда матрица, содержащая все частные производные второго порядка:
 
 $$
 f''(x) = \nabla^2 f(x) = \dfrac{\partial^2 f}{\partial x_i \partial x_j} = \begin{pmatrix}
@@ -555,7 +554,7 @@ $$
 . . .
 
 
-In fact, Hessian could be a tensor in such a way: $\left(f(x): \mathbb{R}^n \to \mathbb{R}^m \right)$ is just 3d tensor, every slice is just hessian of corresponding scalar function $\left( \nabla^2f_1(x), \ldots, \nabla^2f_m(x)\right)$.
+На самом деле, Гессиан может быть тензором в таком случае: $\left(f(x): \mathbb{R}^n \to \mathbb{R}^m \right)$ - это просто 3d-тензор, где каждый срез - это Гессиан соответствующей скалярной функции $\left( \nabla^2f_1(x), \ldots, \nabla^2f_m(x)\right)$.
 
 :::
 
@@ -563,7 +562,7 @@ In fact, Hessian could be a tensor in such a way: $\left(f(x): \mathbb{R}^n \to 
 
 
 ::: {.callout-example} 
-For the function $f(x, y) = x^2 + y^2$, the Hessian is:
+Для функции $f(x, y) = x^2 + y^2$ Гессиан:
 
 $$
 H_f(x, y) = \begin{bmatrix} 2 & 0 \\
@@ -572,10 +571,10 @@ H_f(x, y) = \begin{bmatrix} 2 & 0 \\
 $$
 :::
 
-This matrix provides information about the curvature of the function in different directions.
+Эта матрица содержит информацию о кривизне функции по разным направлениям.
 
 ::: {.callout-question} 
-How can the Hessian matrix be used to determine the concavity or convexity of a function?
+Как Гессиан может быть использован для определения вогнутости или выпуклости функции?
 :::
 :::
 ::::
@@ -587,7 +586,7 @@ How can the Hessian matrix be used to determine the concavity or convexity of a 
 
 ::: {.column width="50%"}
 
-Let $f: \mathbb{R}^n \rightarrow \mathbb{R}$ be a function. If the mixed partial derivatives $\frac{\partial^2 f}{\partial x_i \partial x_j}$ and $\frac{\partial^2 f}{\partial x_j \partial x_i}$ are both continuous on an open set containing a point $a$, then they are equal at the point $a$. That is,
+Пусть функция $f: \mathbb{R}^n \rightarrow \mathbb{R}$. Если смешанные частные производные $\frac{\partial^2 f}{\partial x_i \partial x_j}$ и $\frac{\partial^2 f}{\partial x_j \partial x_i}$ непрерывны на открытом множестве, содержащем точку $a$, то они равны в точке $a$. Таким образом,
 $$
 \frac{\partial^2 f}{\partial x_i \partial x_j} (a) = \frac{\partial^2 f}{\partial x_j \partial x_i} (a)
 $$
@@ -595,13 +594,13 @@ $$
 . . .
 
 
-Given the Schwartz theorem, if the mixed partials are continuous on an open set, the Hessian matrix is symmetric. That means the entries above the main diagonal mirror those below the main diagonal:
+По теореме Шварца, если смешанные частицы непрерывны на открытом множестве, то Гессиан симметричен. Это означает, что элементы над главной диагональю равны элементам, которые зеркально симметричны относительно главной диагонали:
 
 $$
 \frac{\partial^2 f}{\partial x_i \partial x_j} = \frac{\partial^2 f}{\partial x_j \partial x_i} \quad \nabla^2 f(x)  =(\nabla^2 f(x))^T
 $$
 
-This symmetry simplifies computations and analysis involving the Hessian matrix in various applications, particularly in optimization.
+Эта симметрия упрощает вычисления и анализ с использованием Гессиана в различных приложениях, особенно в оптимизации.
 
 :::
 
@@ -612,8 +611,8 @@ This symmetry simplifies computations and analysis involving the Hessian matrix 
 $$
 f(x,y) = 
 \begin{cases}
-    \frac{xy\left(x^2 - y^2\right)}{x^2 + y^2} & \text{ for } (x,\, y) \ne (0,\, 0),\\
-    0 & \text{ for } (x, y) = (0, 0).
+    \frac{xy\left(x^2 - y^2\right)}{x^2 + y^2} & \text{ для } (x,\, y) \ne (0,\, 0),\\
+    0 & \text{ для } (x, y) = (0, 0).
 \end{cases}
 $$
 
@@ -621,7 +620,7 @@ $$
 
 ![](schwartz.pdf)
 
-One can verify, that $\frac{\partial^2 f}{ \partial x \partial y} (0, 0) \neq \frac{\partial^2 f}{ \partial y \partial x} (0, 0)$, although the mixed partial derivatives do exist, and at every other point the symmetry does hold.
+Можно убедиться, что $\frac{\partial^2 f}{ \partial x \partial y} (0, 0)\neq \frac{\partial^2 f}{ \partial y \partial x} (0, 0)$, хотя смешанные частные производные существуют, и в любой другой точке симметрия сохраняется.
 :::
 :::
 
@@ -634,7 +633,7 @@ One can verify, that $\frac{\partial^2 f}{ \partial x \partial y} (0, 0) \neq \f
 
 ::: {.column width="50%"}
 
-The extension of the gradient of multidimensional $f(x):\mathbb{R}^n\to\mathbb{R}^m$ is the following matrix:
+Расширение понятися градиента многомерной функции $f(x):\mathbb{R}^n\to\mathbb{R}^m$ - это следующая матрица:
 
 $$
 J_f = f'(x) = \dfrac{df}{dx^T} = \begin{pmatrix}
@@ -646,10 +645,10 @@ J_f = f'(x) = \dfrac{df}{dx^T} = \begin{pmatrix}
 $$
 
 
-This matrix provides information about the rate of change of the function with respect to its inputs.
+Эта матрица предоставляет информацию о скорости изменения функции по отношению к ее входам.
 
 ::: {.callout-question} 
-Can we somehow connect those three definitions above (gradient, jacobian, and hessian) using a single correct statement?
+Можем ли мы как-то связать эти три определения (градиент, Якобиан и Гессиан) одним корректным утверждением?
 :::
 
 :::
@@ -657,14 +656,14 @@ Can we somehow connect those three definitions above (gradient, jacobian, and he
 ::: {.column width="50%"}
 
 ::: {.callout-example}
-For the function  
+Для функции 
 $$
 f(x, y) = \begin{bmatrix}
 x + y \\
 x - y \\
 \end{bmatrix}, 
 $$
-the Jacobian is: 
+Якобиан равен: 
 $$
 J_f(x, y) = \begin{bmatrix}
 1 & 1 \\
@@ -674,7 +673,7 @@ $$
 :::
 
 ::: {.callout-question} 
-How does the Jacobian matrix relate to the gradient for scalar-valued functions?
+Как матрица Якоби связана с градиентом для скалярно-значных функций?
 :::
 
 
@@ -691,24 +690,24 @@ $$
 
 |             X             |       Y        |             G             |                      Name                       |
 |:----------------:|:----------------:|:----------------:|:-----------------:|
-|       $\mathbb{R}$        |  $\mathbb{R}$  |       $\mathbb{R}$        |              $f'(x)$ (derivative)               |
-|      $\mathbb{R}^n$       |  $\mathbb{R}$  |      $\mathbb{R}^n$       |  $\dfrac{\partial f}{\partial x_i}$ (gradient)  |
-|      $\mathbb{R}^n$       | $\mathbb{R}^m$ | $\mathbb{R}^{n \times m}$ | $\dfrac{\partial f_i}{\partial x_j}$ (jacobian) |
+|       $\mathbb{R}$        |  $\mathbb{R}$  |       $\mathbb{R}$        |              $f'(x)$ (производная)               |
+|      $\mathbb{R}^n$       |  $\mathbb{R}$  |      $\mathbb{R}^n$       |  $\dfrac{\partial f}{\partial x_i}$ (градиент)  |
+|      $\mathbb{R}^n$       | $\mathbb{R}^m$ | $\mathbb{R}^{n \times m}$ | $\dfrac{\partial f_i}{\partial x_j}$ (Якобиан) |
 | $\mathbb{R}^{m \times n}$ |  $\mathbb{R}$  | $\mathbb{R}^{m \times n}$ |      $\dfrac{\partial f}{\partial x_{ij}}$      |
 
 ## Дифференциалы
 
 ::: {.callout-theorem}
-Let $x \in S$ be an interior point of the set $S$, and let $D : U \rightarrow V$ be a linear operator. We say that the function $f$ is differentiable at the point $x$ with derivative $D$ if for all sufficiently small $h \in U$ the following decomposition holds: 
+Пусть $x \in S$ - внутренняя точка множества $S$, и пусть $D : U \rightarrow V$ - линейный оператор. Мы говорим, что функция $f$ дифференцируема в точке $x$ с производной $D$, если для всех достаточно малых $h \in U$ имеет место следующее разложение: 
 $$ 
 f(x + h) = f(x) + D[h] + o(\|h\|)
 $$
-If for any linear operator $D : U \rightarrow V$ the function $f$ is not differentiable at the point $x$ with derivative $D$, then we say that $f$ is not differentiable at the point $x$.
+Если для любого линейного оператора $D : U \rightarrow V$ функция $f$ не дифференцируема в точке $x$ с производной $D$, то мы говорим, что $f$ не дифференцируема в точке $x$.
 :::
 
 ## Дифференциалы
 
-After obtaining the differential notation of $df$ we can retrieve the gradient using the following formula:
+Введя дифференциальное обозначение $df$, мы можем получить градиент по следующей формуле:
 
 $$
 df(x) = \langle \nabla f(x), dx\rangle
@@ -717,7 +716,7 @@ $$
 . . .
 
 
-Then, if we have a differential of the above form and we need to calculate the second derivative of the matrix/vector function, we treat "old" $dx$ as the constant $dx_1$, then calculate $d(df) = d^2f(x)$
+Тогда, если у нас есть дифференциал указанной выше формы и нам нужно вычислить вторую производную матрицы/векторной функции, мы рассматриваем «старый» $dx$ как константу $dx_1$, а затем вычисляем $d(df) = d^2f(x)$.
 
 $$
 d^2f(x) = \langle \nabla^2 f(x) dx_1, dx\rangle = \langle H_f(x) dx_1, dx\rangle
@@ -725,7 +724,7 @@ $$
 
 ## Свойства дифференциалов
 
-Let $A$ and $B$ be the constant matrices, while $X$ and $Y$ are the variables (or matrix functions).
+Пусть $A$ и $B$ - постоянные матрицы, в то время как $X$ и $Y$ - переменные (или матричные функции).
 
 :::: {.columns}
 
@@ -757,30 +756,30 @@ Let $A$ and $B$ be the constant matrices, while $X$ and $Y$ are the variables (o
 ## Матричное дифференцирование. Пример 1
 
 ::: {.callout-example}
-Find $df, \nabla f(x)$, if $f(x) = \langle x, Ax\rangle -b^T x + c$. 
+Найдите $df, \nabla f(x)$, if $f(x) = \langle x, Ax\rangle -b^T x + c$. 
 :::
 
 ## Матричное дифференцирование. Пример 2
 
 ::: {.callout-example}
-Find $df, \nabla f(x)$, if $f(x) = \ln \langle x, Ax\rangle$. 
+Найдите $df, \nabla f(x)$, if $f(x) = \ln \langle x, Ax\rangle$. 
 :::
 
-1.  It is essential for $A$ to be positive definite, because it is a logarithm argument. So, $A \in \mathbb{S}^n_{++}$Let's find the differential first: 
+1.  Необходимо, чтобы $A$ была положительно определенной, потому что она стоит в показателе логарифма. Значит, $A \in \mathbb{S}^n_{++}$ Найдем дифференциал: 
 $$
 \begin{split}
     df &= d \left( \ln \langle x, Ax\rangle \right) = \dfrac{d \left( \langle x, Ax\rangle \right)}{ \langle x, Ax\rangle} = \dfrac{\langle dx, Ax\rangle +  \langle x, d(Ax)\rangle}{ \langle x, Ax\rangle} = \\
     &= \dfrac{\langle Ax, dx\rangle + \langle x, Adx\rangle}{ \langle x, Ax\rangle} = \dfrac{\langle Ax, dx\rangle + \langle A^T x, dx\rangle}{ \langle x, Ax\rangle} = \dfrac{\langle (A + A^T) x, dx\rangle}{ \langle x, Ax\rangle} 
 \end{split}
 $$
-2.  Note, that our main goal is to derive the form $df = \langle \cdot, dx\rangle$
+1.  Заметим, что наша главная цель - получить формулу вида $df = \langle \cdot, dx\rangle$
 $$
 df = \left\langle  \dfrac{2 A x}{ \langle x, Ax\rangle} , dx\right\rangle
 $$
-Hence, the gradient is $\nabla f(x) = \dfrac{2 A x}{ \langle x, Ax\rangle}$
+Следовательно, градиент равен: $\nabla f(x) = \dfrac{2 A x}{ \langle x, Ax\rangle}$
 
 ## Матричное дифференцирование. Пример 3
 
 ::: {.callout-example}
-Find $df, \nabla f(X)$, if $f(X) = \langle S, X\rangle - \log \det X$. 
+Найдите $df, \nabla f(X)$, если $f(X) = \langle S, X\rangle - \log \det X$. 
 :::
