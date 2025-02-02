@@ -28,6 +28,10 @@ jobs:
         with: 
           tinytex: true
 
+      - name: Debug Font Files
+        run: |
+          ls -R files/palatino/
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
