@@ -31,6 +31,13 @@ jobs:
       - name: Debug Font Files
         run: |
           ls -R files/palatino/
+      
+      - name: Register Custom Fonts
+        run: |
+          mkdir -p ~/.fonts
+          cp files/palatino/*.ttf ~/.fonts/
+          fc-cache -f -v
+          fc-list | grep -i palatino
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
