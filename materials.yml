@@ -82,107 +82,100 @@
   youtube: https://youtu.be/oaeZkbJ4lDs
   download: https://disk.yandex.com/i/XyXXtjoQzPw6Ww
 
-- title: Методы нулевого порядка. Безградиентные методы. Оптимизация гиперпараметров модели машинного обучения. Генетический алгоритм. Эволюционные алгоритмы
+- title: Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL).
   number: 13
   materials: /lectures/13.pdf
   notes: /notes/13.pdf
   youtube: 
   download: 
 
-- title: Градиентный спуск. Теоремы сходимости в гладком случае (выпуклые, сильно выпуклые, PL). Верхние и нижние оценки сходимости
+- title: Нижние оценки для градиентных методов. Ускоренные градиентные методы. Полиномы Чебышева. Метод Поляка, Нестерова.
   number: 14
   materials: /lectures/14.pdf
   notes: /notes/14.pdf
   youtube: 
   download: 
 
-- title: Ускоренные градиентные методы. Метод Поляка, Нестерова
+- title: Метод сопряженных направлений. Ортогонализация Грамма - Шмидта. Понятие $A$-ортогональных векторов. Метод сопряженных градиентов
   number: 15
   materials: /lectures/15.pdf
   notes: /notes/15.pdf
   youtube: 
   download: 
 
-- title: Метод сопряженных направлений. Ортогонализация Грамма - Шмидта. Понятие $A$-ортогональных векторов. Метод сопряженных градиентов
+- title: Субградиентный метод. Теоремы сходимости в негладком случае (выпуклый случай). Особенности работы градиентного метода в практических негладких задачах. Задача наименьших квадратов с $l_1$ регуляризацией
   number: 16
   materials: /lectures/16.pdf
   notes: /notes/16.pdf
   youtube: 
   download: 
 
-- title: Субградиентный метод. Теоремы сходимости в негладком случае (выпуклый случай). Особенности работы градиентного метода в практических негладких задачах. Задача наименьших квадратов с $l_1$ регуляризацией
+- title: Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Метод зеркального спуска
   number: 17
   materials: /lectures/17.pdf
   notes: /notes/17.pdf
   youtube: 
   download: 
 
-- title: Градиентные методы в условных задачах оптимизации - метод проекции градиента. Метод Франк - Вульфа. Метод зеркального спуска
+- title: Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы
   number: 18
   materials: /lectures/18.pdf
   notes: /notes/18.pdf
   youtube: 
   download: 
 
-- title: Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы
+- title: Проксимальный градиентный метод
   number: 19
   materials: /lectures/19.pdf
   notes: /notes/19.pdf
   youtube: 
   download: 
 
-- title: Проксимальный градиентный метод
+- title: Введение в стохастические градиентные методы. Батч, эпоха. Сходимость SGD
   number: 20
   materials: /lectures/20.pdf
   notes: /notes/20.pdf
   youtube: 
   download: 
 
-- title: Введение в стохастические градиентные методы. Батч, эпоха. Сходимость SGD
+- title: "Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы"
   number: 21
   materials: /lectures/21.pdf
   notes: /notes/21.pdf
   youtube: 
   download: 
 
-- title: "Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы"
+- title: "Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity"
   number: 22
   materials: /lectures/22.pdf
   notes: /notes/22.pdf
   youtube: 
   download: 
 
-- title: "Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity"
+- title: Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций.
   number: 23
   materials: /lectures/23.pdf
   notes: /notes/23.pdf
   youtube: 
   download: 
 
-- title: Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций.
+- title: "Вопросы обучения больших моделей. Lars, Lamb. Learning rate schedulers. Warm-up. MultiGPU training. LoRa адаптеры. Квантизация."
   number: 24
   materials: /lectures/24.pdf
   notes: /notes/24.pdf
   youtube: 
   download: 
 
-- title: "Вопросы обучения больших моделей. Lars, Lamb. Learning rate schedulers. Warm-up. MultiGPU training. LoRa адаптеры. Квантизация."
+- title: Методы оптимизации в непрерывном времени. Gradient Flow. Accelerated Gradient Flow. Stochastic gradient flow.
   number: 25
   materials: /lectures/25.pdf
   notes: /notes/25.pdf
   youtube: 
   download: 
 
-- title: Методы оптимизации в непрерывном времени. Gradient Flow. Accelerated Gradient Flow. Stochastic gradient flow.
+- title: Введение в двойственные методы оптимизации. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.
   number: 26
   materials: /lectures/26.pdf
   notes: /notes/26.pdf
-  youtube: 
-  download: 
-
-- title: Введение в двойственные методы оптимизации. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.
-  number: 27
-  materials: /lectures/27.pdf
-  notes: /notes/27.pdf
   youtube: 
   download: 
