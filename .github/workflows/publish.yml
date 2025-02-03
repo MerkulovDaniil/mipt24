@@ -15,23 +15,13 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
       
-      - name: Install CMU Unicode Fonts Manually
+      - name: Install required fonts
         run: |
           sudo apt-get update
           sudo apt-get install fonts-cmu
-
-      # Modified Palatino fonts installation with debugging
-      - name: Install Palatino fonts
-        run: |
           sudo mkdir -p /usr/local/share/fonts/palatino
           sudo cp files/palatino/*.ttf /usr/local/share/fonts/palatino/
           sudo fc-cache -f -v
-          # Debug commands
-          echo "Checking font installation:"
-          fc-list | grep -i palatino
-          ls -la /usr/local/share/fonts/palatino/
-          echo "Font cache contents:"
-          fc-cache -v
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
