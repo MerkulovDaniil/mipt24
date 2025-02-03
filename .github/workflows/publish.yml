@@ -9,7 +9,7 @@ jobs:
   build-deploy:
     runs-on: macos-latest
     env:
-      # Update OSFONTDIR to point to the correct TinyTeX fonts directory
+      # Point OSFONTDIR to the actual location of TinyTeX fonts
       OSFONTDIR: $HOME/Library/TinyTeX/texmf-dist/fonts/opentype
     permissions:
       contents: write
@@ -36,12 +36,17 @@ jobs:
       - name: "Debug: List TinyTeX opentype fonts directories"
         run: |
           echo "Listing directories in TinyTeX opentype fonts directory:"
-          find "$HOME/Library/TinyTeX/texmf-dist/fonts/opentype/public" -maxdepth 1 -type d
+          find "$HOME/Library/TinyTeX/texmf-dist/fonts/opentype/public" -maxdepth 1 -type d || true
 
       - name: "Debug: List Fonts via fc-list"
         run: |
           echo "Listing fonts via fc-list (searching for 'cmu'):"
-          fc-list | grep -i "cmu"
+          fc-list | grep -i "cmu" || true
+
+      - name: "Debug: Locate CMU Serif Font via kpsewhich"
+        run: |
+          echo "Locating cmunrm.otf via kpsewhich:"
+          kpsewhich cmunrm.otf || echo "cmunrm.otf not found"
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
