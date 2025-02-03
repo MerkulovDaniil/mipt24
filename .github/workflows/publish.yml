@@ -20,6 +20,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install fonts-cmu
 
+      # Add this new step to install Palatino fonts
+      - name: Install Palatino fonts
+        run: |
+          sudo mkdir -p /usr/local/share/fonts/palatino
+          sudo cp files/palatino/*.ttf /usr/local/share/fonts/palatino/
+          sudo fc-cache -f -v
+
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         env:
