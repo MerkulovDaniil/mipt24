@@ -9,7 +9,8 @@ jobs:
   build-deploy:
     runs-on: macos-latest
     env:
-      OSFONTDIR: $HOME/.TinyTeX/texmf-dist/fonts/opentype
+      # Update OSFONTDIR to point to the correct TinyTeX fonts directory
+      OSFONTDIR: $HOME/Library/TinyTeX/texmf-dist/fonts/opentype
     permissions:
       contents: write
 
@@ -30,17 +31,16 @@ jobs:
           tlmgr install cm-unicode
           mktexlsr
           luaotfload-tool --force
-          # Update the system font cache using fc-cache
           fc-cache -f -v
 
-      - name: "Debug: List CMU Fonts Files"
+      - name: "Debug: List TinyTeX opentype fonts directories"
         run: |
-          echo "Listing files in TinyTeX CMU directory:"
-          find "$HOME/.TinyTeX/texmf-dist/fonts/opentype/public/cmun" -type f
+          echo "Listing directories in TinyTeX opentype fonts directory:"
+          find "$HOME/Library/TinyTeX/texmf-dist/fonts/opentype/public" -maxdepth 1 -type d
 
       - name: "Debug: List Fonts via fc-list"
         run: |
-          echo "Listing fonts via fc-list:"
+          echo "Listing fonts via fc-list (searching for 'cmu'):"
           fc-list | grep -i "cmu"
 
       - name: Render and Publish
