@@ -14,11 +14,6 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      
-      - name: Install CMU Unicode Fonts on macOS
-        run: |
-          brew tap homebrew/cask-fonts
-          brew install --cask font-computer-modern
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
