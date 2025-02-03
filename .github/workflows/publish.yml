@@ -8,6 +8,8 @@ name: Quarto Publish
 jobs:
   build-deploy:
     runs-on: macos-latest
+    env:
+      OSFONTDIR: $HOME/.TinyTeX/texmf-dist/fonts/opentype
     permissions:
       contents: write
 
@@ -25,22 +27,23 @@ jobs:
 
       - name: Install CMU Fonts and Update Databases
         run: |
-          # Install the cm-unicode package which provides the CMU fonts
           tlmgr install cm-unicode
-          # Update TeX’s filename database
           mktexlsr
-          # Update LuaLaTeX font cache
-          luaotfload-tool --update
-          # Set OSFONTDIR so that fontconfig can find the fonts
-          export OSFONTDIR="$HOME/.TinyTeX/texmf-dist/fonts/opentype"
-          # Update the system font cache (fontconfig)
+          luaotfload-tool --force
+          # Update the system font cache using fc-cache
           fc-cache -f -v
+
+      - name: Debug: List CMU Fonts Files
+        run: |
+          echo "Listing files in TinyTeX CMU directory:"
+          find "$HOME/.TinyTeX/texmf-dist/fonts/opentype/public/cmun" -type f
+
+      - name: Debug: List Fonts via fc-list
+        run: |
+          echo "Listing fonts via fc-list:"
+          fc-list | grep -i "cmu"
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Make sure the OSFONTDIR is available in the render environment
-          OSFONTDIR: $HOME/.TinyTeX/texmf-dist/fonts/opentype
