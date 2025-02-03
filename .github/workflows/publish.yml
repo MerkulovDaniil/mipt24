@@ -23,11 +23,18 @@ jobs:
         with: 
           tinytex: true
 
-      - name: Install CMU Serif and Sans Serif Font Package
+      - name: Install CMU Fonts and Update Databases
         run: |
+          # Install the cm-unicode package which provides the CMU fonts
           tlmgr install cm-unicode
+          # Update TeX’s filename database
           mktexlsr
+          # Update LuaLaTeX font cache
           luaotfload-tool --update
+          # Set OSFONTDIR so that fontconfig can find the fonts
+          export OSFONTDIR="$HOME/.TinyTeX/texmf-dist/fonts/opentype"
+          # Update the system font cache (fontconfig)
+          fc-cache -f -v
 
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
@@ -35,3 +42,5 @@ jobs:
           target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Make sure the OSFONTDIR is available in the render environment
+          OSFONTDIR: $HOME/.TinyTeX/texmf-dist/fonts/opentype
