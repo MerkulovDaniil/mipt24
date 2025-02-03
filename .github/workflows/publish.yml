@@ -33,12 +33,12 @@ jobs:
           # Update the system font cache using fc-cache
           fc-cache -f -v
 
-      - name: Debug: List CMU Fonts Files
+      - name: "Debug: List CMU Fonts Files"
         run: |
           echo "Listing files in TinyTeX CMU directory:"
           find "$HOME/.TinyTeX/texmf-dist/fonts/opentype/public/cmun" -type f
 
-      - name: Debug: List Fonts via fc-list
+      - name: "Debug: List Fonts via fc-list"
         run: |
           echo "Listing fonts via fc-list:"
           fc-list | grep -i "cmu"
