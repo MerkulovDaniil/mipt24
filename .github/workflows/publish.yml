@@ -7,16 +7,18 @@ name: Quarto Publish
 
 jobs:
   build-deploy:
-    runs-on: macos-latest
-    env:
-      # Point OSFONTDIR to the actual location of TinyTeX fonts
-      OSFONTDIR: $HOME/Library/TinyTeX/texmf-dist/fonts/opentype
+    runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      
+      - name: Install CMU Unicode Fonts Manually
+        run: |
+          sudo apt-get update
+          sudo apt-get install fonts-cmu
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -26,29 +28,9 @@ jobs:
         with: 
           tinytex: true
 
-      - name: Install CMU Fonts and Update Databases
-        run: |
-          tlmgr install cm-unicode
-          mktexlsr
-          luaotfload-tool --force
-          fc-cache -f -v
-
-      - name: "Debug: List TinyTeX opentype fonts directories"
-        run: |
-          echo "Listing directories in TinyTeX opentype fonts directory:"
-          find "$HOME/Library/TinyTeX/texmf-dist/fonts/opentype/public" -maxdepth 1 -type d || true
-
-      - name: "Debug: List Fonts via fc-list"
-        run: |
-          echo "Listing fonts via fc-list (searching for 'cmu'):"
-          fc-list | grep -i "cmu" || true
-
-      - name: "Debug: Locate CMU Serif Font via kpsewhich"
-        run: |
-          echo "Locating cmunrm.otf via kpsewhich:"
-          kpsewhich cmunrm.otf || echo "cmunrm.otf not found"
-
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
