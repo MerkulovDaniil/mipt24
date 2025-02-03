@@ -23,6 +23,9 @@ jobs:
         with: 
           tinytex: true
 
+      - name: Install CMU Serif Font Package
+        run: tlmgr install cm-unicode
+
       - name: Render and Publish
         uses: quarto-dev/quarto-actions/publish@v2
         with:
