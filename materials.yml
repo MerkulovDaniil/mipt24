@@ -86,8 +86,8 @@
   number: 13
   materials: /lectures/13.pdf
   notes: /notes/13.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/ebK_YGiz0cc
+  download: https://disk.yandex.com/i/H9NPW3ujPdnH8Q
 
 - title: Нижние оценки для градиентных методов. Ускоренные градиентные методы. Полиномы Чебышева. Метод Поляка, Нестерова.
   number: 14
