@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mipt24.fmin.xyz/index.html</loc>
-    <lastmod>2025-02-05T15:30:32.530Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mipt24.fmin.xyz/files/nanogpt.html</loc>
-    <lastmod>2025-02-05T15:30:32.435Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mipt24.fmin.xyz/homework.html</loc>
-    <lastmod>2025-02-05T15:30:32.530Z</lastmod>
+    <loc>https://mipt24.fmin.xyz/program.html</loc>
+    <lastmod>2025-02-10T15:12:45.958Z</lastmod>
   </url>
   <url>
     <loc>https://mipt24.fmin.xyz/files/mds.html</loc>
-    <lastmod>2025-02-05T15:30:32.415Z</lastmod>
+    <lastmod>2025-02-10T15:12:44.797Z</lastmod>
   </url>
   <url>
-    <loc>https://mipt24.fmin.xyz/program.html</loc>
-    <lastmod>2025-02-05T15:30:33.588Z</lastmod>
+    <loc>https://mipt24.fmin.xyz/homework.html</loc>
+    <lastmod>2025-02-10T15:12:44.907Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mipt24.fmin.xyz/files/nanogpt.html</loc>
+    <lastmod>2025-02-10T15:12:44.816Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mipt24.fmin.xyz/index.html</loc>
+    <lastmod>2025-02-10T15:12:44.907Z</lastmod>
   </url>
 </urlset>
