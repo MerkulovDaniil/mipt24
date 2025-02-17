@@ -29,6 +29,10 @@ website:
         href: https://www.youtube.com/@fmin
       - icon: telegram
         href: https://t.me/mipt24_fmin
+      - icon: person-workspace
+        href: https://classroom.google.com/c/NzEwNDkxNTk0MDYz
+      - icon: table
+        href: https://docs.google.com/spreadsheets/d/1FsozOqYd4BZI8Cvzow61hkoyPiTdGhzKQ8vIvqtf4cY/edit?usp=sharing
       - icon: gem
         href: https://fmin.xyz
   repo-url: https://github.com/MerkulovDaniil/mipt24
