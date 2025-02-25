@@ -93,15 +93,15 @@
   number: 14
   materials: /lectures/14.pdf
   notes: /notes/14.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/mGS8b79K3fU
+  download: https://disk.yandex.ru/i/rOwaFE_U0dlTbw
 
 - title: Метод сопряженных направлений. Ортогонализация Грамма - Шмидта. Понятие $A$-ортогональных векторов. Метод сопряженных градиентов
   number: 15
   materials: /lectures/15.pdf
   notes: /notes/15.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/htVaUlxb1i8
+  download: https://disk.yandex.ru/i/Ci9ujr6ifK-FwQ
 
 - title: Субградиентный метод. Теоремы сходимости в негладком случае (выпуклый случай). Особенности работы градиентного метода в практических негладких задачах. Задача наименьших квадратов с $l_1$ регуляризацией
   number: 16
