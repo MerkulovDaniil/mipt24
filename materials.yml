@@ -103,7 +103,7 @@
   youtube: https://youtu.be/htVaUlxb1i8
   download: https://disk.yandex.ru/i/Ci9ujr6ifK-FwQ
 
-  - title: Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы
+- title: Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы
   number: 16
   materials: /lectures/16.pdf
   notes: /notes/16.pdf
