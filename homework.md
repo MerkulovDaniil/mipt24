@@ -1018,7 +1018,7 @@ should be made to maximize the profit?
 
     1. Let $S = \text{diag}(S_{11}, \ldots, S_{mm})$, where $S_{jj}$ are random $\{-1,+1\}$ signs
     2. Let $p \in \mathbb{Z}^+$ be a small positive integer, say $20$ for this problem.
-    3. Let $R \in \{0, 1\}^{n+p \times m}$ be a *row selection matrix*, meaning that each row of $R$ has only 1 non-zero entry, chosen uniformly at random. (The location of these non-zero columns is distinct.)
+    3. Let $R \in \{0, 1\}^{(n+p) \times m}$ be a *row selection matrix*, meaning each row of $R$ has only 1 non-zero entry, chosen uniformly at random. (The location of these non-zero columns is distinct.)
 
         ```python
         import jax.numpy as jnp
