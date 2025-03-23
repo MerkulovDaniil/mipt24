@@ -220,6 +220,12 @@ window.Quarto = {
   <li><a href="#accelerated-methods" id="toc-accelerated-methods" class="nav-link" data-scroll-target="#accelerated-methods">Accelerated methods</a></li>
   <li><a href="#conjugate-gradients" id="toc-conjugate-gradients" class="nav-link" data-scroll-target="#conjugate-gradients">Conjugate gradients</a></li>
   <li><a href="#newton-and-quasinewton-methods" id="toc-newton-and-quasinewton-methods" class="nav-link" data-scroll-target="#newton-and-quasinewton-methods">Newton and quasinewton methods</a></li>
+  <li><a href="#conditional-gradient-methods" id="toc-conditional-gradient-methods" class="nav-link" data-scroll-target="#conditional-gradient-methods">Conditional gradient methods</a></li>
+  <li><a href="#subgradient-method" id="toc-subgradient-method" class="nav-link" data-scroll-target="#subgradient-method">Subgradient method</a></li>
+  <li><a href="#proximal-gradient-method" id="toc-proximal-gradient-method" class="nav-link" data-scroll-target="#proximal-gradient-method">Proximal gradient method</a></li>
+  <li><a href="#stochastic-gradient-methods" id="toc-stochastic-gradient-methods" class="nav-link" data-scroll-target="#stochastic-gradient-methods">Stochastic gradient methods</a></li>
+  <li><a href="#neural-network-training" id="toc-neural-network-training" class="nav-link" data-scroll-target="#neural-network-training">Neural network training</a></li>
+  <li><a href="#big-models" id="toc-big-models" class="nav-link" data-scroll-target="#big-models">Big models</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/MerkulovDaniil/mipt24/edit/main/homework.md" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -1314,6 +1320,259 @@ f(w) = -\sum_{i=1}^n \left[ y_i \log(p(y_i=1 | x_i; w)) + (1-y_i) \log(1-p(y_i=1
 <li><p>(5 points) Finally, implement a Hessian-free version of Newton’s method (HFN) which utilizes Hessian-vector products derived via automatic differentiation. Note, that <code>jax.scipy.sparse.linalg.cg</code> function can take the matvec function, which directly produces the multiplication of any input vector <span class="math inline">x</span>. Implement the HFN method without explicitly forming or storing the Hessian matrix in function <code>newton_method_hfn</code>. Use autograd to compute Hessian-vector products as it is described <a href="https://iclr-blogposts.github.io/2024/blog/bench-hvp/">here</a>. Compare this method’s time complexity and memory requirements against previous implementations.</p></li>
 </ol></li>
 </ol>
+</section>
+<section id="conditional-gradient-methods" class="level3">
+<h3 class="anchored" data-anchor-id="conditional-gradient-methods">Conditional gradient methods</h3>
+</section>
+<section id="subgradient-method" class="level3">
+<h3 class="anchored" data-anchor-id="subgradient-method">Subgradient method</h3>
+<ol type="1">
+<li><p><strong>Finding a point in the intersection of convex sets.</strong> [30 points] Let <span class="math inline">A \in \mathbb{R}^{n \times n}</span> be a positive definite matrix and let <span class="math inline">\Sigma</span> be an <span class="math inline">n \times n</span> diagonal matrix with diagonal entries <span class="math inline">\sigma_1,...,\sigma_n &gt; 0</span>, and <span class="math inline">y</span> a given vector in <span class="math inline">\mathbb{R}^n</span>. Consider the compact convex sets <span class="math inline">U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}</span> and <span class="math inline">V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}</span>.</p>
+<ul>
+<li><p>Minimize maximum distance from the current point to the convex sets.</p>
+<p><span class="math display">
+  \min_{x\in\mathbb{R}^n} f(x) =  \min_{x\in\mathbb{R}^n} \max\{\mathbf{dist}(x, U), \mathbf{dist}(x, V)\}
+  </span></p>
+<p>propose an algorithm to find a point <span class="math inline">x \in U \cap V</span>. You can assume that <span class="math inline">U \cap V</span> is not empty. Your algorithm must be provably converging (although you do not need to prove it and you can simply refer to the lecture slides).</p></li>
+<li><p>Implement your algorithm with the following data: <span class="math inline">n = 2</span>, <span class="math inline">y = (3, 2)</span>, <span class="math inline">\sigma_1 = 0.5</span>, <span class="math inline">\sigma_2 = 1</span>,</p>
+<p><span class="math display">
+  A = \begin{bmatrix}
+  1 &amp; 0 \\
+  -1 &amp; 1
+  \end{bmatrix},
+  </span></p>
+<p>and <span class="math inline">x = (2, 1)</span>. Plot the objective value of your optimization problem versus the number of iterations.</p></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="convex_intersection.png" class="img-fluid figure-img"></p>
+<figcaption>Illustration of the problem</figcaption>
+</figure>
+</div></li>
+</ol>
+</section>
+<section id="proximal-gradient-method" class="level3">
+<h3 class="anchored" data-anchor-id="proximal-gradient-method">Proximal gradient method</h3>
+<ol type="1">
+<li><p>[20 points] <strong>Proximal Method for Sparse Softmax Regression</strong> Softmax regression, also known as multinomial logistic regression, is a generalization of logistic regression to multiple classes. It is used to model categorical outcome variables where each category is mutually exclusive. The softmax function transforms any input vector to the probability-like vector as follows:</p>
+<p><span class="math display">
+P(y = j | x; W) = \frac{e^{W_j^T x}}{\sum\limits_{i=1}^{c} e^{W_i^T x}}
+</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Softmax.svg" class="img-fluid figure-img"></p>
+<figcaption>Scheme of softmax regression</figcaption>
+</figure>
+</div>
+<p>where <span class="math inline">x</span> is the input vector, <span class="math inline">W</span> is the weight matrix, <span class="math inline">c</span> is the number of classes, and <span class="math inline">P(y = j | x; W)</span> is the probability that the input <span class="math inline">x</span> belongs to class <span class="math inline">j</span>.</p>
+<p>The optimization problem for softmax regression is to minimize the negative log-likelihood:</p>
+<p><span class="math display">
+\min_{W \in \mathbb{R}^{c \times d}} -\sum_{i=1}^{N} \log P(y_i | x_i; W) + \lambda \| W \|_1
+</span></p>
+<p>where <span class="math inline">N</span> is the number of training examples, <span class="math inline">\lambda</span> is the regularization parameter, and <span class="math inline">\| W \|_1</span> is the L1 norm of the weight matrix, which promotes sparsity in the solution. I suggest you to vectorize matrix and add <span class="math inline">1</span>-vector norm.</p>
+<p>We will solve the sparse softmax regression problem using the subgradient method and the proximal gradient method, both incorporating L1 regularization. The proximal gradient method is particularly useful for optimization problems involving non-smooth regularizers like the L1 norm. We will use 3 class classification problem of <a href="https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success">Predicting Students’ Dropout and Academic Success</a>. In this problem you should start with this <a href="https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Proximal_softmax_regression.ipynb">colab notebook</a></p>
+<ol type="1">
+<li>[4 points] Write down exact formulation of subgradient method and proximal gradient method here (you can not use any optimization problems in this formulation).</li>
+<li>[6 points] Choose <span class="math inline">\lambda = 0</span>. Solve the softmax regression problem using subgradient descent and proximal gradient descent. Find the highest learning (individually), acceptable for both methods to converge. Report convergence curves and report final sparsity of both methods. Draw you conclusions.</li>
+<li>[10 points] Solve non-smooth problem and fill the following table. For each value of <span class="math inline">\lambda</span> provide convergence curves.</li>
+</ol>
+<p>Report the number of iterations needed to reach specified primal gaps for each method. Present the results in the following markdown table:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 16%">
+<col style="width: 5%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Method</th>
+<th style="text-align: center;">Learning Rate (<span class="math inline">\eta</span>)</th>
+<th style="text-align: right;">Tolerance (<span class="math inline">\epsilon</span>)</th>
+<th style="text-align: center;">Number of Iterations</th>
+<th style="text-align: center;">Comment(if any)</th>
+<th style="text-align: center;">Final Sparsity of the solution</th>
+<th style="text-align: left;"><span class="math inline">\lambda</span></th>
+<th style="text-align: center;">Final test accuracy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-1}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-3}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-4}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-5}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-1}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-3}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-4}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-5}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-2</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-3</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-3</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1e-1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Subgradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Proximal Gradient Descent</td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;"><span class="math inline">10^{-2}</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;"><code>1</code></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+</section>
+<section id="stochastic-gradient-methods" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-gradient-methods">Stochastic gradient methods</h3>
+</section>
+<section id="neural-network-training" class="level3">
+<h3 class="anchored" data-anchor-id="neural-network-training">Neural network training</h3>
+</section>
+<section id="big-models" class="level3">
+<h3 class="anchored" data-anchor-id="big-models">Big models</h3>
 
 
 </section>
