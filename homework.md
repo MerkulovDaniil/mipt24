@@ -1206,3 +1206,85 @@ should be made to maximize the profit?
     6. (5 points) Now switch back to the strongly convex setting $\mu=1$. To avoid directly computing the Hessian matrix in Newton's method, use the Conjugate Gradient (CG) method to solve the linear system in the Newton step. Develop the `newton_method_cg` function, which computes the Newton step using CG to solve the system $\nabla^2 f(x_k) d_k = - \nabla f(x_k), \; x_{k+1} = x_k + \alpha d_k$ defined by the Hessian. You have to use [`jax.scipy.sparse.linalg.cg`](https://jax.readthedocs.io/en/latest/_autosummary/jax.scipy.sparse.linalg.cg.html) function here. So, firstly compute the hessian as it was done in the code, then put it into this linear solver. Compare its performance in terms of computational efficiency and convergence rate to the standard Newton method.
     
     7. (5 points) Finally, implement a Hessian-free version of Newton's method (HFN) which utilizes Hessian-vector products derived via automatic differentiation. Note, that `jax.scipy.sparse.linalg.cg` function can take the matvec function, which directly produces the multiplication of any input vector $x$. Implement the HFN method without explicitly forming or storing the Hessian matrix in function `newton_method_hfn`. Use autograd to compute Hessian-vector products as it is described [here](https://iclr-blogposts.github.io/2024/blog/bench-hvp/). Compare this method's time complexity and memory requirements against previous implementations.
+
+
+### Conditional gradient methods
+
+### Subgradient method
+
+1. **Finding a point in the intersection of convex sets.** [30 points] Let $A \in \mathbb{R}^{n \times n}$ be a positive definite matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
+
+    * Minimize maximum distance from the current point to the convex sets. 
+
+        $$
+        \min_{x\in\mathbb{R}^n} f(x) =  \min_{x\in\mathbb{R}^n} \max\{\mathbf{dist}(x, U), \mathbf{dist}(x, V)\}
+        $$
+
+        propose an algorithm to find a point $x \in U \cap V$. You can assume that $U \cap V$ is not empty. Your algorithm must be provably converging (although you do not need to prove it and you can simply refer to the lecture slides).
+
+    * Implement your algorithm with the following data: $n = 2$, $y = (3, 2)$, $\sigma_1 = 0.5$, $\sigma_2 = 1$, 
+
+        $$
+        A = \begin{bmatrix} 
+        1 & 0 \\
+        -1 & 1 
+        \end{bmatrix},
+        $$
+
+        and $x = (2, 1)$. Plot the objective value of your optimization problem versus the number of iterations.
+
+    ![Illustration of the problem](convex_intersection.png)
+
+### Proximal gradient method
+
+1. [20 points] **Proximal Method for Sparse Softmax Regression** Softmax regression, also known as multinomial logistic regression, is a generalization of logistic regression to multiple classes. It is used to model categorical outcome variables where each category is mutually exclusive. The softmax function transforms any input vector to the probability-like vector as follows:
+
+    $$
+    P(y = j | x; W) = \frac{e^{W_j^T x}}{\sum\limits_{i=1}^{c} e^{W_i^T x}}
+    $$
+
+    ![Scheme of softmax regression](Softmax.svg)
+
+    where $x$ is the input vector, $W$ is the weight matrix, $c$ is the number of classes, and $P(y = j | x; W)$ is the probability that the input $x$ belongs to class $j$.
+
+    The optimization problem for softmax regression is to minimize the negative log-likelihood:
+
+    $$
+    \min_{W \in \mathbb{R}^{c \times d}} -\sum_{i=1}^{N} \log P(y_i | x_i; W) + \lambda \| W \|_1
+    $$
+
+    where $N$ is the number of training examples, $\lambda$ is the regularization parameter, and $\| W \|_1$ is the L1 norm of the weight matrix, which promotes sparsity in the solution. I suggest you to vectorize matrix and add $1$-vector norm.
+
+    We will solve the sparse softmax regression problem using the subgradient method and the proximal gradient method, both incorporating L1 regularization. The proximal gradient method is particularly useful for optimization problems involving non-smooth regularizers like the L1 norm. We will use 3 class classification problem of [Predicting Students' Dropout and Academic Success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success). In this problem you should start with this [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/Proximal_softmax_regression.ipynb)
+
+    1. [4 points] Write down exact formulation of subgradient method and proximal gradient method here (you can not use any optimization problems in this formulation).
+    1. [6 points] Choose $\lambda = 0$. Solve the softmax regression problem using subgradient descent and proximal gradient descent. Find the highest learning (individually), acceptable for both methods to converge. Report convergence curves and report final sparsity of both methods. Draw you conclusions.
+    1. [10 points] Solve non-smooth problem and fill the following table. For each value of $\lambda$ provide convergence curves.
+
+    Report the number of iterations needed to reach specified primal gaps for each method. Present the results in the following markdown table:
+
+    | Method                     | Learning Rate ($\eta$)   | Tolerance ($\epsilon$) | Number of Iterations | Comment(if any)          | Final Sparsity of the solution | $\lambda$ | Final test accuracy |
+    |:--------------------------:|:------------------------:|-----------------------:|:--------------------:|:------------------------:|:------------------------------:|:----------|:-------------------:|
+    | Subgradient Descent        |                          | $10^{-1}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Subgradient Descent        |                          | $10^{-2}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Subgradient Descent        |                          | $10^{-3}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Subgradient Descent        |                          | $10^{-4}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Subgradient Descent        |                          | $10^{-5}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-1}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-2}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-3}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-4}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-5}$              |                      |                          |                                |  `1e-2`   |                     |
+    | Subgradient Descent        |                          | $10^{-2}$              |                      |                          |                                |  `1e-3`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-2}$              |                      |                          |                                |  `1e-3`   |                     |
+    | Subgradient Descent        |                          | $10^{-2}$              |                      |                          |                                |  `1e-1`   |                     |
+    | Proximal Gradient Descent  |                          | $10^{-2}$              |                      |                          |                                |  `1e-1`   |                     |
+    | Subgradient Descent        |                          | $10^{-2}$              |                      |                          |                                |  `1`      |                     |
+    | Proximal Gradient Descent  |                          | $10^{-2}$              |                      |                          |                                |  `1`      |                     |
+
+
+### Stochastic gradient methods
+
+### Neural network training
+
+### Big models
