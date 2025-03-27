@@ -106,7 +106,7 @@
 - title: Концепция методов адаптивной метрики. Метод Ньютона. Квазиньютоновские методы
   number: 16
   materials: /lectures/16.pdf
-  notes: /notes/16.pdf
+  notes:
   youtube: 
   download: 
 
@@ -128,8 +128,8 @@
   number: 19
   materials: /lectures/19.pdf
   notes: /notes/19.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/pm59eAxfMPI
+  download: https://disk.yandex.com/d/TsWbzmIs2UTLcQ
 
 - title: Введение в стохастические градиентные методы. Батч, эпоха. Сходимость SGD
   number: 20
