@@ -19,6 +19,7 @@ website:
     left: 
         - program.md
         - homework.md 
+        - projects.md
     title: false
     logo: logo.svg
     logo-alt: mipt24.fmin.xyz
