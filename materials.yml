@@ -121,8 +121,8 @@
   number: 18
   materials: /lectures/18.pdf
   notes: /notes/18.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/Xs9ufxTFZWU
+  download: https://disk.yandex.com/i/Z-G9R4tTa4VxXw
 
 - title: Проксимальный градиентный метод
   number: 19
@@ -135,8 +135,8 @@
   number: 20
   materials: /lectures/20.pdf
   notes: /notes/20.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/aHWVRLXppDU
+  download: https://disk.yandex.com/i/2rUKeDTp3lH5_w
 
 - title: "Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы"
   number: 21
