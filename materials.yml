@@ -138,7 +138,7 @@
   youtube: https://youtu.be/aHWVRLXppDU
   download: https://disk.yandex.com/i/2rUKeDTp3lH5_w
 
-- title: "Методы редукции дисперсии: SAG, SVRG, SAGA. Адаптивные стохастические градиентные методы"
+- title: "Методы редукции дисперсии: SAG, SVRG, SAGA."
   number: 21
   materials: /lectures/21.pdf
   notes: /notes/21.pdf
