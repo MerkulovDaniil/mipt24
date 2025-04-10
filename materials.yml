@@ -142,8 +142,8 @@
   number: 21
   materials: /lectures/21.pdf
   notes: /notes/21.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/GjfLM5uevuE
+  download: https://disk.yandex.ru/i/TrM9P2r9K8AF2w
 
 - title: "Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity"
   number: 22

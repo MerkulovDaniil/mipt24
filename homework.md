@@ -1210,6 +1210,109 @@ should be made to maximize the profit?
 
 ### Conditional gradient methods
 
+1.  **Projection onto the Birkhoff Polytope using Frank-Wolfe** [20 points]
+
+    In a recent [book](https://arxiv.org/pdf/2211.14103) authors presented the following comparison table with complexities of linear minimizations and projections on some convex sets up to an additive error $\epsilon$ in the Euclidean norm. When $\epsilon$ is missing, there is no additive error. The $\tilde{\mathcal{O}}$ hides polylogarithmic factors in the dimensions and polynomial factors in constants related to thedistancetothe optimum. For the nuclear norm ball, i.e., the spectrahedron, $\nu$ denotes the number of non-zero entries and $\sigma_1$ denotes the top singular value of the projected matrix.
+
+    | **Set**   | **Linear minimization**  | **Projection**    |
+    |------------------------|--------------------|---------|
+    | $n$-dimensional $\ell_p$-ball, $p \neq 1,2,\infty$ | $\mathcal{O}(n)$  | $\tilde{\mathcal{O}}\!\bigl(\tfrac{n}{\epsilon^2}\bigr)$|
+    | Nuclear norm ball of $n\times m$ matrices | $\mathcal{O}\!\Bigl(\nu\,\ln(m + n)\,\tfrac{\sqrt{\sigma_1}}{\sqrt{\epsilon}}\Bigr)$    | $\mathcal{O}\!\bigl(m\,n\,\min\{m,n\}\bigr)$   |
+    | Flow polytope on a graph with $m$ vertices and $n$ edges (capacity bound on edges) | $\mathcal{O}\!\Bigl((n \log m)\bigl(n + m\,\log m\bigr)\Bigr)$ | $\tilde{\mathcal{O}}\!\bigl(\tfrac{n}{\epsilon^2}\bigr)\ \text{or}\ \mathcal{O}(n^4\,\log n)$    |
+    | Birkhoff polytope ($n \times n$ doubly stochastic matrices)   | $\mathcal{O}(n^3)$| $\tilde{\mathcal{O}}\!\bigl(\tfrac{n^2}{\epsilon^2}\bigr)$   |
+
+    The Birkhoff polytope, denoted as $B_n$, is the set of $n \times n$ doubly stochastic matrices:
+    $$
+    B_n = \{ X \in \mathbb{R}^{n \times n} \mid X_{ij} \ge 0 \;\forall i,j, \quad X \mathbf{1} = \mathbf{1}, \quad X^T \mathbf{1} = \mathbf{1} \}
+    $$
+    where $\mathbf{1}$ is the vector of all ones. This set is convex and compact. Its extreme points are the permutation matrices.
+
+    Given an arbitrary matrix $Y \in \mathbb{R}^{n \times n}$, we want to find its projection onto $B_n$, which is the solution to the optimization problem:
+    $$
+    \min_{X \in B_n} f(X) = \frac{1}{2} \| X - Y \|_F^2
+    $$
+    where $\| \cdot \|_F$ is the Frobenius norm.
+
+    We will use the Frank-Wolfe (Conditional Gradient) algorithm to solve this problem. Recall the steps of the Frank-Wolfe algorithm:
+    *   Initialize $X_0 \in B_n$.
+    *   For $k = 0, 1, 2, \ldots$:
+        *   Compute the gradient $\nabla f(X_k)$.
+        *   Solve the Linear Minimization Oracle (LMO): $S_k = \arg\min_{S \in B_n} \langle \nabla f(X_k), S \rangle$.
+        *   Determine the step size $\gamma_k \in [0, 1]$.
+        *   Update $X_{k+1} = (1-\gamma_k) X_k + \gamma_k S_k$.
+
+    **Tasks:**
+
+    1.  [5 points] Explicitly write down the gradient $\nabla f(X_k)$. Explain how to solve the LMO step $\min_{S \in B_n} \langle \nabla f(X_k), S \rangle$. What kind of matrix is the solution $S_k$? *Hint: Consider the connection to the linear assignment problem (Hungarian algorithm).*
+
+    2.  [10 points] Implement the Frank-Wolfe algorithm in Python to solve the projection problem. Use `scipy.optimize.linear_sum_assignment` to solve the LMO. For the step size, you can use the optimal closed-form solution for projection: $\gamma_k = \frac{\langle X_k - Y, X_k - S_k \rangle}{\| X_k - S_k \|_F^2}$, clipped to $[0, 1]$.
+
+        ```python
+        import numpy as np
+        from scipy.optimize import linear_sum_assignment
+        import matplotlib.pyplot as plt
+
+        def project_to_birkhoff_frank_wolfe(Y, max_iter=100, tol=1e-6):
+            """
+            Projects matrix Y onto the Birkhoff polytope using the Frank-Wolfe algorithm.
+
+            Args:
+                Y (np.ndarray): The matrix to project.
+                max_iter (int): Maximum number of iterations.
+                tol (float): Tolerance for convergence (change in objective value).
+
+            Returns:
+                np.ndarray: The projection of Y onto the Birkhoff polytope.
+                list: History of objective function values.
+            """
+            n = Y.shape[0]
+            assert Y.shape[0] == Y.shape[1], "Input matrix must be square"
+
+            # Initialize with a feasible point (e.g., uniform matrix)
+            Xk = np.ones((n, n)) / n
+            
+            objective_history = []
+
+            for k in range(max_iter):
+                # Objective function value
+                obj_val = 0.5 * np.linalg.norm(Xk - Y, 'fro')**2
+                objective_history.append(obj_val)
+                
+                if k > 0 and abs(objective_history[-1] - objective_history[-2]) < tol:
+                    print(f"Converged after {k} iterations.")
+                    break
+
+                # 1. Compute gradient
+                grad_fk = ... # YOUR CODE HERE 
+
+                # 2. Solve the LMO: S_k = argmin_{S in Birkhoff} <grad_fk, S>
+                # Use linear_sum_assignment on the cost matrix grad_fk
+                row_ind, col_ind = ... # YOUR CODE HERE using linear_sum_assignment
+                Sk = np.zeros((n, n))
+                # Construct permutation matrix Sk based on row_ind, col_ind
+                ... # YOUR CODE HERE 
+
+                # 3. Compute step size gamma_k 
+                # Optimal step size for projection, clipped to [0, 1]
+                delta_k = Xk - Sk
+                denom = np.linalg.norm(delta_k, 'fro')**2
+                if denom < 1e-12: # Avoid division by zero if Xk is already the vertex Sk
+                    gamma_k = 0.0
+                else:
+                    gamma_k = ... # YOUR CODE HERE for optimal step size
+                    gamma_k = np.clip(gamma_k, 0.0, 1.0) 
+
+                # 4. Update
+                Xk = ... # YOUR CODE HERE 
+
+            else: # If loop finishes without breaking
+                 print(f"Reached max iterations ({max_iter}).")
+
+            return Xk, objective_history
+        ```
+
+    3.  [5 points] Test your implementation with $n=5$ and a randomly generated matrix $Y = \text{np.random.rand}(5, 5)$. Run the algorithm for 200 iterations. Plot the objective function value $f(X_k)$ versus the iteration number $k$. Verify numerically that the final matrix $X_{200}$ approximately satisfies the conditions for being in $B_5$ (non-negative entries, row sums equal to 1, column sums equal to 1).
+
 ### Subgradient method
 
 1. **Finding a point in the intersection of convex sets.** [30 points] Let $A \in \mathbb{R}^{n \times n}$ be a positive definite matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
@@ -1288,3 +1391,47 @@ should be made to maximize the profit?
 ### Neural network training
 
 ### Big models
+
+1. **Fit the largest model you can on a single GPU.** [15 points]
+
+    In this assignment, you will train a language model (LM) using the TinyStories dataset, focusing on optimizing model performance within the constraints of Google Colab's hardware. For the sake of speed, we will do it on the part of the dataset.
+    
+    ```Tiny_Stories
+    Once upon a time, there was a little car named Beep. Beep loved to go fast and play in the sun. 
+    Beep was a healthy car because he always had good fuel....
+    ```
+
+    Your objective is to maximize the size of the model without exceeding the available computational resources (~ 16GB VRAM). You could start with the Hugging Face Transformers library and experiment with various memory optimization techniques, such as (but not limited to):
+
+        * Different batch size
+        * Different optimizer
+        * Gradient accumulation
+        * Activation checkpointing
+        * CPU offloading
+        * 8bit optimizers
+
+    You have a baseline of training `gpt-2` model prepared at the following [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/TinyStories_baseline.ipynb). You can easily switch it to `opt-350m`, `opt-1.3b`, `gpt2` etc. You can find a great beginner-level guide on the topic [here](https://huggingface.co/docs/transformers/v4.18.0/en/performance).
+
+    ```GPT2
+    A long time ago in a galaxy far far away... a little girl named Lily was playing in the garden. She was so excited! She wanted to explore the garden and see what was around her.
+    Suddenly, she heard a loud noise. Lily looked up and saw a big, hairy creature. Lily was so excited! She ran to the creature and grabbed it by the arm. The creature was so big and hairy that Lily couldn't help but laugh. 
+    ```
+
+    ![](gpt2_generation.jpeg)
+
+    You have to fill this table with your description/observations.
+
+    | Setup | # of parameters | GPU peak memory, MB | Final eval loss | Batch Size | Time to run 5 epochs, s | Generation example | Comment |
+    |:---:|:---:|:---:|:---:|:---:|:---:|:---------:|:---------:|
+    | Baseline (OPT-125M) | 125 M | 9044 | 1.928 | 8 | 442.34 | `A long time ago in a galaxy far far away... there was a little girl named Lily. She was three years old and loved to explore. One day, she decided to go for a walk in the park. Lily was so excited to go for a walk. She asked her mom, "What do you want to do?" Her mom smiled and said, "I want to explore the galaxy." Lily was so excited to explore the galaxy.` |  |
+    | Baseline (GPT2-S) | 124 M | 13016 | 2.001 | 8 | 487.75 | `A long time ago in a galaxy far far away... a little girl named Lily was playing in the garden. She was so excited! She wanted to explore the garden and see what was around her. Suddenly, she heard a loud noise. Lily looked up and saw a big, hairy creature. Lily was so excited! She ran to the creature and grabbed it by the arm. The creature was so big and hairy that Lily couldn't help but laugh.` | The generation seems more interesting, despite the fact, that eval loss is higher. |
+    |  |  |  |  |  |  |  |  |
+    |  |  |  |  |  |  |  |  |
+    |  |  |  |  |  |  |  |  |
+    |  |  |  |  |  |  |  |  |
+     
+    For each unique trick for memory optimization, you will get 3 points (maximum 15 points). A combination of tricks is not counted as a unique trick, but will, probably, be necessary to train big models. The maximum grade is bounded with the size of the trained model:
+        * If the model size you train is <= 125M - you can get a maximum of 6 points.
+        * If the model size you train is 126M <= 350M - you can get a maximum of 8 points.
+        * If the model size you train is 350M <= 1B - you can get a maximum of 12 points.
+        * If you fit 1B model or more - you can get a maximum 15 points.
