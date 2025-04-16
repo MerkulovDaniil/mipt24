@@ -138,21 +138,21 @@
   youtube: https://youtu.be/aHWVRLXppDU
   download: https://disk.yandex.com/i/2rUKeDTp3lH5_w
 
-- title: "Методы редукции дисперсии: SAG, SVRG, SAGA."
+- title: "Методы редукции дисперсии: SAG, SVRG"
   number: 21
   materials: /lectures/21.pdf
   notes: /notes/21.pdf
   youtube: https://youtu.be/GjfLM5uevuE
   download: https://disk.yandex.ru/i/TrM9P2r9K8AF2w
 
-- title: "Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity"
+- title: "Адаптивные градиентные методы. AdamW, Muon, Shampoo, NanoGPT speedrun, AlgoPerf banchmark"
   number: 22
   materials: /lectures/22.pdf
   notes: /notes/22.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/YyP69_a9DCc
+  download: https://disk.yandex.ru/i/wye4SRqjR0L78w
 
-- title: Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций.
+- title: Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций. Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity
   number: 23
   materials: /lectures/23.pdf
   notes: /notes/23.pdf
