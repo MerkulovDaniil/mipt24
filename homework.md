@@ -240,7 +240,7 @@ toc: true
     \sup_{x \in P} f(x) = \max_{i=1, \ldots, k} f(v_i).
     $$
 
-    A stronger statement is: the maximum of a convex function over a closed bounded convex set is achieved at an extreme point, i.e., a point in the set that is not a convex combination of any other points in the set. (you do not have to prove it). *Hint:* Assume the statement is false, and use Jensen’s inequality.
+    A stronger statement is: the maximum of a convex function over a closed bounded convex set is achieved at an extreme point, i.e., a point in the set that is not a convex combination of any other points in the set. (you do not have to prove it). *Hint:* Assume the statement is false, and use Jensen's inequality.
 
 1. [10 points] Show, that the two definitions of $\mu$-strongly convex functions are equivalent:
     1. $f(x)$ is $\mu$-strongly convex $\iff$ for any $x_1, x_2 \in S$ and $0 \le \lambda \le 1$ for some $\mu > 0$:
@@ -441,11 +441,11 @@ In this section, you can consider either the arbitrary norm or the Euclidian nor
     * 🎧 headphones
     * 💻 laptops
 
-    The company’s production facilities are such that if we devote the entire production to headphone covers, we can produce 5000 of them in one day. If we devote the entire production to phone covers or laptop covers, we can produce 4000 or 2000 of them in one day. 
+    The company's production facilities are such that if we devote the entire production to headphone covers, we can produce 5000 of them in one day. If we devote the entire production to phone covers or laptop covers, we can produce 4000 or 2000 of them in one day. 
 
-    The production schedule is one week (6 working days), and the week’s production must be stored before distribution. Storing 1000 headphone covers (packaging included) takes up 30 cubic feet of space. Storing 1000 phone covers (packaging included) takes up 50 cubic feet of space, and storing 1000 laptop covers (packaging included) takes up 220 cubic feet of space. The total storage space available is 1500 cubic feet. 
+    The production schedule is one week (6 working days), and the week's production must be stored before distribution. Storing 1000 headphone covers (packaging included) takes up 30 cubic feet of space. Storing 1000 phone covers (packaging included) takes up 50 cubic feet of space, and storing 1000 laptop covers (packaging included) takes up 220 cubic feet of space. The total storage space available is 1500 cubic feet. 
     
-    Due to commercial agreements with Lyzard Corp has to deliver at least 4500 headphone covers and 4000 laptop covers per week to strengthen the product’s diffusion. 
+    Due to commercial agreements with Lyzard Corp has to deliver at least 4500 headphone covers and 4000 laptop covers per week to strengthen the product's diffusion. 
 
     The marketing department estimates that the weekly demand for headphones covers, phone, and laptop covers does not exceed 10000 14000, and 7000 units, therefore the company does not want to produce more than these amounts for headphones, phone, and laptop covers. 
 
@@ -1315,17 +1315,17 @@ should be made to maximize the profit?
 
 ### Subgradient method
 
-1. **Finding a point in the intersection of convex sets.** [30 points] Let $A \in \mathbb{R}^{n \times n}$ be a positive definite matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A^{1/2}(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
+1. **Finding a point in the intersection of convex sets.** [30 points] Let $A \in \mathbb{R}^{n \times n}$ be some non-degenerate matrix and let $\Sigma$ be an $n \times n$ diagonal matrix with diagonal entries $\sigma_1,...,\sigma_n > 0$, and $y$ a given vector in $\mathbb{R}^n$. Consider the compact convex sets $U = \{x \in \mathbb{R}^n \mid \|A(x-y)\|_2 \leq 1\}$ and $V = \{x \in \mathbb{R}^n \mid \|\Sigma x\|_\infty \leq 1\}$.
 
-    * Minimize maximum distance from the current point to the convex sets. 
+    * [10 points] Minimize maximum distance from the current point to the convex sets. 
 
         $$
         \min_{x\in\mathbb{R}^n} f(x) =  \min_{x\in\mathbb{R}^n} \max\{\mathbf{dist}(x, U), \mathbf{dist}(x, V)\}
         $$
 
-        propose an algorithm to find a point $x \in U \cap V$. You can assume that $U \cap V$ is not empty. Your algorithm must be provably converging (although you do not need to prove it and you can simply refer to the lecture slides).
+        propose an algorithm to find a point $x \in U \cap V$. You can assume that $U \cap V$ is not empty. Your algorithm must be specific and provably converging (although you do not need to prove it and you can simply refer to the lecture slides).
 
-    * Implement your algorithm with the following data: $n = 2$, $y = (3, 2)$, $\sigma_1 = 0.5$, $\sigma_2 = 1$, 
+    * [15 points] Implement your algorithm with the following data: $n = 2$, $y = (3, 2)$, $\sigma_1 = 0.5$, $\sigma_2 = 1$, 
 
         $$
         A = \begin{bmatrix} 
@@ -1334,9 +1334,48 @@ should be made to maximize the profit?
         \end{bmatrix},
         $$
 
-        and $x = (2, 1)$. Plot the objective value of your optimization problem versus the number of iterations.
+        Plot the objective value of your optimization problem versus the number of iterations. Choose the following initial points $x_0 = [(2, -1), (0, 0), (1, 2)]$. 
+
+    * [5 points] Discussion: compare the three curves. Describe the properties of this optimization problem. 
+    
+        * Is it convex/strongly convex? 
+        * Is it smooth? 
+        * Do we have a unique solution here? 
+        * Which start converges fastest / slowest and why? Relate your observations to the initial distance to $U \cap V$ and to the contact angle between the two sets at the solution.
 
     ![Illustration of the problem](convex_intersection.png)
+
+1. **Subgradient methods for Lasso.**  (10 points)
+
+    Consider the optimization problem 
+
+    $$
+    \min_{x \in \mathbb{R}^n} f(x) := \frac12 \|Ax - b\|^2 + \lambda \|x\|_1,
+    $$
+
+    with variables $x \in \mathbb{R}^n$ and problem data $A \in \mathbb{R}^{m \times n}$, $b \in \mathbb{R}^m$ and $\lambda > 0$. This model is known as Lasso, or Least Squares with $l_1$ regularization, which encourages sparsity in the solution via the non-smooth penalty $\|x\|_1 := \sum_{j=1}^n |x_j|$. In this problem, we will explore various subgradient methods for fitting this model.
+
+    * Derive the subdifferential $\partial f(x)$ of the objective.
+
+    * Find the update rule of the subgradient method and state the computational complexity of applying one update using big O notation in terms of the dimensions.
+
+    * Let $n = 1000$, $m = 200$ and $\lambda = 0.01$. Generate a random matrix $A \in \mathbb{R}^{m \times n}$ with independent Gaussian entries with mean 0 and variance $1/m$, and a fixed vector $x^* = {\underbrace{[1, \ldots, 1}_{\text{k times}}, \underbrace{0, \ldots, 0]}_{\text{n-k times}}}^T \in \mathbb{R}^n$. Let $k = 5$ and then set $b = Ax^*$. Implement the subgradient method to minimize $f(x)$, initialized at the all-zeros vector. Try different step size rules, including:
+        * constant step size $\alpha_k = \alpha$
+        * constant step length $\alpha_k = \frac{\gamma}{\|g_k\|_2}$ (so $\|x^{k+1} - x^k\|_2 = \gamma$)
+        * Inverse square root $\frac{1}{\sqrt{k}}$
+        * Inverse $\frac1k$
+        * Polyak's step length with estimated objective value:
+
+            $$
+            \alpha_k = \frac{f(x_k) - f_k^{\text{best}} + \gamma_k}{\|g_k\|_2^2}, \quad \text{ with} \sum_{k=1}^\infty \gamma_k = \infty, \quad \sum_{k=1}^\infty \gamma_k^2 < \infty
+            $$
+
+            For example, one can use $\gamma_k = \frac{10}{10 + k}$. Here  $f_k^{\text{best}} - \gamma_k$ serves as estimate of $f^*$. It is better to take $\gamma_k$ in the same scale as the objective value. One can show, that $f_k^{\text{best}} \to f^*$.
+
+    
+        Plot objective value versus iteration curves of different step size rules on the same figure.
+
+    * Repeat previous part using a heavy ball term, $\beta_k(x^k - x^{k-1})$, added to the subgradient. Try different step size rules as in the previous part and tune the heavy ball parameter $\beta_k = \beta$ for faster convergence.
 
 ### Proximal gradient method
 
@@ -1388,7 +1427,181 @@ should be made to maximize the profit?
 
 ### Stochastic gradient methods
 
+1. **Variance reduction for stochastic gradient methods for neural networks**. [20 points]
+
+    [5 points]Open [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/VR_exercise.ipynb). Implement SAG and SVRG method. Consider Linear least squares problem with the following setup
+
+    ```python
+    params = {
+        "mu": 0,
+        "m": 50,
+        "n": 100,
+        "methods": [
+            {
+                "method": "SGD",
+                "learning_rate": 1e-2,
+                "batch_size": 2,
+                "iterations": 1000,
+            },
+            {
+                "method": "SGD",
+                "learning_rate": 1e-2,
+                "batch_size": 50,
+                "iterations": 1000,
+            },
+            {
+                "method": "SAG",
+                "learning_rate": 1e-2,
+                "batch_size": 2,
+                "iterations": 1000,
+            },
+            {
+                "method": "SVRG",
+                "learning_rate": 1e-2,
+                "epoch_length": 2,
+                "batch_size": 2,
+                "iterations": 1000,
+            },
+        ]
+    }
+
+    results = run_experiments(params)
+    ```
+
+    [5 points] Then, consider strongly convex case with:
+
+    ```python
+    params = {
+        "mu": 1e-1,
+        "m": 50,
+        "n": 100,
+        "methods": [
+            {
+                "method": "SGD",
+                "learning_rate": 1e-2,
+                "batch_size": 2,
+                "iterations": 2000,
+            },
+            {
+                "method": "SGD",
+                "learning_rate": 1e-2,
+                "batch_size": 50,
+                "iterations": 2000,
+            },
+            {
+                "method": "SAG",
+                "learning_rate": 1e-2,
+                "batch_size": 2,
+                "iterations": 2000,
+            },
+            {
+                "method": "SVRG",
+                "learning_rate": 1e-2,
+                "epoch_length": 2,
+                "batch_size": 2,
+                "iterations": 2000,
+            },
+        ]
+    }
+    ```
+
+    [5 points] And for the convex binary logistic regression:
+
+    ```python
+    params = {
+        "mu": 0,
+        "m": 100,
+        "n": 200,
+        "methods": [
+            {
+                "method": "SGD",
+                "learning_rate": 1e-2,
+                "batch_size": 2,
+                "iterations": 2000,
+            },
+            {
+                "method": "SAG",
+                "learning_rate": 1e-2,
+                "batch_size": 2,
+                "iterations": 2000,
+            },
+            {
+                "method": "SVRG",
+                "learning_rate": 1e-2,
+                "epoch_length": 3,
+                "batch_size": 2,
+                "iterations": 2000,
+            },
+            {
+                "method": "SGD",
+                "learning_rate": 1e-2,
+                "batch_size": 100,
+                "iterations": 2000,
+            },
+        ]
+    }
+    ```
+
+    [5 points] and strongly convex case
+
+    ```python
+    params = {
+        "mu": 1e-1,
+        "m": 100,
+        "n": 200,
+        "methods": [
+            {
+                "method": "SGD",
+                "learning_rate": 2e-2,
+                "batch_size": 2,
+                "iterations": 3000,
+            },
+            {
+                "method": "SAG",
+                "learning_rate": 2e-2,
+                "batch_size": 2,
+                "iterations": 3000,
+            },
+            {
+                "method": "SVRG",
+                "learning_rate": 2e-2,
+                "epoch_length": 3,
+                "batch_size": 2,
+                "iterations": 3000,
+            },
+            {
+                "method": "SGD",
+                "learning_rate": 2e-2,
+                "batch_size": 100,
+                "iterations": 3000,
+            },
+        ]
+    }
+    ```
+
+    Describe the obtained convergence and compare methods.
+
+
+    ![](lls_VR.svg)
+
+    ![](logreg_VR.svg)
+
 ### Neural network training
+
+1. **Anomaly detection with neural network.** [20 points] 
+
+    In this problem we will try to detect anomalies in time series with neural network. 
+
+:::{.plotly} 
+anomaly_detection.html
+:::
+
+    We will train the model to reconstruct normal data and when the reconstruction error for the actual data on trained model is high, we report an anomaly. Start with this notebook [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/time_series_anomaly.ipynb). The default solution is adam and after training it can detect 4 out of 5 anomalies. Train and compare several methods on the same problem. For each method try to find hyperparameters, which ensures at least 3 out of 5 anomalies detection. Present learning curves and anomaly predictions for each method.
+
+        * SGD with momentum [5 points] from optax
+        * Adadelta [5 points] from optax
+        * BFGS [10 points] implemented manually
+        * Muon optimizer [10 points] implemented manually
 
 ### Big models
 
@@ -1435,3 +1648,108 @@ should be made to maximize the profit?
         * If the model size you train is 126M <= 350M - you can get a maximum of 8 points.
         * If the model size you train is 350M <= 1B - you can get a maximum of 12 points.
         * If you fit 1B model or more - you can get a maximum 15 points.
+
+### ADMM (Dual methods)
+
+1. **Low‑Rank Matrix Completion via ADMM**  [25 points]
+
+   **Background.** In many applications such as recommender systems, computer vision and system identification, the data matrix is approximately low‑rank but only a subset of its entries are observed. Recovering the missing entries can be posed as a convex program that combines a data‑fitting term with the nuclear norm, a convex surrogate for rank.
+
+   We are given a partially observed matrix $M \in \mathbb{R}^{m\times n}$ and the index set of observed entries $\Omega \subseteq \{1,\dots,m\} \times \{1,\dots,n\}$. Define the sampling operator $P_\Omega : \mathbb{R}^{m\times n}\to\mathbb{R}^{m\times n}$ by $(P_\Omega(X))_{ij}= X_{ij}$ if $(i,j)\in\Omega$ and $0$ otherwise.
+
+   We consider the optimization problem
+   $$
+   \min_{X\in\mathbb{R}^{m\times n}}\;\frac12\|P_\Omega(X-M)\|_F^2\; + \;\lambda\|X\|_*,
+   $$
+   where $\|X\|_* = \sum_k \sigma_k(X)$ is the nuclear norm.
+
+   * **(a) [10 points] Derive a two‑block ADMM algorithm.**  
+     Introduce an auxiliary variable $Z$ and rewrite the problem in the form  
+     $$
+     \min_{X,Z}\; \frac12\|P_\Omega(Z-M)\|_F^2 + \lambda\|X\|_* \quad\text{s.t. } X-Z = 0.
+     $$
+     Derive explicit closed‑form expressions for each ADMM update:
+
+     * **$X$‑update:** singular‑value soft‑thresholding (SVT);
+     * **$Z$‑update:** projection onto the observed entries (keep $M$ on $\Omega$, average with $X$ elsewhere);
+     * **dual‑variable update.**
+
+     State a practical stopping rule based on the primal and dual residuals.
+
+   * **(b) [10 points] Implement the algorithm on synthetic data.**  
+     Use the following set‑up (in Python):
+
+     ```python
+     import numpy as np
+     np.random.seed(0)
+     m, n, r = 50, 40, 3
+     U = np.random.randn(m, r)
+     V = np.random.randn(n, r)
+     M_star = U @ V.T                      # ground‑truth low‑rank matrix
+     mask = np.random.rand(m, n) < 0.3     # 30 % observations
+     noise = 0.01 * np.random.randn(m, n)
+     M = mask * (M_star + noise)           # observed matrix (zeros elsewhere)
+     lambda_ = 1 / np.sqrt(max(m, n))
+     ```
+
+     1. Implement the ADMM algorithm derived in part (a).
+     2. Run it from $X^0 = 0$ for three penalty parameters $\rho \in \{0.1, 1, 10\}$.
+     3. For each $\rho$:
+        * plot **(i)** the objective value and **(ii)** the relative reconstruction error $\frac{\|X^k - M_\star\|_F}{\|M_\star\|_F}$ versus iteration number;
+        * report the number of iterations required until $\max(\|r_{\mathrm p}^k\|_F,\|r_{\mathrm d}^k\|_F) \le 10^{-3}$.
+
+   * **(c) [5 points] Discussion.**  
+     Compare the convergence behaviour across the three values of $\rho$. How does $\rho$ influence the rate at which the primal and dual residuals decrease? Comment on
+
+     * the rank of the iterates (after SVT);
+     * the trade‑off between data‑fit and nuclear‑norm penalty as $\lambda$ varies;
+     * the quality of the reconstruction once the stopping criterion is met.
+
+     Relate your observations to the theory of ADMM and to the sensitivity of singular‑value thresholding to the choice of $\rho$.  
+
+
+
+### Continuous time methods
+
+1.  **SGD as a splitting scheme and the importance of batches order** [40 points]
+
+    **Background: (to be honest you can do the task without reading it)**
+
+    The standard Gradient Descent (GD) method for minimizing $f(x) = \frac{1}{n} \sum_{i=1}^n f_i(x)$ can be viewed as an Euler discretization of the gradient flow Ordinary Differential Equation (ODE):
+    $$
+    \frac{d x}{d t} = -\nabla f(x) = -\frac{1}{n} \sum_{i=1}^n \nabla f_i(x)
+    $$
+    Stochastic Gradient Descent (SGD), particularly with cycling through mini-batches without replacement, can be interpreted as a *splitting scheme* applied to this ODE. In a first-order splitting scheme for $\frac{dx}{dt} = A x = \sum_{i=1}^m A_i x$, we approximate the solution $x(h)$ by sequentially applying the flows corresponding to each $A_i$: $x(h) \approx e^{A_{\sigma(m)} h} \ldots e^{A_{\sigma(1)} h} x_0$ for some permutation $\sigma$. 
+    
+    In the [paper](https://arxiv.org/abs/2004.08981) authors show that for the linear least squares problem $f(x) = \frac{1}{2n}\|X x - y\|^2$, where $X$ is split into $m$ row blocks $X_i$, the corresponding ODE involves matrices $A_i = -\frac{1}{n} X_i^T X_i$. If $X_i^T = Q_i R_i$ is the QR decomposition ($Q_i$ has orthonormal columns), let $\Pi_i = I - Q_i Q_i^*$ be the projector onto the null space of $X_i$. The paper presents the following result for the asymptotic global error of the splitting scheme:
+    > **Theorem:** Let $A_i = -\frac{1}{n} X_i^T X_i$ for $i=1,\dots,m$. Assume each $A_i$ is negative semidefinite and does not have full rank, but their sum $A = \sum A_i$ does have full rank. Then, for any permutation $\sigma$ of $\{1, \dots, m\}$:
+    > $$
+    >     \lim_{t \to \infty}\| e^{A_{\sigma(m)}t} \cdots e^{A_{\sigma(1)}t} - e^{At}\| = \left\|\prod_{i=1}^m \Pi_{\sigma(i)}\right\|
+    > $$
+    This error bound depends on the product of projectors $\Pi_i$ and thus *on the order* specified by the permutation $\sigma$. Since one epoch of SGD corresponds to applying the Euler discretization of each local problem $\frac{dx}{dt} = A_i x$ sequentially, this suggests that the order in which batches are processed in SGD might affect convergence, especially over many epochs.
+
+    **Tasks:**
+
+    1.  **Investigating the Bound Distribution** [5 points]
+        *   Consider a simple linear least squares problem.
+            $$
+            \frac{1}{2n}\|X \theta - y\|^2 \to \min_{\theta \in \mathbb{R}^{d}}, X \in \mathbb{R}^{n \times d}, y \in \mathbb{R}^n
+            $$
+            For example, generate a random matrix $X \in \mathbb{R}^{80 \times 20}$ and a random vector $y \in \mathbb{R}^{80}$.
+        *   Split $X$ into $m=8$ batches (row blocks) sequentially $X_1, \ldots, X_8$, where each $X_i \in \mathbb{R}^{10 \times 20}$.
+        *   For each batch $X_i \in \mathbb{R}^{10 \times 20}$, you have to compute the projector matrix $\Pi_i = I - Q_i Q_i^* \in \mathbb{R}^{20 \times 20}$, where $X_i^T = Q_i R_i$ is the (thin) QR decomposition of $X_i^T \in \mathbb{R}^{20 \times 10}$ ($Q_i \in \mathbb{R}^{20 \times r_i}, R_i \in \mathbb{R}^{r_i \times 10}$, with $r_i = \text{rank}(X_i) \le 10$).
+        *   Calculate the error bound norm $E(\sigma) = \|\prod_{j=1}^m \Pi_{\sigma(j)}\|_2$ (where the product is a $20 \times 20$ matrix) for *all* $m! = 8! = 40320$ possible permutations $\sigma$. Note, that this quantity is a scalar and depends on the order of batches in multiplication (permutation $\sigma$), i.e. $\|\Pi_1 \Pi_2\| \neq \|\Pi_2 \Pi_1\|$.
+        *   Plot a histogram of the distribution of these scalar $E(\sigma)$ values. Does the order seem to matter significantly in this random case?
+
+    2.  **Maximizing Order Dependence with adversarial dataset construction** [30 points]
+        *   Modify the structure of the matrix $X$ (or the way it is split into $X_i$, but you cannot change the number of batches and their size) from Task 1 to create a scenario where the distribution of the error bounds $E(\sigma)$ has a significantly larger variance (to be precise, the ratio of the maximum to minimum values for different permutations should be maximized). *Hint: Think about how the projectors $\Pi_i$ interact. How could you make the product $\Pi_{\sigma(m)} \cdots \Pi_{\sigma(1)}$ very different for different orders $\sigma$? Consider cases where the null spaces have specific overlaps or orthogonality properties.*
+        *   Explain your reasoning for the modification.
+        *   Repeat the calculation and plotting from Task 1 for your modified problem to demonstrate the increased variance in the error bounds. Report the ratio of the maximum to minimum values for different permutations before and after adversarial dataset construction.
+
+    3.  **Testing SGD Convergence** [5 points]
+        *   Using the adversarial dataset from Task 2, identify two specific permutations: $\sigma_{\text{low}}$ with a low error bound $E(\sigma_{\text{low}})$ and $\sigma_{\text{high}}$ with a high error bound $E(\sigma_{\text{high}})$.
+        *   Implement SGD for the linear least squares problem $\min_x \frac{1}{2n} \|Xx - y\|^2$. Use a fixed, small learning rate (e.g., $\alpha = 0.01/L$ where $L$ is the Lipschitz constant of the full gradient).
+        *   Run SGD for a sufficient number of epochs (e.g., 50-100), applying the batches *deterministically* according to the order defined by $\sigma_{\text{low}}$ in each epoch. Record the squared error $\|X x_k - y\|^2$ at the end of each epoch $k$.
+        *   Repeat the SGD run using the fixed batch order defined by $\sigma_{\text{high}}$.
+        *   Plot the convergence curves (squared error vs. epoch number) for both $\sigma_{\text{low}}$ and $\sigma_{\text{high}}$ on the same graph.
+        *   Discuss your results. Does the observed convergence speed of SGD correlate with the theoretical asymptotic error bound $E(\sigma)$? Does the order of batches appear to matter more in your modified problem compared to the random one?
