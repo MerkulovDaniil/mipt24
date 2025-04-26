@@ -1598,10 +1598,10 @@ anomaly_detection.html
 
     We will train the model to reconstruct normal data and when the reconstruction error for the actual data on trained model is high, we report an anomaly. Start with this notebook [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/time_series_anomaly.ipynb). The default solution is adam and after training it can detect 4 out of 5 anomalies. Train and compare several methods on the same problem. For each method try to find hyperparameters, which ensures at least 3 out of 5 anomalies detection. Present learning curves and anomaly predictions for each method.
 
-        * SGD with momentum [5 points] from optax
-        * Adadelta [5 points] from optax
-        * BFGS [10 points] implemented manually
-        * Muon optimizer [10 points] implemented manually
+    * SGD with momentum [5 points] from optax
+    * Adadelta [5 points] from optax
+    * BFGS [10 points] implemented manually
+    * [Muon](https://github.com/KellerJordan/Muon) [optimizer](https://arxiv.org/pdf/2502.16982) [10 points] implemented manually
 
 ### Big models
 
@@ -1722,10 +1722,12 @@ anomaly_detection.html
     Stochastic Gradient Descent (SGD), particularly with cycling through mini-batches without replacement, can be interpreted as a *splitting scheme* applied to this ODE. In a first-order splitting scheme for $\frac{dx}{dt} = A x = \sum_{i=1}^m A_i x$, we approximate the solution $x(h)$ by sequentially applying the flows corresponding to each $A_i$: $x(h) \approx e^{A_{\sigma(m)} h} \ldots e^{A_{\sigma(1)} h} x_0$ for some permutation $\sigma$. 
     
     In the [paper](https://arxiv.org/abs/2004.08981) authors show that for the linear least squares problem $f(x) = \frac{1}{2n}\|X x - y\|^2$, where $X$ is split into $m$ row blocks $X_i$, the corresponding ODE involves matrices $A_i = -\frac{1}{n} X_i^T X_i$. If $X_i^T = Q_i R_i$ is the QR decomposition ($Q_i$ has orthonormal columns), let $\Pi_i = I - Q_i Q_i^*$ be the projector onto the null space of $X_i$. The paper presents the following result for the asymptotic global error of the splitting scheme:
-    > **Theorem:** Let $A_i = -\frac{1}{n} X_i^T X_i$ for $i=1,\dots,m$. Assume each $A_i$ is negative semidefinite and does not have full rank, but their sum $A = \sum A_i$ does have full rank. Then, for any permutation $\sigma$ of $\{1, \dots, m\}$:
-    > $$
-    >     \lim_{t \to \infty}\| e^{A_{\sigma(m)}t} \cdots e^{A_{\sigma(1)}t} - e^{At}\| = \left\|\prod_{i=1}^m \Pi_{\sigma(i)}\right\|
-    > $$
+    
+    **Theorem:** Let $A_i = -\frac{1}{n} X_i^T X_i$ for $i=1,\dots,m$. Assume each $A_i$ is negative semidefinite and does not have full rank, but their sum $A = \sum A_i$ does have full rank. Then, for any permutation $\sigma$ of $\{1, \dots, m\}$:
+    $$
+    \lim_{t \to \infty}\| e^{A_{\sigma(m)}t} \cdots e^{A_{\sigma(1)}t} - e^{At}\| = \left\|\prod_{i=1}^m \Pi_{\sigma(i)}\right\|
+    $$
+
     This error bound depends on the product of projectors $\Pi_i$ and thus *on the order* specified by the permutation $\sigma$. Since one epoch of SGD corresponds to applying the Euler discretization of each local problem $\frac{dx}{dt} = A_i x$ sequentially, this suggests that the order in which batches are processed in SGD might affect convergence, especially over many epochs.
 
     **Tasks:**
