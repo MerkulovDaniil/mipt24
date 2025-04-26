@@ -1427,7 +1427,7 @@ should be made to maximize the profit?
 
 ### Stochastic gradient methods
 
-1. **Variance reduction for stochastic gradient methods for neural networks**. [20 points]
+1. **Variance reduction for stochastic gradient methods**. [20 points]
 
     [5 points]Open [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/VR_exercise.ipynb). Implement SAG and SVRG method. Consider Linear least squares problem with the following setup
 
