@@ -152,30 +152,23 @@
   youtube: https://youtu.be/YyP69_a9DCc
   download: https://disk.yandex.ru/i/wye4SRqjR0L78w
 
-- title: Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций. Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking. Mode connectivity
+- title: Удивительные сюжеты из мира обучения больших нейросетей с точки зрения методов оптимизации. Проекция функции потерь нейронной сети на прямую, плоскость. Инициализация. Grokking. Double Descent. Large batch training. Чекпоинтинг активаций. Обучение нейронных сетей с точки зрения методов оптимизации. Обобщающая способность моделей машинного обучения. Double Descent. Grokking.
   number: 23
   materials: /lectures/23.pdf
   notes: /notes/23.pdf
-  youtube: 
-  download: 
+  youtube: https://youtu.be/HGLPJUsr4F8
+  download: https://disk.yandex.ru/i/dMe4uNQ3IjF29Q
 
-- title: "Вопросы обучения больших моделей. Learning rate schedulers. Warm-up. Cooldown. Double Descent. Grokking"
+- title: Двойственные методы оптимизации. Прямо-двойственные методы. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.
   number: 24
   materials: /lectures/24.pdf
   notes: /notes/24.pdf
-  youtube: https://youtu.be/HGLPJUsr4F8
-  download: 
+  youtube: https://youtu.be/J5h5dBazg_g
+  download: https://disk.yandex.ru/i/dcKo13jUVk0H_w
 
-- title: Методы оптимизации в непрерывном времени. Gradient Flow. Accelerated Gradient Flow. Stochastic gradient flow.
+- title: Методы оптимизации в непрерывном времени. Gradient Flow. Accelerated Gradient Flow. Stochastic gradient flow. Central Flow.
   number: 25
   materials: /lectures/25.pdf
   notes: /notes/25.pdf
-  youtube: 
-  download: 
-
-- title: Введение в двойственные методы оптимизации. Метод двойственного градиентного подъёма. Метод модифицированной функции Лагранжа. ADMM.
-  number: 26
-  materials: /lectures/26.pdf
-  notes: /notes/26.pdf
   youtube: 
   download: 
