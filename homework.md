@@ -1588,13 +1588,13 @@ should be made to maximize the profit?
 
 ### Neural network training
 
-1. **Anomaly detection with neural network.** [20 points] 
+1. **Anomaly detection with neural network.** [30 points] 
 
     In this problem we will try to detect anomalies in time series with neural network. 
-
-:::{.plotly} 
-anomaly_detection.html
-:::
+    
+    :::{.plotly}
+    anomaly_detection.html
+    :::
 
     We will train the model to reconstruct normal data and when the reconstruction error for the actual data on trained model is high, we report an anomaly. Start with this notebook [\faPython colab notebook](https://colab.research.google.com/github/MerkulovDaniil/optim/blob/master/assets/Notebooks/time_series_anomaly.ipynb). The default solution is adam and after training it can detect 4 out of 5 anomalies. Train and compare several methods on the same problem. For each method try to find hyperparameters, which ensures at least 3 out of 5 anomalies detection. Present learning curves and anomaly predictions for each method.
 
