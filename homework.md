@@ -1644,10 +1644,11 @@ should be made to maximize the profit?
     |  |  |  |  |  |  |  |  |
      
     For each unique trick for memory optimization, you will get 3 points (maximum 15 points). A combination of tricks is not counted as a unique trick, but will, probably, be necessary to train big models. The maximum grade is bounded with the size of the trained model:
-        * If the model size you train is <= 125M - you can get a maximum of 6 points.
-        * If the model size you train is 126M <= 350M - you can get a maximum of 8 points.
-        * If the model size you train is 350M <= 1B - you can get a maximum of 12 points.
-        * If you fit 1B model or more - you can get a maximum 15 points.
+    
+    * If the model size you train is <= 125M - you can get a maximum of 6 points.
+    * If the model size you train is 126M <= 350M - you can get a maximum of 8 points.
+    * If the model size you train is 350M <= 1B - you can get a maximum of 12 points.
+    * If you fit 1B model or more - you can get a maximum 15 points.
 
 ### ADMM (Dual methods)
 
