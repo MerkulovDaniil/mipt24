@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mipt24.fmin.xyz/index.html</loc>
-    <lastmod>2025-06-07T19:09:13.210Z</lastmod>
-  </url>
-  <url>
     <loc>https://mipt24.fmin.xyz/files/nanogpt.html</loc>
-    <lastmod>2025-06-07T19:09:13.119Z</lastmod>
+    <lastmod>2025-06-12T07:27:12.484Z</lastmod>
   </url>
   <url>
     <loc>https://mipt24.fmin.xyz/program.html</loc>
-    <lastmod>2025-06-07T19:09:14.737Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mipt24.fmin.xyz/homework.html</loc>
-    <lastmod>2025-06-07T19:09:13.210Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mipt24.fmin.xyz/Notebooks/polynoms.html</loc>
-    <lastmod>2025-06-07T19:09:12.928Z</lastmod>
-  </url>
-  <url>
-    <loc>https://mipt24.fmin.xyz/files/mds.html</loc>
-    <lastmod>2025-06-07T19:09:13.099Z</lastmod>
+    <lastmod>2025-06-12T07:27:14.094Z</lastmod>
   </url>
   <url>
     <loc>https://mipt24.fmin.xyz/projects.html</loc>
-    <lastmod>2025-06-07T19:09:14.737Z</lastmod>
+    <lastmod>2025-06-12T07:27:14.094Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mipt24.fmin.xyz/Notebooks/polynoms.html</loc>
+    <lastmod>2025-06-12T07:27:12.288Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mipt24.fmin.xyz/homework.html</loc>
+    <lastmod>2025-06-12T07:27:12.576Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mipt24.fmin.xyz/index.html</loc>
+    <lastmod>2025-06-12T07:27:12.576Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mipt24.fmin.xyz/files/mds.html</loc>
+    <lastmod>2025-06-12T07:27:12.465Z</lastmod>
   </url>
 </urlset>
