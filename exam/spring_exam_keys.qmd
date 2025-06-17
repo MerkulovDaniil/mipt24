@@ -8,6 +8,17 @@ format:
         toc: true
         filters:
         - ../_extensions/fminxyz/fix_html_images.lua
+        template-partials:
+            - title-block.html # Empty title block
+        number-sections: false
+        link-external-newwindow: true
+        theme: [cosmo, theme.scss]
+        code-link: true
+        code-copy: true
+        html-math-method: katex
+        include-in-header:
+            - text: |
+                <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/copy-tex.min.js" integrity="sha384-ww/583aHhxWkz5DEVn6OKtNiIaLi2iBRNZXfJRiY1Ai7tnJ9UXpEsyvOITVpTl4A" crossorigin="anonymous"></script>
 ---
 
 # Определения и формулировки
@@ -66,10 +77,10 @@ format:
     $$
     Если зафиксируем $x_0 \in \mathbb{R}^n$, то:
     $$
-    \varphi_1(x) = f(x_0) + \langle f(x_0), x - x_0 \rangle - \frac{L}{2}\| x - x_0 \|^2
+    \varphi_1(x) = f(x_0) + \langle \nabla f(x_0), x - x_0 \rangle - \frac{L}{2}\| x - x_0 \|^2
     $$
     $$
-    \varphi_2(x) = f(x_0) + \langle f(x_0), x - x_0 \rangle + \frac{L}{2}\| x - x_0 \|^2
+    \varphi_2(x) = f(x_0) + \langle \nabla f(x_0), x - x_0 \rangle + \frac{L}{2}\| x - x_0 \|^2
     $$
     Это две параболы, и для них верно, что $\varphi_1(x) \leqslant f(x) \leqslant \varphi_2(x)$ $\forall x$
 
@@ -119,7 +130,7 @@ format:
 1.  Условие Поляка-Лоясиевича (градиентного доминирования) для функций.
 
     :::{.callout-tip appearance="simple"}
-    $\exists \mu > 0: \quad \| \nabla f(x) \|^2 \geqslant 2\mu(f(x) - f^*) \quad \forall x$,  где $f^*$ - минмимум функции $f(x)$.
+    $\exists \mu > 0: \quad \| \nabla f(x) \|^2 \geqslant 2\mu(f(x) - f^*) \quad \forall x$,  где $f^*$ - минимум функции $f(x)$.
     :::
 1.  Сходимость градиентного спуска для сильно выпуклых квадратичных функций. Оптимальные гиперпараметры.
 
@@ -187,7 +198,7 @@ format:
     :::{.callout-tip appearance="simple"}
     | Функция | Неускоренная | Ускоренная |
     |:--------:|:-------:|:-------:|
-    Гладкая и выпуклая |$\mathcal{O}\left(\frac{1}{k^2}\right)$| $\mathcal{O}\left(\frac{1}{k^2}\right)$  |
+    Гладкая и выпуклая |$\mathcal{O}\left(\frac{1}{k}\right)$| $\mathcal{O}\left(\frac{1}{k^2}\right)$  |
     Гладкая и сильно-выпуклая (или PL) |$\mathcal{O}\left((1 - \frac{\mu}{L})^k\right)$| $\mathcal{O}\left((1 - \sqrt{\frac{\mu}{L}})^k\right)$  |
     :::
 1.  Формулировка метода тяжелого шарика (Поляка) для квадратичной функции. Характер сходимости. Оптимальные гиперпараметры.
@@ -228,7 +239,7 @@ format:
     &\textbf{Обновление градиента: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
     &\textbf{Экстраполяция: } &x_{k+1} &= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
     &\textbf{Экстраполяция веса: } &\lambda_{k+1} &= \frac{1 + \sqrt{1 + 4\lambda_k^2}}{2} \\
-    &\textbf{Экстраполяция веса: } &\gamma_k &= \frac{1 - \lambda_k}{\lambda_{k+1}}
+    &\gamma_k &= \frac{1 - \lambda_k}{\lambda_{k+1}}
     \end{aligned}
     $$
     Метод сходится со скоростью $\mathcal{O}\left(\frac{1}{k^2}\right)$, а именно:
@@ -239,12 +250,12 @@ format:
 1.  Ускоренный градиентный метод Нестерова для сильно выпуклых гладких функций.
 
     :::{.callout-tip appearance="simple"}
-    Рассматриваем задачу $f(x) \rightarrow \min\limits_{x}$, где $f : \mathbb{R}^n \rightarrow \mathbb{R} - \mu$-сильно выпуклая и $L$-гладкая. Алгоритм Нестерова ускоренного градиентного спуска (NAG) имеет вид $(x_0 = y_0,\ \lambda_0 = 0)$:
+    Рассматриваем задачу $f(x) \rightarrow \min\limits_{x}$, где $f : \mathbb{R}^n \rightarrow \mathbb{R} - \mu$-сильно выпуклая и $L$-гладкая. Алгоритм Нестерова ускоренного градиентного спуска (NAG) имеет вид $(x_0 = y_0)$:
     $$
     \begin{aligned}
     &\textbf{Обновление градиента: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
-    &\textbf{Экстрополяция: } &x_{k+1} &= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
-    &\textbf{Экстрополяция весов: } &\gamma_k &= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
+    &\textbf{Экстраполяция: } &x_{k+1} &= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
+    &\textbf{Экстраполяция веса: } &\gamma_k &= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
     \end{aligned}
     $$
     Метод сходится линейно, а именно:
@@ -273,7 +284,7 @@ format:
     \begin{aligned} 
     b_1 &= a_1 \\
     b_2 &= a_2 - \text{proj}_{b_1}a_2 \\
-    b_3 &= a_3 - \text{proj}_{b_1}a_3 - \text{proj}_{b_2} a_2 \\
+    b_3 &= a_3 - \text{proj}_{b_1}a_3 - \text{proj}_{b_2} a_3 \\
     \ldots \\
     b_n &= a_n - \sum_{i=1}^{n-1}\text{proj}_{b_i}a_n
     \end{aligned}
@@ -372,7 +383,7 @@ format:
 1.  Характер сходимости метода Ньютона для сильно выпуклых гладких функций - куда и как сходится.
 
     :::{.callout-tip appearance="simple"}
-    Пусть $f(x)$ сильно выпукла дважды непрерывно дифференцируемая на $\mathbb{R}^n$ и выпоняются неравенства: $\mu I_n\preceq \nabla ^2f(x) \preceq L I_n$. Тогда метод Ньютона с постоянным шагом локально сходится к решению со сверхлинейной скоростью. Если вдобавок, Гессиан $M$-Липшицев, тогда метод сходится  локально к  $x^*$ с квадратичной скоростью.
+    Пусть $f(x)$ сильно выпукла дважды непрерывно дифференцируема на $\mathbb{R}^n$ и выпоняются неравенства: $\mu I_n\preceq \nabla ^2f(x) \preceq L I_n$. Тогда метод Ньютона с постоянным шагом локально сходится к решению со сверхлинейной скоростью. Если вдобавок, Гессиан $M$-Липшицев, тогда метод сходится  локально к  $x^*$ с квадратичной скоростью.
     :::
 1.  Демпфированный метод Ньютона.
 
