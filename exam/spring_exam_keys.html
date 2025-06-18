@@ -314,7 +314,7 @@ f(x) = \frac{1}{2}x^TAx - b^Tx + c \to \min_{x \in \mathbb{R}^d}
 </div>
 </div>
 </div></li>
-<li><p>Связь числа обусловленности матрицы квадратичной функции с параметрами сильной выпуклости и гладкости функции.</p>
+<li><p>Связь числа обусловленности симметричной матрицы квадратичной функции с параметрами сильной выпуклости и гладкости функции.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -410,28 +410,6 @@ f(x) = \|Ax - b\|_2^2,
 <p>Рассмотрим задачу минимизации функции: <span class="math display">
 f(x) = \|Ax - b\|_2^2 + \lambda \|x\|_1,
 </span> где <span class="math inline">A \in \mathbb{R}^{n \times n}</span>, <span class="math inline">\lambda &gt; 0</span>. Эта функция выпукла, но негладкая из-за наличия <span class="math inline">\ell_1</span>-регуляризации.</p>
-</div>
-</div>
-</div></li>
-<li><p>Нижние оценки для негладкой выпуклой оптимизации с помощью методов первого порядка в терминах <span class="math inline">\mathcal{O}</span> от числа итераций метода.</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><span class="math inline">f^{\text{best}}_k - f^* \sim \mathcal{O} \left( \frac{1}{\sqrt{k}} \right)</span></p>
-</div>
-</div>
-</div></li>
-<li><p>Нижние оценки для негладкой сильно выпуклой оптимизации с помощью методов первого порядка в терминах <span class="math inline">\mathcal{O}</span> от числа итераций метода.</p>
-<div class="callout callout-style-simple callout-tip">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-body-container">
-<p><span class="math inline">f^{\text{best}}_k - f^* \sim \mathcal{O} \left( \frac{1}{k} \right)</span></p>
 </div>
 </div>
 </div></li>
@@ -1694,7 +1672,7 @@ f(x_{k+1}) &amp;\leq f(x_k) -\frac{\alpha}{2} \Vert \nabla f(x_k)\Vert^2 \leq f^
 &amp;= f^* + \frac{1}{2 \alpha}\left\langle \alpha \nabla f(x_k), 2\left(x_k-x^* - \frac{\alpha}{2} \nabla f(x_k)\right)\right\rangle
 \end{split}
 </span></p></li>
-<li><p>Пусть <span class="math inline">a = x_k-x^*</span> и <span class="math inline">b =x_k-x^* - \alpha\nabla f(x_k)</span>. Тогда <span class="math inline">a+b = \alpha \nabla f(x_k)</span> и <span class="math inline">a-b=2\left(x_k-x^* - \frac{\alpha}{2} \nabla f(x_k)\right)</span>. <span class="math display">
+<li><p>Пусть <span class="math inline">a = x_k-x^*</span> и <span class="math inline">b =x_k-x^* - \alpha\nabla f(x_k)</span>. Тогда <span class="math inline">a-b = \alpha \nabla f(x_k)</span> и <span class="math inline">a+b=2\left(x_k-x^* - \frac{\alpha}{2} \nabla f(x_k)\right)</span>. <span class="math display">
 \begin{split}
 f(x_{k+1}) &amp;\leq f^* + \frac{1}{2 \alpha}\left[ \|x_k-x^*\|_2^2 - \|x_k-x^* - \alpha\nabla f(x_k)\|_2^2\right] \\
 &amp;\leq f^* + \frac{1}{2 \alpha}\left[ \|x_k-x^*\|_2^2 - \|x_{k+1}-x^*\|_2^2\right] \\
@@ -1763,11 +1741,11 @@ f(x_k) - f^* \leqslant \left(\frac{L-\mu}{L+\mu}\right)^k(f(x_0) - f^*).
 <p><span class="math display">
 \nabla f(x) = Ax - b \overset{\nabla f(x^*) = 0}{\Rightarrow} Ax^* = b
 </span> Тогда шаг градиентного спуска имеет вид <span class="math display">
-x_{k+1} = x_k - \alpha (Ax - b)
+x_{k+1} = x_k - \alpha (Ax_k - b)
 </span> Найдем <span class="math inline">\alpha^*</span>. Воспользуемся <span class="math inline">A = Q\Lambda Q^T</span>, где <span class="math inline">\Lambda = \text{diag}\{\lambda_1, \ldots, \lambda_n\}, \ Q = \|q_1, \ldots, q_n\|</span>, <span class="math inline">\lambda_i, q_i</span> - собственное значение и собственный вектор соответственно. <span class="math display"> x_{k+1}  = (I - \alpha A)x_k + \alpha A x^* \ | \ -x^*</span> <span class="math display"> x_{k + 1} - x^* = (I - \alpha A)(x_k - x^*) </span> <span class="math display"> x_{k + 1} - x^* = (I - \alpha Q\Lambda Q^T)(x_k - x^*) \ | \ \cdot Q^T </span> <span class="math display"> Q^T(x_{k+1} - x^*) = (Q^T - \alpha \Lambda Q^T)(x_k - x^*) = (I - \alpha \Lambda)Q^T(x_k - x^*) </span> <span class="math display"> \text{Замена: } \tilde{x} = Q^T(x - x^*) \Rightarrow \tilde{x}_{k+1} = (I - \alpha \Lambda)\tilde{x}_{k} \Leftrightarrow \tilde{x}_i^{(k+1)} = (1 - \alpha \lambda_i)\tilde{x}_i^{(k)} \ i=\overline{1,d} </span> <span class="math display"> \lambda_{\min} = \mu, \quad \lambda_{\max} = L </span> Сходимость есть <span class="math inline">\Leftrightarrow \max\limits_{i}|1 - \alpha \lambda_i| &lt; 1</span> <span class="math display">
 \left\{
 \begin{array}{rl}
-    |1 - \lambda \mu| &lt; 1 \Rightarrow &amp;1 - \lambda \mu &lt; 1 \Rightarrow \alpha &gt; 0 \\
+    |1 - \alpha \mu| &lt; 1 \Rightarrow &amp;1 - \alpha \mu &lt; 1 \Rightarrow \alpha &gt; 0 \\
     &amp;\alpha \mu - 1 &lt; 1 \Rightarrow \alpha &lt; \frac{2}{\mu} \\
     |1 - \alpha L| &lt; 1 \Rightarrow &amp;1 - \alpha L &lt; 1 \Rightarrow \alpha &gt; 0 \\
     &amp;\alpha L - 1 &lt; 1 \Rightarrow \alpha &lt; \frac{2}{L}
