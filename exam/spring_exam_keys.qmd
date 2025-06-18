@@ -591,7 +591,7 @@ format:
     $$
     \begin{aligned}
     r(x) &= \frac{\mu}{2} \|x\|_2^2\\
-    \text{prox}_r(x) &= \frac{x}{1 - \mu}
+    \text{prox}_r(x) &= \frac{x}{1 + \mu}
     \end{aligned}
     $$
     :::
