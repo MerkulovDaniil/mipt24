@@ -9,10 +9,10 @@ format:
         filters:
         - ../_extensions/fminxyz/fix_html_images.lua
         template-partials:
-            - title-block.html # Empty title block
+            - ../_extensions/fminxyz/title-block.html # Empty title block
         number-sections: false
         link-external-newwindow: true
-        theme: [cosmo, theme.scss]
+        theme: [cosmo, ../_extensions/fminxyz/theme.scss]
         code-link: true
         code-copy: true
         html-math-method: katex
