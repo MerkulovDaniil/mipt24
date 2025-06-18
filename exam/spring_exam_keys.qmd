@@ -150,7 +150,7 @@ format:
 1.  Связь PL-функций и сильно выпуклых функций. 
 
     :::{.callout-tip appearance="simple"}
-    Пусть $f$ $\mu$-сильно выпуклая и дифференицруемая $\Rightarrow f \in$ PL.
+    Пусть $f$ $\mu$-сильно выпуклая и дифференцируемая $\Rightarrow f \in$ PL.
     
     Обратное неверно - $f(x) = x^2 + 3\sin^2x \in$ PL, но не сильно выпуклая (она вообще не выпуклая).
 
@@ -181,7 +181,7 @@ format:
     $$
     f(x) = \|Ax - b\|_2^2 + \lambda \|x\|_1,
     $$
-    где $A \in \mathbb{R}^{n \times n}$, $\lambda > 0$. Эта функция выпукла, но негладка из-за наличия $\ell_1$-регуляризации.
+    где $A \in \mathbb{R}^{n \times n}$, $\lambda > 0$. Эта функция выпукла, но негладкая из-за наличия $\ell_1$-регуляризации.
     :::
 1.  Нижние оценки для негладкой выпуклой оптимизации с помощью методов первого порядка в терминах $\mathcal{O}$ от числа итераций метода.
 
@@ -204,7 +204,7 @@ format:
 1.  Формулировка метода тяжелого шарика (Поляка) для квадратичной функции. Характер сходимости. Оптимальные гиперпараметры.
 
     :::{.callout-tip appearance="simple"}
-    Задача: $f(x) = \frac{1}{2} x^T A x - b^T x \rightarrow \min\limits_{x \in \mathbb{R}^d}, \ f(x), \lambda(A) \in [\mu; L]$.
+    Задача: $f(x) = \frac{1}{2} x^T A x - b^T x \rightarrow \min\limits_{x \in \mathbb{R}^d}, \lambda(A) \in [\mu; L]$.
     $$
     x_{k+1} = x_{k} −\alpha\nabla f(x_{k}) + \beta(x_k−x_{k−1}), \qquad 0 < \beta < 1.
     $$
@@ -233,34 +233,37 @@ format:
 1.  Ускоренный градиентный метод Нестерова для выпуклых гладких функций.
 
     :::{.callout-tip appearance="simple"}
-    Рассматриваем задачу $f(x) \rightarrow \min\limits_{x}$, где $f : \mathbb{R}^n \rightarrow \mathbb{R}$ выпуклая и $L$-гладкая. Алгоритм Нестерова ускоренного градиентного спуска (NAG) имеет вид $(x_0 = y_0,\ \lambda_0 = 0)$:
+    Пусть $f : \mathbb{R}^n \rightarrow \mathbb{R}$ выпуклая и $L$-гладкая. Ускоренный градиентный метод Нестерова (NAG) имеет вид $(x_0 = y_0,\ \lambda_0 = 0)$:
     $$
     \begin{aligned}
-    &\textbf{Обновление градиента: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
+    &\textbf{Градиентный шаг: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
     &\textbf{Экстраполяция: } &x_{k+1} &= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
-    &\textbf{Экстраполяция веса: } &\lambda_{k+1} &= \frac{1 + \sqrt{1 + 4\lambda_k^2}}{2} \\
-    &\gamma_k &= \frac{1 - \lambda_k}{\lambda_{k+1}}
+    &\textbf{Вес экстраполяции: } &\lambda_{k+1} &= \frac{1 + \sqrt{1 + 4\lambda_k^2}}{2} \\
+    &\textbf{Вес экстраполяции: } &\gamma_k &= \frac{1 - \lambda_k}{\lambda_{k+1}}
     \end{aligned}
     $$
-    Метод сходится со скоростью $\mathcal{O}\left(\frac{1}{k^2}\right)$, а именно:
+    Последовательность $\{f(y_k)\}_{k\in\mathbb{N}}$ сходится к оптимальному значению $f^*$ со скоростью $\mathcal{O}\left(\frac{1}{k^2}\right)$, а именно:
     $$
-    f(y_k) - f^* \leqslant\frac{2L \|x_0 - x^*\|_2^2}{k^2}
+    f(y_k) - f^* \leq \frac{2L \|x_0 - x^*\|^2}{k^2}
     $$
+
+    ![](AGD_horizontal.pdf)
+
     :::
 1.  Ускоренный градиентный метод Нестерова для сильно выпуклых гладких функций.
 
     :::{.callout-tip appearance="simple"}
-    Рассматриваем задачу $f(x) \rightarrow \min\limits_{x}$, где $f : \mathbb{R}^n \rightarrow \mathbb{R} - \mu$-сильно выпуклая и $L$-гладкая. Алгоритм Нестерова ускоренного градиентного спуска (NAG) имеет вид $(x_0 = y_0)$:
+    Пусть $f : \mathbb{R}^n \rightarrow \mathbb{R}$ $\mu$-сильно выпуклая и $L$-гладкая. Ускоренный градиентный метод Нестерова (NAG) имеет вид $(x_0 = y_0,\ \lambda_0 = 0)$:
     $$
     \begin{aligned}
-    &\textbf{Обновление градиента: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
-    &\textbf{Экстраполяция: } &x_{k+1} &= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
-    &\textbf{Экстраполяция веса: } &\gamma_k &= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
+    &\textbf{Градиентный шаг: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
+    &\textbf{Экстраполяция: } &x_{k+1} &= (1 + \gamma_k)y_{k+1} - \gamma_k y_k \\
+    &\textbf{Вес экстраполяции: } &\gamma_k &= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
     \end{aligned}
     $$
-    Метод сходится линейно, а именно:
+    Последовательность $\{f(y_k)\}_{k\in\mathbb{N}}$ сходится к оптимальному значению $f^*$ линейно:
     $$
-    f(y_k) - f^* \leqslant\frac{\mu + L}{2}\|x_0 - x^*\|^2_2 \exp \left(-\frac{k}{\sqrt{\kappa}}\right), \quad \kappa = \frac{L}{\mu}
+    f(y_k) - f^* \leq \frac{\mu + L}{2}\|x_0 - x^*\|^2_2 \exp \left(-\frac{k}{\sqrt{\kappa}}\right)
     $$
     :::
 1.  $A$-сопряженность двух векторов. $A$-ортогональность. Скалярное произведение $\langle \cdot, \cdot \rangle_A$.
