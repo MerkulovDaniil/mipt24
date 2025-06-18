@@ -1124,7 +1124,7 @@ format:
     $$
     Тогда шаг градиентного спуска имеет вид
     $$
-    x_{k+1} = x_k - \alpha (Ax - b)
+    x_{k+1} = x_k - \alpha (Ax_k - b)
     $$
     Найдем $\alpha^*$. Воспользуемся $A = Q\Lambda Q^T$, где $\Lambda = \text{diag}\{\lambda_1, \ldots, \lambda_n\}, \ Q = \|q_1, \ldots, q_n\|$, $\lambda_i, q_i$ - собственное значение и собственный вектор соответственно.
     $$ x_{k+1}  = (I - \alpha A)x_k + \alpha A x^* \ | \ -x^*$$
