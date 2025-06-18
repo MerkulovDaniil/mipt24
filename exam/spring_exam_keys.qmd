@@ -607,7 +607,7 @@ format:
     :::{.callout-tip appearance="simple"}
     Решаемая задача: $f(x) \rightarrow \min\limits_{x \in \mathbb{R}^p}$, где $f(x) =\frac{1}{n} \sum\limits_{i=1}^n f_i(x)$
     $$
-    \text{SGD:}\quad x_{k+1} = x_k - \alpha_k \nabla f_{i_k}(x),
+    \text{SGD:}\quad x_{k+1} = x_k - \alpha_k \nabla f_{i_k}(x_k),
     $$
     гдe $i_k$ - случайно выбранный индекс. Если $\mathbb{P}(i_k = i) = \frac{1}{n}$, то $\mathbb{E}[\nabla f_{i_k}(x)] = \nabla f(x)$
 
