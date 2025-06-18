@@ -1403,13 +1403,7 @@ format:
         T_k(1+\epsilon)&=\cosh\left(k\,\mathrm{arccosh}(1+\epsilon)\right).
         \end{aligned}
         $$
-    1. Для любого $x\ge 1$, полином Чебышёва первого рода может быть записан как
-        $$
-        \begin{aligned}
-        T_k(x)&=\cosh\left(k\,\mathrm{arccosh}(x)\right)\\
-        T_k(1+\epsilon)&=\cosh\left(k\,\mathrm{arccosh}(1+\epsilon)\right).
-        \end{aligned}
-        $$
+
     1. Помним, что:
         $$
         \cosh(x)=\frac{e^x+e^{-x}}{2} \quad \mathrm{arccosh}(x) = \ln(x + \sqrt{x^2-1}).
