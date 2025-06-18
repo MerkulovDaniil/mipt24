@@ -1049,7 +1049,7 @@ format:
         &= f^* + \frac{1}{2 \alpha}\left\langle \alpha \nabla f(x_k), 2\left(x_k-x^* - \frac{\alpha}{2} \nabla f(x_k)\right)\right\rangle 
         \end{split}
         $$
-    1. Пусть $a = x_k-x^*$ и $b =x_k-x^* - \alpha\nabla f(x_k)$. Тогда $a+b = \alpha \nabla f(x_k)$ и $a-b=2\left(x_k-x^* - \frac{\alpha}{2} \nabla f(x_k)\right)$.
+    1. Пусть $a = x_k-x^*$ и $b =x_k-x^* - \alpha\nabla f(x_k)$. Тогда $a-b = \alpha \nabla f(x_k)$ и $a+b=2\left(x_k-x^* - \frac{\alpha}{2} \nabla f(x_k)\right)$.
         $$
         \begin{split}
         f(x_{k+1}) &\leq f^* + \frac{1}{2 \alpha}\left[ \|x_k-x^*\|_2^2 - \|x_k-x^* - \alpha\nabla f(x_k)\|_2^2\right] \\
