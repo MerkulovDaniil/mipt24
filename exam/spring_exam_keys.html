@@ -363,7 +363,7 @@ x_{k + 1} &amp;= x_k - \alpha (Ax_k - b) \\
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Пусть <span class="math inline">f</span> <span class="math inline">\mu</span>-сильно выпуклая и дифференицруемая <span class="math inline">\Rightarrow f \in</span> PL.</p>
+<p>Пусть <span class="math inline">f</span> <span class="math inline">\mu</span>-сильно выпуклая и дифференцируемая <span class="math inline">\Rightarrow f \in</span> PL.</p>
 <p>Обратное неверно - <span class="math inline">f(x) = x^2 + 3\sin^2x \in</span> PL, но не сильно выпуклая (она вообще не выпуклая).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -409,7 +409,7 @@ f(x) = \|Ax - b\|_2^2,
 <div class="callout-body-container">
 <p>Рассмотрим задачу минимизации функции: <span class="math display">
 f(x) = \|Ax - b\|_2^2 + \lambda \|x\|_1,
-</span> где <span class="math inline">A \in \mathbb{R}^{n \times n}</span>, <span class="math inline">\lambda &gt; 0</span>. Эта функция выпукла, но негладка из-за наличия <span class="math inline">\ell_1</span>-регуляризации.</p>
+</span> где <span class="math inline">A \in \mathbb{R}^{n \times n}</span>, <span class="math inline">\lambda &gt; 0</span>. Эта функция выпукла, но негладкая из-за наличия <span class="math inline">\ell_1</span>-регуляризации.</p>
 </div>
 </div>
 </div></li>
@@ -478,7 +478,7 @@ f(x) = \|Ax - b\|_2^2 + \lambda \|x\|_1,
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Задача: <span class="math inline">f(x) = \frac{1}{2} x^T A x - b^T x \rightarrow \min\limits_{x \in \mathbb{R}^d}, \ f(x), \lambda(A) \in [\mu; L]</span>. <span class="math display">
+<p>Задача: <span class="math inline">f(x) = \frac{1}{2} x^T A x - b^T x \rightarrow \min\limits_{x \in \mathbb{R}^d}, \lambda(A) \in [\mu; L]</span>. <span class="math display">
 x_{k+1} = x_{k} −\alpha\nabla f(x_{k}) + \beta(x_k−x_{k−1}), \qquad 0 &lt; \beta &lt; 1.
 </span> Оптимальные гиперпараметры: <span class="math display">
 \alpha^* = \dfrac{4}{(\sqrt{L} + \sqrt{\mu})^2} \qquad \beta^* = \left(\dfrac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}\right)^2.
@@ -515,16 +515,17 @@ x_{k+1} = x_{k} −\alpha\nabla f(x_{k}) + \beta(x_k−x_{k−1}), \qquad 0 &lt;
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Рассматриваем задачу <span class="math inline">f(x) \rightarrow \min\limits_{x}</span>, где <span class="math inline">f : \mathbb{R}^n \rightarrow \mathbb{R}</span> выпуклая и <span class="math inline">L</span>-гладкая. Алгоритм Нестерова ускоренного градиентного спуска (NAG) имеет вид <span class="math inline">(x_0 = y_0,\ \lambda_0 = 0)</span>: <span class="math display">
+<p>Пусть <span class="math inline">f : \mathbb{R}^n \rightarrow \mathbb{R}</span> выпуклая и <span class="math inline">L</span>-гладкая. Ускоренный градиентный метод Нестерова (NAG) имеет вид <span class="math inline">(x_0 = y_0,\ \lambda_0 = 0)</span>: <span class="math display">
 \begin{aligned}
-&amp;\textbf{Обновление градиента: } &amp;y_{k+1} &amp;= x_k - \frac{1}{L} \nabla f(x_k) \\
+&amp;\textbf{Градиентный шаг: } &amp;y_{k+1} &amp;= x_k - \frac{1}{L} \nabla f(x_k) \\
 &amp;\textbf{Экстраполяция: } &amp;x_{k+1} &amp;= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
-&amp;\textbf{Экстраполяция веса: } &amp;\lambda_{k+1} &amp;= \frac{1 + \sqrt{1 + 4\lambda_k^2}}{2} \\
-&amp;\gamma_k &amp;= \frac{1 - \lambda_k}{\lambda_{k+1}}
+&amp;\textbf{Вес экстраполяции: } &amp;\lambda_{k+1} &amp;= \frac{1 + \sqrt{1 + 4\lambda_k^2}}{2} \\
+&amp;\textbf{Вес экстраполяции: } &amp;\gamma_k &amp;= \frac{1 - \lambda_k}{\lambda_{k+1}}
 \end{aligned}
-</span> Метод сходится со скоростью <span class="math inline">\mathcal{O}\left(\frac{1}{k^2}\right)</span>, а именно: <span class="math display">
-f(y_k) - f^* \leqslant\frac{2L \|x_0 - x^*\|_2^2}{k^2}
+</span> Последовательность <span class="math inline">\{f(y_k)\}_{k\in\mathbb{N}}</span> сходится к оптимальному значению <span class="math inline">f^*</span> со скоростью <span class="math inline">\mathcal{O}\left(\frac{1}{k^2}\right)</span>, а именно: <span class="math display">
+f(y_k) - f^* \leq \frac{2L \|x_0 - x^*\|^2}{k^2}
 </span></p>
+<p><img src="../files/AGD_horizontal.svg" class="img-fluid"></p>
 </div>
 </div>
 </div></li>
@@ -535,14 +536,14 @@ f(y_k) - f^* \leqslant\frac{2L \|x_0 - x^*\|_2^2}{k^2}
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Рассматриваем задачу <span class="math inline">f(x) \rightarrow \min\limits_{x}</span>, где <span class="math inline">f : \mathbb{R}^n \rightarrow \mathbb{R} - \mu</span>-сильно выпуклая и <span class="math inline">L</span>-гладкая. Алгоритм Нестерова ускоренного градиентного спуска (NAG) имеет вид <span class="math inline">(x_0 = y_0)</span>: <span class="math display">
+<p>Пусть <span class="math inline">f : \mathbb{R}^n \rightarrow \mathbb{R}</span> <span class="math inline">\mu</span>-сильно выпуклая и <span class="math inline">L</span>-гладкая. Ускоренный градиентный метод Нестерова (NAG) имеет вид <span class="math inline">(x_0 = y_0,\ \lambda_0 = 0)</span>: <span class="math display">
 \begin{aligned}
-&amp;\textbf{Обновление градиента: } &amp;y_{k+1} &amp;= x_k - \frac{1}{L} \nabla f(x_k) \\
-&amp;\textbf{Экстраполяция: } &amp;x_{k+1} &amp;= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
-&amp;\textbf{Экстраполяция веса: } &amp;\gamma_k &amp;= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
+&amp;\textbf{Градиентный шаг: } &amp;y_{k+1} &amp;= x_k - \frac{1}{L} \nabla f(x_k) \\
+&amp;\textbf{Экстраполяция: } &amp;x_{k+1} &amp;= (1 + \gamma_k)y_{k+1} - \gamma_k y_k \\
+&amp;\textbf{Вес экстраполяции: } &amp;\gamma_k &amp;= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
 \end{aligned}
-</span> Метод сходится линейно, а именно: <span class="math display">
-f(y_k) - f^* \leqslant\frac{\mu + L}{2}\|x_0 - x^*\|^2_2 \exp \left(-\frac{k}{\sqrt{\kappa}}\right), \quad \kappa = \frac{L}{\mu}
+</span> Последовательность <span class="math inline">\{f(y_k)\}_{k\in\mathbb{N}}</span> сходится к оптимальному значению <span class="math inline">f^*</span> линейно: <span class="math display">
+f(y_k) - f^* \leq \frac{\mu + L}{2}\|x_0 - x^*\|^2_2 \exp \left(-\frac{k}{\sqrt{\kappa}}\right)
 </span></p>
 </div>
 </div>
