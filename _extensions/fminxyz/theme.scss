@@ -31,6 +31,47 @@ $theorem-background-callout: rgba(65,214,147,0.2);
   }
 }
 
+/* Fix for equation overflow in callouts on mobile */
+div.callout {
+  // Ensure callout itself doesn't overflow container
+  @media (max-width: 768px) {
+    max-width: 100%;
+    overflow-x: auto;
+    word-wrap: break-word;
+  }
+  
+  // Ensure callout body doesn't overflow
+  .callout-body {
+    overflow-x: auto;
+    
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+  }
+  
+  .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    
+    @media (max-width: 768px) {
+      .katex {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+      }
+    }
+  }
+  
+  /* Alternative: Force equations to break responsively */
+  @media (max-width: 768px) {
+    .katex-display .katex {
+      font-size: 0.9em;
+    }
+  }
+}
+
   
 /*-- scss:rules --*/
 
