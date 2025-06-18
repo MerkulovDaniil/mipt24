@@ -122,7 +122,7 @@ format:
     :::{.callout-tip appearance="simple"}
     $\quad \mu = \min\limits_{x \in \text{dom} f}\lambda_{\min}(\nabla^2 f(x)), \quad L = \max\limits_{x \in \text{dom} f}\lambda_{\max}(\nabla^2 f(x)).$ 
     :::
-1.  Связь числа обусловленности матрицы квадратичной функции с параметрами сильной выпуклости и гладкости функции.
+1.  Связь числа обусловленности симметричной матрицы квадратичной функции с параметрами сильной выпуклости и гладкости функции.
 
     :::{.callout-tip appearance="simple"}
     $\varkappa = \frac{L}{\mu} = \frac{\lambda_{\max}(\nabla^2 f(x))}{\lambda_{\min}(\nabla^2 f(x))} = \frac{\lambda_{\max}(A)}{\lambda_{\min}(A)} \geq 1.$ 
