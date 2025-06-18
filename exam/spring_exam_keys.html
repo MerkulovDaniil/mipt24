@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d2f3a7a26ab2f4108af9782375309ca7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-697d100ec41eb6330bfa9e75c675346c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -2516,7 +2516,85 @@ f(x_{k+1}) \le f(x_k)\quad\text{for each }k,
 k\,\bigl[f(x_k) - f^*\bigr] \le \sum_{i=0}^{k-1}\bigl[f(x_i) - f^*\bigr] \le \frac{L}{2}\|x_0 - x^*\|_2^2,
 </span> Следовательно: <span class="math display">
 f(x_k) - f^* \le \frac{L\|x_0 - x^*\|_2^2}{2k}.
-</span> <!-- 1. Теорема о сходимости метода проекции градиента для сильно выпуклой гладкой функции. --></p></li>
+</span> <!-- 1.  Теорема о сходимости метода проекции градиента для сильно выпуклых гладких функций.
+
+:::{.callout-note appearance="simple"}
+Пусть $f: \mathbb{R}^n \to \mathbb{R}$ - $\mu$-сильно выпуклая. Пусть $S \subseteq  \mathbb{R}^n$ замкнутое выпуклое множество, и пусть $x^*$ - минимизатор $f$ на $S$; кроме того, пусть $f$ гладкая на $S$ с параметром $L$. Метод проекции градиента с шагом $\alpha \leq \frac1L$ достигает следующей сходимости после итерации $k > 0$:
+$$
+\|x_{k} - x^*\|_2^2 \leq \left(1 - \alpha \mu\right)^k \|x_{0} - x^*\|_2^2.
+$$
+:::
+
+Для доказательства мы используем два факта:
+1. Пусть $f: \mathbb{R}^n \rightarrow \mathbb{R}$ - $L$-гладкая выпуклая функция. Тогда для любых $x, y \in \mathbb{R}^n$ выполняется неравенство:
+    $$
+    \begin{aligned}
+    f(x) + \langle \nabla f(x), y - x \rangle + \frac{1}{2L} & \|\nabla f(x) - \nabla f(y)\|^2_2 \leq f(y) \text{ or, equivalently, }\\
+    \|\nabla f(y)-\nabla f (x)\|_2^2 = & \|\nabla f(x)-\nabla f (y)\|_2^2 \leq 2L\left(f(x)-f(y)-\langle\nabla f (y),x -y\rangle \right)
+    \end{aligned}
+    $$
+2. Пусть $f: \mathbb{R}^n \rightarrow \mathbb{R}$ непрерывно дифференцируема на $\mathbb{R}^n$. Тогда функция $f$ $\mu$-сильно выпукла, если и только если для любых $x, y \in \mathbb{R}^n$ выполняется:
+    $$
+    \begin{aligned}
+    \text{Strongly convex case } \mu >0 & &\langle \nabla f(x) - \nabla f(y), x - y \rangle &\geq \mu \|x - y\|^2 \\
+    \text{Convex case } \mu = 0 & &\langle \nabla f(x) - \nabla f(y), x - y \rangle &\geq 0
+    \end{aligned}
+    $$
+
+**Доказательство**
+
+1. Сначала докажем свойство стационарности метода: $\text{proj}_S(x^* - \alpha \nabla f(x^*)) = x^*$.
+
+    Это следует из критерия проекции и условия оптимальности первого порядка для $x^*$. Пусть $y = x^* - \alpha \nabla f(x^*)$. Мы должны показать, что $\langle y - x^*, x - x^* \rangle \le 0$ для всех $x \in S$.
+    $$
+    \langle (x^* - \alpha \nabla f(x^*)) - x^*, x - x^* \rangle = -\alpha \langle \nabla f(x^*), x - x^* \rangle \le 0
+    $$
+    Неравенство выполняется, потому что $\alpha > 0$ и $\langle \nabla f(x^*), x-x^* \rangle \geq 0$ - условие оптимальности для $x^*$.
+
+2. Рассмотрим расстояние до решения и используем свойство стационарности:
+    $$
+    \begin{aligned}
+    \|x_{k+1} - x^*\|^2_2 &= \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
+    \text{stationary point property} & = \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - \text{proj}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
+    \text{nonexpansiveness} & \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
+    & =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
+    \end{aligned}
+    $$
+3. Рассмотрим расстояние до решения и используем свойство стационарности:
+    $$
+    \begin{aligned}
+    \|x_{k+1} - x^*\|^2_2 &= \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
+    {\scriptsize \text{stationary point property}}  & = \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - \text{proj}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
+    {\scriptsize \text{nonexpansiveness}}   & \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
+    & =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
+    \end{aligned}
+    $$
+
+4. Используем гладкость и сильную выпуклость: 
+    $$
+    \begin{aligned}
+    \text{smoothness} \;\; &\|\nabla f(x_k)-\nabla f (x^*)\|_2^2 \leq 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right) \\
+    \text{strong convexity} \;\; & - \langle \nabla f(x_k) -  \nabla f(x^*), x_k - x^* \rangle \leq \\
+    & - \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - \langle \nabla f(x^*), x_k - x^* \rangle
+    \end{aligned}
+    $$
+
+5. Подставляем:
+    $$
+    \begin{aligned}
+    \|x_{k+1} - x^*\|^2_2 &\leq \|x_k - x^*\|^2 - 2\alpha \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - 2\alpha \langle \nabla f(x^*), x_k - x^* \rangle + \\ 
+    & + \alpha^2 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right)  \\
+    &\leq (1 - \alpha \mu)\|x_k - x^*\|^2 + 2\alpha (\alpha L - 1) \left( f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \right)
+    \end{aligned}
+    $$
+
+6. Из выпуклости $f$: $f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0$. Следовательно, если мы используем $\alpha \leq \frac1L$:
+    $$
+    \begin{aligned}
+    \|x_{k+1} - x^*\|^2_2 &\leq (1 - \alpha \mu)\|x_k - x^*\|^2 \\
+    \|x_k - x^*\|_2^2 &\leq (1 - \alpha \mu)^k \|x_0 - x^*\|_2^2
+    \end{aligned}
+    $$ --></p></li>
 </ol></li>
 <li><p>Теорема о сходимости метода Франк-Вульфа для выпуклых гладких функций.</p>
 <div class="callout callout-style-simple callout-note">
