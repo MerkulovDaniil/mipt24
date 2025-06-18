@@ -920,7 +920,7 @@ format:
     Тогда метод двойственного подъема запишется следующим образом:
     $$
     \begin{aligned}
-    x^{k}_i &\in \arg\min\limits_{x_i}\left(f_i(x_i) + u^TA_ix_i\right), \quad i = \overline{1,B} \\
+    x^{k}_i &\in \arg\min\limits_{x_i}\left(f_i(x_i) + (u^{k-1})^TA_ix_i\right), \quad i = \overline{1,B} \\
     u^k &= u^{k-1} + \alpha_k\left(\sum_{i=1}^B A_ix_i^k - b\right).
     \end{aligned}
     $$
