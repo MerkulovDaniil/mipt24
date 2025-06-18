@@ -247,7 +247,7 @@ format:
     $$
     \begin{aligned}
     &\textbf{Градиентный шаг: } &y_{k+1} &= x_k - \frac{1}{L} \nabla f(x_k) \\
-    &\textbf{Экстраполяция: } &x_{k+1} &= (1 + \gamma_k)y_{k+1} - \gamma_k y_k \\
+    &\textbf{Экстраполяция: } &x_{k+1} &= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
     &\textbf{Вес экстраполяции: } &\gamma_k &= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
     \end{aligned}
     $$
