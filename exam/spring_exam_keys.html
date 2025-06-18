@@ -1079,7 +1079,7 @@ r(x) &amp;= \frac{\mu}{2} \|x\|_2^2\\
 </div>
 <div class="callout-body-container">
 <p>Разделим данные размера <span class="math inline">N</span> на <span class="math inline">k</span> мини-батчей (выборок) размера <span class="math inline">B_k</span>, на каждой итерации посчитаем градиент мини-батча с использованием параллелизма. За <span class="math inline">\frac{N}{k}</span> итераций пройдёмся по всей выборке. <strong>Эпоха</strong> - набор <span class="math inline">k</span> итераций с батчем размера <span class="math inline">B_k = \frac{N}{k}</span>. <span class="math display">
-x_{k + 1} = x_k - \alpha_k \frac{1}{|B_k|} \sum_{i \in B_k}\nabla f_{i}(x) - \text{шаг мини-батча}.
+x_{k + 1} = x_k - \alpha_k \frac{1}{|B_k|} \sum_{i \in B_k}\nabla f_{i}(x_k) - \text{шаг мини-батча}.
 </span> C увеличением размера мини-батча время на эпоху уменьшается до тех пор, пока нам хватает памяти (в случае наличия параллелизма).</p>
 <p><img src="../files/batches_5.svg" class="img-fluid"></p>
 </div>
@@ -1962,12 +1962,6 @@ P_k(a) = T_k\left(\frac{L+\mu-2a}{L-\mu}\right) \cdot T_k\left(\frac{L+\mu}{L-\m
 </span></p></li>
 <li><p>Следовательно, нам нужно только понять значение <span class="math inline">T_k</span> в <span class="math inline">1+\epsilon</span>. Это то, откуда берется ускорение. Мы будем ограничивать это значение сверху величиной <span class="math inline">\mathcal{O}\left(\frac{1}{\sqrt{\epsilon}}\right)</span>.</p></li>
 <li><p>Чтобы ограничить <span class="math inline">|P_k|</span> сверху, нам нужно оценить <span class="math inline">|T_k(1 + \epsilon)|</span> снизу.</p></li>
-<li><p>Для любого <span class="math inline">x\ge 1</span>, полином Чебышёва первого рода может быть записан как <span class="math display">
-\begin{aligned}
-T_k(x)&amp;=\cosh\left(k\,\mathrm{arccosh}(x)\right)\\
-T_k(1+\epsilon)&amp;=\cosh\left(k\,\mathrm{arccosh}(1+\epsilon)\right).
-\end{aligned}
-</span></p></li>
 <li><p>Для любого <span class="math inline">x\ge 1</span>, полином Чебышёва первого рода может быть записан как <span class="math display">
 \begin{aligned}
 T_k(x)&amp;=\cosh\left(k\,\mathrm{arccosh}(x)\right)\\
