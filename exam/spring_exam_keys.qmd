@@ -2044,8 +2044,7 @@ format:
         \begin{aligned}
         \sum\limits_{i=0}^{k-1} \left[f(x_i) - f^*\right]&\leq \sum\limits_{i=0}^{k-1}\left[ f(x_{i}) - f(x_{i+1}) + \frac{L}{2} \|y_{i} - x_{i+1}\|^2 \right] + \frac{L}{2}\|x_0 - x^*\|^2  - \frac{L}{2} \sum\limits_{i=0}^{i-1} \|y_i - x_{i+1}\|^2  \\
         &\leq f(x_0) - f(x_k) + \frac{L}{2} \sum\limits_{i=0}^{i-1} \|y_i - x_{i+1}\|^2 + \frac{L}{2}\|x_0 - x^*\|^2  - \frac{L}{2} \sum\limits_{i=0}^{i-1} \|y_i - x_{i+1}\|^2 \\
-        &\leq f(x_0) - f(x_k) + \frac{L}{2}\|x_0 - x^*\|^2 \\
-        \sum\limits_{i=0}^{k-1} f(x_i) - k f^* &\leq f(x_0) - f(x
+        &\leq f(x_0) - f(x_k) + \frac{L}{2}\|x_0 - x^*\|^2
         \end{aligned}
         $$
 
