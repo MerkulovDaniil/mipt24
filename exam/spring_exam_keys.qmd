@@ -212,7 +212,7 @@ format:
 1.  Формулировка метода тяжелого шарика (Поляка) для гладкой выпуклой/сильно выпуклой функций. Характер сходимости в терминах $\mathcal{O}$ от числа итераций метода.
 
     :::{.callout-tip appearance="simple"}
-    Задача: $f(x) = \frac{1}{2} x^T A x - b^T x \rightarrow \min\limits_{x \in \mathbb{R}^d}, \ f(x), \lambda(A) \in [\mu; L]$.
+    Задача: $f(x) \rightarrow \min\limits_{x \in \mathbb{R}^d}, \ f(x), \lambda(A) \in [\mu; L]$.
     $$
     x_{k+1} = x_{k} −\alpha\nabla f(x_{k}) + \beta(x_k−x_{k−1}), \qquad 0 < \beta < 1.
     $$
