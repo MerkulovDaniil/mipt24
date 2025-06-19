@@ -1203,7 +1203,7 @@ format:
             x_3^* \\
             \vdots \\
             x_{n}^* \\
-        \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \quad \begin{cases} 2x_1^* - x_2^* = 1 \\ -x_i^* + 2x_{i+1}^* - x_{i+2}^* = 0, \; i = 2, \ldots, n-1 \\ -x_{n-1}^* + 2x_n^* = 0 \end{cases}
+        \end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \quad \begin{cases} 2x_1^* - x_2^* = 1 \\ -x_i^* + 2x_{i+1}^* - x_{i+2}^* = 0, \; i = 1, \ldots, n-2 \\ -x_{n-1}^* + 2x_n^* = 0 \end{cases}
         $$
     1. Предположим, что $x_i^* = a+bi$. Проверьте, что второе уравнение удовлетворяется, в то время как $a$ и $b$ вычисляются из первого и последнего уравнений.
         Решение:
