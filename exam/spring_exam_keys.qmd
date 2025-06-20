@@ -2616,7 +2616,7 @@ format:
     :::
 
     Предположим, у нас выполняется условие Поляка-Лоясевича $\|\nabla f(x)\|^2 \geqslant 2\mu (f(x) - f^*)$, тогда
-    $$ \frac{d}{dt}\left(f(x(t)) - f(x^*)\right) = \nabla f(x(t))^T\underbrace{\dot{x}(t)}_{= \frac{dx}{dt} = -\nabla f(x)} = -\|\nabla f(x(t))|^2_2 \leqslant -2\mu \left(f(x(t)) - f^*\right) $$
+    $$ \frac{d}{dt}\left(f(x(t)) - f(x^*)\right) = \nabla f(x(t))^T\underbrace{\dot{x}(t)}_{= \frac{dx}{dt} = -\nabla f(x)} = -\|\nabla f(x(t))\|^2_2 \leqslant -2\mu \left(f(x(t)) - f^*\right) $$
     Интегрируя, получаем:
     $$ f(x(t)) - f^* \leqslant \exp\{-2\mu t\}\left(f(x(0)) - f^*\right) $$
 
