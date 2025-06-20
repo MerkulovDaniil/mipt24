@@ -2509,16 +2509,7 @@ format:
         x^* = \text{prox}_{\alpha r}(x^* - \alpha \nabla f(x^*)) = \text{prox}_{r, \alpha}(x^* - \alpha \nabla f(x^*))
         $$
 
-    2. Рассмотрим расстояние до решения и используем свойство стационарности:
-        $$
-        \begin{aligned}
-        \|x_{k+1} - x^*\|^2_2 &= \|\text{prox}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
-        \text{stationary point property} & = \|\text{prox}_S (x_k - \alpha \nabla f (x_k)) - \text{prox}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-        \text{nonexpansiveness} & \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-        & =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
-        \end{aligned}
-        $$
-    3. Рассмотрим расстояние до решения и используем свойство стационарности:
+    1. Рассмотрим расстояние до решения и используем свойство стационарности:
         $$
         \begin{aligned}
         \|x_{k+1} - x^*\|^2_2 &= \|\text{prox}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
@@ -2528,7 +2519,7 @@ format:
         \end{aligned}
         $$
 
-    4. Используем гладкость и сильную выпуклость: 
+    1. Используем гладкость и сильную выпуклость: 
         $$
         \begin{aligned}
         \text{smoothness} \;\; &\|\nabla f(x_k)-\nabla f (x^*)\|_2^2 \leq 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right) \\
@@ -2537,7 +2528,7 @@ format:
         \end{aligned}
         $$
 
-    5. Подставляем:
+    1. Подставляем:
         $$
         \begin{aligned}
         \|x_{k+1} - x^*\|^2_2 &\leq \|x_k - x^*\|^2 - 2\alpha \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - 2\alpha \langle \nabla f(x^*), x_k - x^* \rangle + \\ 
@@ -2546,7 +2537,7 @@ format:
         \end{aligned}
         $$
 
-    6. Из выпуклости $f$: $f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0$. Следовательно, если мы используем $\alpha \leq \frac1L$:
+    1. Из выпуклости $f$: $f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0$. Следовательно, если мы используем $\alpha \leq \frac1L$:
         $$
         \begin{aligned}
         \|x_{k+1} - x^*\|^2_2 &\leq (1 - \alpha \mu)\|x_k - x^*\|^2 \\
