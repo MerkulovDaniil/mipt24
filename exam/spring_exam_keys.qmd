@@ -571,7 +571,7 @@ format:
     $$
     \begin{aligned}
     r(x) &= \lambda \|x\|_1, \quad \lambda > 0 \\
-    [\text{prox}_r(x)]_i &= [|x_i - \lambda]_+ \cdot \text{sign}(x_i)
+    [\text{prox}_r(x)]_i &= [|x_i| - \lambda]_+ \cdot \text{sign}(x_i)
     \end{aligned}
     $$
     :::
@@ -580,7 +580,7 @@ format:
     :::{.callout-tip appearance="simple"}
     $$
     \begin{aligned}
-    r(x) &= \frac{\mu}{2} \|x\|_2^2\\
+    r(x) &= \frac{\mu}{2} \|x\|_2^2, \quad \mu > 0\\
     \text{prox}_r(x) &= \frac{x}{1 + \mu}
     \end{aligned}
     $$
