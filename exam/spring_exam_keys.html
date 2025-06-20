@@ -994,7 +994,7 @@ x_{k+1} = \text{prox}_{\alpha r}\left(x_k -\alpha \nabla f(x_k)\right)
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Рассматривается задача: <span class="math inline">\varphi(x) \rightarrow \min\limits_{x \in \mathbb{R}^n}</span>, где <span class="math inline">\varphi(x)  = f(x) +r(x)</span>, <span class="math inline">f(x)</span> - гладкая выпуклая, <span class="math inline">r(x)</span> - негладкая выпуклая, проксимально дружественная. <span class="math display">
+<p>Рассматривается задача: <span class="math inline">\varphi(x) \rightarrow \min\limits_{x \in \mathbb{R}^n}</span>, где <span class="math inline">\varphi(x)  = f(x) +r(x)</span>, <span class="math inline">f(x)</span> - гладкая сильно выпуклая, <span class="math inline">r(x)</span> - негладкая выпуклая, проксимально дружественная. <span class="math display">
 \|x_k - x^*\|^2 \sim \mathcal{O} \left( \left(1 - \frac{\mu}{L}\right)^k \right)
 </span> где <span class="math inline">\mu</span> - константа сильной выпуклости функции <span class="math inline">f</span>, <span class="math inline">L</span> - константа гладкости функции <span class="math inline">f</span>.</p>
 </div>
@@ -1010,7 +1010,7 @@ x_{k+1} = \text{prox}_{\alpha r}\left(x_k -\alpha \nabla f(x_k)\right)
 <p><span class="math display">
 \begin{aligned}
 r(x) &amp;= \lambda \|x\|_1, \quad \lambda &gt; 0 \\
-[\text{prox}_r(x)]_i &amp;= [|x_i - \lambda]_+ \cdot \text{sign}(x_i)
+[\text{prox}_r(x)]_i &amp;= [|x_i| - \lambda]_+ \cdot \text{sign}(x_i)
 \end{aligned}
 </span></p>
 </div>
@@ -1025,7 +1025,7 @@ r(x) &amp;= \lambda \|x\|_1, \quad \lambda &gt; 0 \\
 <div class="callout-body-container">
 <p><span class="math display">
 \begin{aligned}
-r(x) &amp;= \frac{\mu}{2} \|x\|_2^2\\
+r(x) &amp;= \frac{\mu}{2} \|x\|_2^2, \quad \mu &gt; 0\\
 \text{prox}_r(x) &amp;= \frac{x}{1 + \mu}
 \end{aligned}
 </span></p>
@@ -2403,7 +2403,7 @@ r_{k+1}  \leq \dfrac{r_k^2 M}{2(\mu - Mr_k)} &lt; \dfrac{3 M r_k^2 }{2\mu}
 <p>Умножая на <span class="math inline">\Delta y_k</span> и ипользуя уравнение секущих <span class="math inline">d_k = C_{k+1} \Delta y_k</span> имеет:</p>
 <p><span class="math display"> d_k = C_k\Delta y_k + (a u^T \Delta y_k)u + (bv^T\Delta y_k)v </span></p>
 <p>Полагая <span class="math inline">u = C_k\Delta y_k, v = d_k</span> и решая для <span class="math inline">a, b</span> получаем:</p>
-<p><span class="math display"> (1 + a \Delta y_k ^T C \Delta y_k) C_k \Delta y_k + (bd_k^T\Delta y_k - 1)d_k \Leftrightarrow a = -\frac{1}{\Delta y_k ^T C \Delta y_k}, b = \frac{1}{\Delta y_k^T d_k}</span></p>
+<p><span class="math display"> (1 + a \Delta y_k ^T C \Delta y_k) C_k \Delta y_k + (bd_k^T\Delta y_k - 1)d_k = 0 \Leftrightarrow a = -\frac{1}{\Delta y_k ^T C \Delta y_k}, b = \frac{1}{\Delta y_k^T d_k}</span></p>
 <p><span class="math display"> C_{k+1} = C_k - \frac{C_k \Delta y_k \Delta y_k^T C_k}{\Delta y_k^T C_k \Delta y_k} + \frac{d_k d_k^T}{\Delta y_k^T d_k} </span></p>
 <p><strong>Woodbury Formula Application</strong> Формула показывает:</p>
 <p><span class="math display">
@@ -2413,7 +2413,7 @@ B_{k+1} = \left(I - \frac{\Delta y_k d_k^T}{\Delta y_k^T d_k}\right)B_k\left(I -
 <li><p><strong>Broyden-Fletcher-Goldfarb-Shanno update</strong></p>
 <p>Давайте теперь попробуем обновление второго ранга: <span class="math display"> B_{k+1} = B_k + a u u^T + b v v^T. </span></p>
 <p>Умножая на <span class="math inline">\Delta y_k</span> и используя уравнение секущих <span class="math inline">\Delta y_k = B_{k+1} d_k</span> имеем: <span class="math display"> \Delta y_k - B_k d_k = (a u^T d_k) u + (b v^T d_k) v </span></p>
-<p>Полагая <span class="math inline">u = \Delta y_k</span>, <span class="math inline">v = B_k d_k</span>, и решая для <span class="math inline">a</span>, <span class="math inline">b</span> мы получаем: <span class="math display"> (1 - a \Delta y_k^T d_k)\Delta y_k - (1 + bd_k^TB_k d_k)B_kd_k \Leftrightarrow a = \frac{1}{y_k^T d_k}, b = -\frac{1}{d_k^TB_k d_k} </span> <span class="math display"> B_{k+1} = B_k - \frac{B_k d_k d_k^T B_k}{d_k^T B_k d_k} + \frac{\Delta y_k \Delta y_k^T}{d_k^T \Delta y_k} </span> называется обновлением Бройдена-Флетчера-Гольдфарба-Шанно (BFGS).</p></li>
+<p>Полагая <span class="math inline">u = \Delta y_k</span>, <span class="math inline">v = B_k d_k</span>, и решая для <span class="math inline">a</span>, <span class="math inline">b</span> мы получаем: <span class="math display"> (1 - a \Delta y_k^T d_k)\Delta y_k - (1 + bd_k^TB_k d_k)B_kd_k = 0 \Leftrightarrow a = \frac{1}{y_k^T d_k}, b = -\frac{1}{d_k^TB_k d_k} </span> <span class="math display"> B_{k+1} = B_k - \frac{B_k d_k d_k^T B_k}{d_k^T B_k d_k} + \frac{\Delta y_k \Delta y_k^T}{d_k^T \Delta y_k} </span> называется обновлением Бройдена-Флетчера-Гольдфарба-Шанно (BFGS).</p></li>
 </ol></li>
 <li><p>Теорема о сходимости метода проекции градиента для выпуклой гладкой функции.</p>
 <div class="callout callout-style-simple callout-note">
@@ -2463,8 +2463,7 @@ f(x_k) - f^* \leq \frac{L\|x_0 - x^*\|_2^2}{2k}
 \begin{aligned}
 \sum\limits_{i=0}^{k-1} \left[f(x_i) - f^*\right]&amp;\leq \sum\limits_{i=0}^{k-1}\left[ f(x_{i}) - f(x_{i+1}) + \frac{L}{2} \|y_{i} - x_{i+1}\|^2 \right] + \frac{L}{2}\|x_0 - x^*\|^2  - \frac{L}{2} \sum\limits_{i=0}^{i-1} \|y_i - x_{i+1}\|^2  \\
 &amp;\leq f(x_0) - f(x_k) + \frac{L}{2} \sum\limits_{i=0}^{i-1} \|y_i - x_{i+1}\|^2 + \frac{L}{2}\|x_0 - x^*\|^2  - \frac{L}{2} \sum\limits_{i=0}^{i-1} \|y_i - x_{i+1}\|^2 \\
-&amp;\leq f(x_0) - f(x_k) + \frac{L}{2}\|x_0 - x^*\|^2 \\
-\sum\limits_{i=0}^{k-1} f(x_i) - k f^* &amp;\leq f(x_0) - f(x
+&amp;\leq f(x_0) - f(x_k) + \frac{L}{2}\|x_0 - x^*\|^2
 \end{aligned}
 </span></p></li>
 <li><p>Из неравенства о достаточном убывании: <span class="math display">
@@ -2532,17 +2531,8 @@ $$
     & =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
     \end{aligned}
     $$
-3. Рассмотрим расстояние до решения и используем свойство стационарности:
-    $$
-    \begin{aligned}
-    \|x_{k+1} - x^*\|^2_2 &= \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
-    {\scriptsize \text{stationary point property}}  & = \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - \text{proj}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-    {\scriptsize \text{nonexpansiveness}}   & \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-    & =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
-    \end{aligned}
-    $$
 
-4. Используем гладкость и сильную выпуклость: 
+3. Используем гладкость и сильную выпуклость: 
     $$
     \begin{aligned}
     \text{smoothness} \;\; &\|\nabla f(x_k)-\nabla f (x^*)\|_2^2 \leq 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right) \\
@@ -2551,7 +2541,7 @@ $$
     \end{aligned}
     $$
 
-5. Подставляем:
+4. Подставляем:
     $$
     \begin{aligned}
     \|x_{k+1} - x^*\|^2_2 &\leq \|x_k - x^*\|^2 - 2\alpha \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - 2\alpha \langle \nabla f(x^*), x_k - x^* \rangle + \\ 
@@ -2560,7 +2550,7 @@ $$
     \end{aligned}
     $$
 
-6. Из выпуклости $f$: $f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0$. Следовательно, если мы используем $\alpha \leq \frac1L$:
+5. Из выпуклости $f$: $f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0$. Следовательно, если мы используем $\alpha \leq \frac1L$:
     $$
     \begin{aligned}
     \|x_{k+1} - x^*\|^2_2 &\leq (1 - \alpha \mu)\|x_k - x^*\|^2 \\
