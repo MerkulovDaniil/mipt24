@@ -413,6 +413,28 @@ f(x) = \|Ax - b\|_2^2 + \lambda \|x\|_1,
 </div>
 </div>
 </div></li>
+<li><p>Нижние оценки для гладкой выпуклой оптимизации с помощью методов первого порядка в терминах <span class="math inline">\mathcal{O}</span> от числа итераций метода.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><span class="math inline">f(x_k) - f^* \sim  \mathcal{O}\left(\frac{1}{k^2}\right)</span></p>
+</div>
+</div>
+</div></li>
+<li><p>Нижние оценки для гладкой сильно выпуклой оптимизации с помощью методов первого порядка в терминах <span class="math inline">\mathcal{O}</span> от числа итераций метода.</p>
+<div class="callout callout-style-simple callout-tip">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><span class="math inline">\|x^k - x^*\|^2 \sim \mathcal{O} \left( \left(1 - \sqrt{\dfrac{\mu}{L}}\right)^k \right)</span></p>
+</div>
+</div>
+</div></li>
 <li><p>Отличие ускоренной и неускоренной линейной сходимости для методов первого порядка.</p>
 <div class="callout callout-style-simple callout-tip">
 <div class="callout-body d-flex">
@@ -1185,7 +1207,7 @@ x_{k+1} = x_k - \alpha  \nabla f_{i_k}(x_k)
 <li><span class="math inline">x^{(k)} = x^{(k-1)} - \alpha ^k g^{(k)}</span></li>
 </ol>
 <p>PS: стоимость итерации как в обычном SGD, но платим за это памятью.</p>
-<p>Сходимость в выпуклом случае: <span class="math inline">f(x_{\text{mean}}^{(k)}) - f^* \leq \frac{48n|f(x^{(0)}) - f^*| + 128L\|x^{(0)} - x^*\|^2}{k} = O(\frac{1}{k})</span></p>
+<p>Сходимость в выпуклом случае: <span class="math inline">\mathbb{E}\left[f(x_{\text{mean}}^{(k)}) - f^*\right] \leq \frac{48n|f(x^{(0)}) - f^*| + 128L\|x^{(0)} - x^*\|^2}{k} = O(\frac{1}{k})</span></p>
 <p>Скорость в сильно выпуклом случае с параметром <span class="math inline">\mu</span>:</p>
 <p><span class="math inline">\mathbb{E}\left[f(x^{(k)}) - f^*\right] \leq \left(1 - \min\left(\frac{\mu}{16L}, \frac{1}{8n}\right)\right)^k (\frac{3}{2}(f(x^{(0)}) - f^*) + \frac{4L}{n} \|x^{(0)} - x^*\|^2) = O(\gamma ^k)</span></p>
 </div>
@@ -2827,14 +2849,6 @@ x^* - \alpha \nabla f(x^*) - x^* \in &amp; \alpha \partial r(x^*)
 \text{prox}_r(x) = y \Leftrightarrow x - y \in \partial r(y)
 </span> И, наконец, <span class="math display">
 x^* = \text{prox}_{\alpha r}(x^* - \alpha \nabla f(x^*)) = \text{prox}_{r, \alpha}(x^* - \alpha \nabla f(x^*))
-</span></p></li>
-<li><p>Рассмотрим расстояние до решения и используем свойство стационарности: <span class="math display">
-\begin{aligned}
-\|x_{k+1} - x^*\|^2_2 &amp;= \|\text{prox}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
-\text{stationary point property} &amp; = \|\text{prox}_S (x_k - \alpha \nabla f (x_k)) - \text{prox}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-\text{nonexpansiveness} &amp; \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-&amp; =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
-\end{aligned}
 </span></p></li>
 <li><p>Рассмотрим расстояние до решения и используем свойство стационарности: <span class="math display">
 \begin{aligned}
