@@ -1967,7 +1967,7 @@ format:
 
         Полагая $u = C_k\Delta y_k, v = d_k$ и решая для $a, b$ получаем:
 
-        $$ (1 + a \Delta y_k ^T C \Delta y_k) C_k \Delta y_k + (bd_k^T\Delta y_k - 1)d_k \Leftrightarrow a = -\frac{1}{\Delta y_k ^T C \Delta y_k}, b = \frac{1}{\Delta y_k^T d_k}$$
+        $$ (1 + a \Delta y_k ^T C \Delta y_k) C_k \Delta y_k + (bd_k^T\Delta y_k - 1)d_k = 0 \Leftrightarrow a = -\frac{1}{\Delta y_k ^T C \Delta y_k}, b = \frac{1}{\Delta y_k^T d_k}$$
 
         $$ C_{k+1} = C_k - \frac{C_k \Delta y_k \Delta y_k^T C_k}{\Delta y_k^T C_k \Delta y_k} + \frac{d_k d_k^T}{\Delta y_k^T d_k} $$
 
@@ -1990,7 +1990,7 @@ format:
         $$ \Delta y_k - B_k d_k = (a u^T d_k) u + (b v^T d_k) v $$
 
         Полагая $u = \Delta y_k$, $v = B_k d_k$, и решая для $a$, $b$ мы получаем:
-        $$ (1 - a \Delta y_k^T d_k)\Delta y_k - (1 + bd_k^TB_k d_k)B_kd_k \Leftrightarrow a = \frac{1}{y_k^T d_k}, b = -\frac{1}{d_k^TB_k d_k} $$
+        $$ (1 - a \Delta y_k^T d_k)\Delta y_k - (1 + bd_k^TB_k d_k)B_kd_k = 0 \Leftrightarrow a = \frac{1}{y_k^T d_k}, b = -\frac{1}{d_k^TB_k d_k} $$
         $$ B_{k+1} = B_k - \frac{B_k d_k d_k^T B_k}{d_k^T B_k d_k} + \frac{\Delta y_k \Delta y_k^T}{d_k^T \Delta y_k} $$
         называется обновлением Бройдена-Флетчера-Гольдфарба-Шанно (BFGS).
 1.  Теорема о сходимости метода проекции градиента для выпуклой гладкой функции.
