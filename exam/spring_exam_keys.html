@@ -479,7 +479,7 @@ x_{k+1} = x_{k} −\alpha\nabla f(x_{k}) + \beta(x_k−x_{k−1}), \qquad 0 &lt;
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Задача: <span class="math inline">f(x) = \frac{1}{2} x^T A x - b^T x \rightarrow \min\limits_{x \in \mathbb{R}^d}, \ f(x), \lambda(A) \in [\mu; L]</span>. <span class="math display">
+<p>Задача: <span class="math inline">f(x) \rightarrow \min\limits_{x \in \mathbb{R}^d}, \ f(x), \lambda(A) \in [\mu; L]</span>. <span class="math display">
 x_{k+1} = x_{k} −\alpha\nabla f(x_{k}) + \beta(x_k−x_{k−1}), \qquad 0 &lt; \beta &lt; 1.
 </span></p>
 <p>Характер сходимости для произвольных выпуклых гладких функций: глобальный сублинейный <span class="math inline">\mathcal{O}(\frac1k)</span>. Для сильно выпуклых гладких функций характер сходимости глобальный линейный. Метод не имеет глобальной ускоренной сходимости для произвольных гладких (сильно) выпуклых функций.</p>
@@ -517,7 +517,7 @@ f(y_k) - f^* \leq \frac{2L \|x_0 - x^*\|^2}{k^2}
 <p>Пусть <span class="math inline">f : \mathbb{R}^n \rightarrow \mathbb{R}</span> <span class="math inline">\mu</span>-сильно выпуклая и <span class="math inline">L</span>-гладкая. Ускоренный градиентный метод Нестерова (NAG) имеет вид <span class="math inline">(x_0 = y_0,\ \lambda_0 = 0)</span>: <span class="math display">
 \begin{aligned}
 &amp;\textbf{Градиентный шаг: } &amp;y_{k+1} &amp;= x_k - \frac{1}{L} \nabla f(x_k) \\
-&amp;\textbf{Экстраполяция: } &amp;x_{k+1} &amp;= (1 + \gamma_k)y_{k+1} - \gamma_k y_k \\
+&amp;\textbf{Экстраполяция: } &amp;x_{k+1} &amp;= (1 - \gamma_k)y_{k+1} + \gamma_k y_k \\
 &amp;\textbf{Вес экстраполяции: } &amp;\gamma_k &amp;= \frac{\sqrt{L} - \sqrt{\mu}}{\sqrt{L} + \sqrt{\mu}}
 \end{aligned}
 </span> Последовательность <span class="math inline">\{f(y_k)\}_{k\in\mathbb{N}}</span> сходится к оптимальному значению <span class="math inline">f^*</span> линейно: <span class="math display">
@@ -776,7 +776,7 @@ x_{k+1} = \text{proj}_S(x_{k} - \alpha_k \nabla f(x_{k})),
 <i class="callout-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Проекция <span class="math inline">\text{proj}_S(x)</span> точки <span class="math inline">x</span> на выпуклое множество <span class="math inline">S</span> удовлетворяет: <span class="math display">
+<p>Проекция <span class="math inline">\text{proj}_S(x)</span> точки <span class="math inline">x</span> на замкнутое и выпуклое множество <span class="math inline">S</span> удовлетворяет: <span class="math display">
 \langle x - \text{proj}_S(x), y - \text{proj}_S(x) \rangle \leqslant0 \quad \forall y \in S.
 </span></p>
 </div>
@@ -1066,7 +1066,7 @@ r(x) &amp;= \frac{\mu}{2} \|x\|_2^2\\
 </div>
 <div class="callout-body-container">
 <p>Решаемая задача: <span class="math inline">f(x) \rightarrow \min\limits_{x \in \mathbb{R}^p}</span>, где <span class="math inline">f(x) =\frac{1}{n} \sum\limits_{i=1}^n f_i(x)</span> <span class="math display">
-\text{SGD:}\quad x_{k+1} = x_k - \alpha_k \nabla f_{i_k}(x),
+\text{SGD:}\quad x_{k+1} = x_k - \alpha_k \nabla f_{i_k}(x_k),
 </span> гдe <span class="math inline">i_k</span> - случайно выбранный индекс. Если <span class="math inline">\mathbb{P}(i_k = i) = \frac{1}{n}</span>, то <span class="math inline">\mathbb{E}[\nabla f_{i_k}(x)] = \nabla f(x)</span></p>
 </div>
 </div>
@@ -1306,7 +1306,7 @@ x_j^{(k)} = x_j^{(k-1)} - \alpha \left( \frac{\hat{m}_j}{\sqrt{\hat{v}_j} + \eps
 <div class="callout-body-container">
 <p><span class="math display">
 W_{t+1} = W_t - \eta UV^\top,
-</span> где <span class="math inline">G = U \Sigma V^\top</span> - сингулярное разложение матрицы градиентов соответствующей текущему слою.</p>
+</span> где <span class="math inline">G_t = U \Sigma V^\top</span> - сингулярное разложение матрицы градиентов соответствующей текущему слою.</p>
 </div>
 </div>
 </div></li>
@@ -1535,7 +1535,7 @@ u_k &amp;= u_{k-1} + \alpha_k(Ax_k - b).
 x^{\text{new}} \in \arg\min\limits_{x}\left(\sum_{i=1}^B f_i(x_i) + u^TAx\right) \Rightarrow x^{\text{new}}_i \in \arg\min\limits_{x_i}\left(f_i(x_i) + u^TA_ix_i\right), \quad i = \overline{1,B}
 </span> Тогда метод двойственного подъема запишется следующим образом: <span class="math display">
 \begin{aligned}
-x^{k}_i &amp;\in \arg\min\limits_{x_i}\left(f_i(x_i) + u^TA_ix_i\right), \quad i = \overline{1,B} \\
+x^{k}_i &amp;\in \arg\min\limits_{x_i}\left(f_i(x_i) + (u^{k-1})^TA_ix_i\right), \quad i = \overline{1,B} \\
 u^k &amp;= u^{k-1} + \alpha_k\left(\sum_{i=1}^B A_ix_i^k - b\right).
 \end{aligned}
 </span></p>
@@ -1595,7 +1595,7 @@ x_k &amp;= \arg \min\limits_{x}\left[f(x) + (u_{k-1})^TAx + \frac{\rho}{2}\|Ax -
 \min_{x,z}&amp; \; f(x) + g(z) \\
 \text{s.t. }&amp; Ax + Bz = c
 \end{aligned}
-</span> После добавления штрафа за выход из бюджетного множества имеем <span class="math inline">f(x) + g(z) + \|Ax + Bz - c\|^2 \rightarrow \min\limits_{Ax + Bz = c}</span>, где <span class="math inline">\rho &gt; 0</span> - параметр. Тогда функция Лагранжа имеет вид: <span class="math display">
+</span> После добавления штрафа за выход из бюджетного множества имеем <span class="math inline">f(x) + g(z) + \frac{\rho}{2}\|Ax + Bz - c\|^2 \rightarrow \min\limits_{Ax + Bz = c}</span>, где <span class="math inline">\rho &gt; 0</span> - параметр. Тогда функция Лагранжа имеет вид: <span class="math display">
 L_\rho(x, z, u) = f(x) + g(z) + u^T(Ax + Bz - c) + \frac{\rho}{2}\|Ax + Bz - c\|^2.
 </span> И шаг ADMM записывается как: <span class="math display">
 \begin{aligned}
@@ -1814,7 +1814,7 @@ x^T A x &amp;= 2x_1^2 + 2x_2^2 + 2x_3^2 - 2x_1x_2 - 2x_2x_3 \\
      x_3^* \\
      \vdots \\
      x_{n}^* \\
-\end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \quad \begin{cases} 2x_1^* - x_2^* = 1 \\ -x_i^* + 2x_{i+1}^* - x_{i+2}^* = 0, \; i = 2, \ldots, n-1 \\ -x_{n-1}^* + 2x_n^* = 0 \end{cases}
+\end{bmatrix} = \begin{bmatrix} 1 \\ 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \quad \begin{cases} 2x_1^* - x_2^* = 1 \\ -x_i^* + 2x_{i+1}^* - x_{i+2}^* = 0, \; i = 1, \ldots, n-2 \\ -x_{n-1}^* + 2x_n^* = 0 \end{cases}
 </span></p></li>
 <li><p>Предположим, что <span class="math inline">x_i^* = a+bi</span>. Проверьте, что второе уравнение удовлетворяется, в то время как <span class="math inline">a</span> и <span class="math inline">b</span> вычисляются из первого и последнего уравнений. Решение: <span class="math display">
 x^*_i = 1 - \frac{i}{n+1},
