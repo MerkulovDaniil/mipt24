@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="ru" xml:lang="ru"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.9.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
 <title>spring_exam_keys</title>
 <style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
@@ -37,10 +40,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-697d100ec41eb6330bfa9e75c675346c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-76a2a2729fa140051de1c220677c0bfe.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -97,7 +100,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -123,7 +126,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../logo.svg" alt="mipt24.fmin.xyz" class="navbar-logo">
+    <img src="../logo.svg" alt="mipt24.fmin.xyz" class="navbar-logo light-content">
+    <img src="../logo.svg" alt="mipt24.fmin.xyz" class="navbar-logo dark-content">
     </a>
   </div>
             <div id="quarto-search" class="" title="Поиск"></div>
@@ -2509,76 +2513,69 @@ f(x_{k+1}) \le f(x_k)\quad\text{for each }k,
 k\,\bigl[f(x_k) - f^*\bigr] \le \sum_{i=0}^{k-1}\bigl[f(x_i) - f^*\bigr] \le \frac{L}{2}\|x_0 - x^*\|_2^2,
 </span> Следовательно: <span class="math display">
 f(x_k) - f^* \le \frac{L\|x_0 - x^*\|_2^2}{2k}.
-</span> <!-- 1.  Теорема о сходимости метода проекции градиента для сильно выпуклых гладких функций.
-
-:::{.callout-note appearance="simple"}
-Пусть $f: \mathbb{R}^n \to \mathbb{R}$ - $\mu$-сильно выпуклая. Пусть $S \subseteq  \mathbb{R}^n$ замкнутое выпуклое множество, и пусть $x^*$ - минимизатор $f$ на $S$; кроме того, пусть $f$ гладкая на $S$ с параметром $L$. Метод проекции градиента с шагом $\alpha \leq \frac1L$ достигает следующей сходимости после итерации $k > 0$:
-$$
+</span> &lt;!– 1. Теорема о сходимости метода проекции градиента для сильно выпуклых гладких функций.</p></li>
+</ol>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Пусть <span class="math inline">f: \mathbb{R}^n \to \mathbb{R}</span> - <span class="math inline">\mu</span>-сильно выпуклая. Пусть <span class="math inline">S \subseteq  \mathbb{R}^n</span> замкнутое выпуклое множество, и пусть <span class="math inline">x^*</span> - минимизатор <span class="math inline">f</span> на <span class="math inline">S</span>; кроме того, пусть <span class="math inline">f</span> гладкая на <span class="math inline">S</span> с параметром <span class="math inline">L</span>. Метод проекции градиента с шагом <span class="math inline">\alpha \leq \frac1L</span> достигает следующей сходимости после итерации <span class="math inline">k &gt; 0</span>: <span class="math display">
 \|x_{k} - x^*\|_2^2 \leq \left(1 - \alpha \mu\right)^k \|x_{0} - x^*\|_2^2.
-$$
-:::
-
-Для доказательства мы используем два факта:
-1. Пусть $f: \mathbb{R}^n \rightarrow \mathbb{R}$ - $L$-гладкая выпуклая функция. Тогда для любых $x, y \in \mathbb{R}^n$ выполняется неравенство:
-    $$
-    \begin{aligned}
-    f(x) + \langle \nabla f(x), y - x \rangle + \frac{1}{2L} & \|\nabla f(x) - \nabla f(y)\|^2_2 \leq f(y) \text{ or, equivalently, }\\
-    \|\nabla f(y)-\nabla f (x)\|_2^2 = & \|\nabla f(x)-\nabla f (y)\|_2^2 \leq 2L\left(f(x)-f(y)-\langle\nabla f (y),x -y\rangle \right)
-    \end{aligned}
-    $$
-2. Пусть $f: \mathbb{R}^n \rightarrow \mathbb{R}$ непрерывно дифференцируема на $\mathbb{R}^n$. Тогда функция $f$ $\mu$-сильно выпукла, если и только если для любых $x, y \in \mathbb{R}^n$ выполняется:
-    $$
-    \begin{aligned}
-    \text{Strongly convex case } \mu >0 & &\langle \nabla f(x) - \nabla f(y), x - y \rangle &\geq \mu \|x - y\|^2 \\
-    \text{Convex case } \mu = 0 & &\langle \nabla f(x) - \nabla f(y), x - y \rangle &\geq 0
-    \end{aligned}
-    $$
-
-**Доказательство**
-
-1. Сначала докажем свойство стационарности метода: $\text{proj}_S(x^* - \alpha \nabla f(x^*)) = x^*$.
-
-    Это следует из критерия проекции и условия оптимальности первого порядка для $x^*$. Пусть $y = x^* - \alpha \nabla f(x^*)$. Мы должны показать, что $\langle y - x^*, x - x^* \rangle \le 0$ для всех $x \in S$.
-    $$
-    \langle (x^* - \alpha \nabla f(x^*)) - x^*, x - x^* \rangle = -\alpha \langle \nabla f(x^*), x - x^* \rangle \le 0
-    $$
-    Неравенство выполняется, потому что $\alpha > 0$ и $\langle \nabla f(x^*), x-x^* \rangle \geq 0$ - условие оптимальности для $x^*$.
-
-2. Рассмотрим расстояние до решения и используем свойство стационарности:
-    $$
-    \begin{aligned}
-    \|x_{k+1} - x^*\|^2_2 &= \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
-    \text{stationary point property} & = \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - \text{proj}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-    \text{nonexpansiveness} & \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
-    & =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
-    \end{aligned}
-    $$
-
-3. Используем гладкость и сильную выпуклость: 
-    $$
-    \begin{aligned}
-    \text{smoothness} \;\; &\|\nabla f(x_k)-\nabla f (x^*)\|_2^2 \leq 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right) \\
-    \text{strong convexity} \;\; & - \langle \nabla f(x_k) -  \nabla f(x^*), x_k - x^* \rangle \leq \\
-    & - \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - \langle \nabla f(x^*), x_k - x^* \rangle
-    \end{aligned}
-    $$
-
-4. Подставляем:
-    $$
-    \begin{aligned}
-    \|x_{k+1} - x^*\|^2_2 &\leq \|x_k - x^*\|^2 - 2\alpha \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - 2\alpha \langle \nabla f(x^*), x_k - x^* \rangle + \\ 
-    & + \alpha^2 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right)  \\
-    &\leq (1 - \alpha \mu)\|x_k - x^*\|^2 + 2\alpha (\alpha L - 1) \left( f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \right)
-    \end{aligned}
-    $$
-
-5. Из выпуклости $f$: $f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0$. Следовательно, если мы используем $\alpha \leq \frac1L$:
-    $$
-    \begin{aligned}
-    \|x_{k+1} - x^*\|^2_2 &\leq (1 - \alpha \mu)\|x_k - x^*\|^2 \\
-    \|x_k - x^*\|_2^2 &\leq (1 - \alpha \mu)^k \|x_0 - x^*\|_2^2
-    \end{aligned}
-    $$ --></p></li>
+</span></p>
+</div>
+</div>
+</div>
+<p>Для доказательства мы используем два факта:</p>
+<ol type="1">
+<li>Пусть <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span> - <span class="math inline">L</span>-гладкая выпуклая функция. Тогда для любых <span class="math inline">x, y \in \mathbb{R}^n</span> выполняется неравенство: <span class="math display">
+\begin{aligned}
+f(x) + \langle \nabla f(x), y - x \rangle + \frac{1}{2L} &amp; \|\nabla f(x) - \nabla f(y)\|^2_2 \leq f(y) \text{ or, equivalently, }\\
+\|\nabla f(y)-\nabla f (x)\|_2^2 = &amp; \|\nabla f(x)-\nabla f (y)\|_2^2 \leq 2L\left(f(x)-f(y)-\langle\nabla f (y),x -y\rangle \right)
+\end{aligned}
+</span></li>
+<li>Пусть <span class="math inline">f: \mathbb{R}^n \rightarrow \mathbb{R}</span> непрерывно дифференцируема на <span class="math inline">\mathbb{R}^n</span>. Тогда функция <span class="math inline">f</span> <span class="math inline">\mu</span>-сильно выпукла, если и только если для любых <span class="math inline">x, y \in \mathbb{R}^n</span> выполняется: <span class="math display">
+\begin{aligned}
+\text{Strongly convex case } \mu &gt;0 &amp; &amp;\langle \nabla f(x) - \nabla f(y), x - y \rangle &amp;\geq \mu \|x - y\|^2 \\
+\text{Convex case } \mu = 0 &amp; &amp;\langle \nabla f(x) - \nabla f(y), x - y \rangle &amp;\geq 0
+\end{aligned}
+</span></li>
+</ol>
+<p><strong>Доказательство</strong></p>
+<ol type="1">
+<li><p>Сначала докажем свойство стационарности метода: <span class="math inline">\text{proj}_S(x^* - \alpha \nabla f(x^*)) = x^*</span>.</p>
+<p>Это следует из критерия проекции и условия оптимальности первого порядка для <span class="math inline">x^*</span>. Пусть <span class="math inline">y = x^* - \alpha \nabla f(x^*)</span>. Мы должны показать, что <span class="math inline">\langle y - x^*, x - x^* \rangle \le 0</span> для всех <span class="math inline">x \in S</span>. <span class="math display">
+\langle (x^* - \alpha \nabla f(x^*)) - x^*, x - x^* \rangle = -\alpha \langle \nabla f(x^*), x - x^* \rangle \le 0
+</span> Неравенство выполняется, потому что <span class="math inline">\alpha &gt; 0</span> и <span class="math inline">\langle \nabla f(x^*), x-x^* \rangle \geq 0</span> - условие оптимальности для <span class="math inline">x^*</span>.</p></li>
+<li><p>Рассмотрим расстояние до решения и используем свойство стационарности: <span class="math display">
+\begin{aligned}
+\|x_{k+1} - x^*\|^2_2 &amp;= \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - x^*\|^2_2 \\
+\text{stationary point property} &amp; = \|\text{proj}_S (x_k - \alpha \nabla f (x_k)) - \text{proj}_S (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
+\text{nonexpansiveness} &amp; \leq \|x_k - \alpha \nabla f (x_k) - (x^* - \alpha \nabla f (x^*)) \|^2_2 \\
+&amp; =  \|x_k - x^*\|^2 - 2\alpha \langle \nabla f(x_k) - \nabla f(x^*), x_k - x^* \rangle + \alpha^2 \|\nabla f(x_k) - \nabla f(x^*)\|^2_2
+\end{aligned}
+</span></p></li>
+<li><p>Используем гладкость и сильную выпуклость: <span class="math display">
+\begin{aligned}
+\text{smoothness} \;\; &amp;\|\nabla f(x_k)-\nabla f (x^*)\|_2^2 \leq 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right) \\
+\text{strong convexity} \;\; &amp; - \langle \nabla f(x_k) -  \nabla f(x^*), x_k - x^* \rangle \leq \\
+&amp; - \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - \langle \nabla f(x^*), x_k - x^* \rangle
+\end{aligned}
+</span></p></li>
+<li><p>Подставляем: <span class="math display">
+\begin{aligned}
+\|x_{k+1} - x^*\|^2_2 &amp;\leq \|x_k - x^*\|^2 - 2\alpha \left(f(x_k) - f(x^*) + \frac{\mu}{2} \| x_k - x^* \|^2_2 \right) - 2\alpha \langle \nabla f(x^*), x_k - x^* \rangle + \\
+&amp; + \alpha^2 2L\left(f(x_k)-f(x^*)-\langle\nabla f (x^*),x_k -x^*\rangle \right)  \\
+&amp;\leq (1 - \alpha \mu)\|x_k - x^*\|^2 + 2\alpha (\alpha L - 1) \left( f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \right)
+\end{aligned}
+</span></p></li>
+<li><p>Из выпуклости <span class="math inline">f</span>: <span class="math inline">f(x_k) - f(x^*) - \langle \nabla f(x^*), x_k - x^* \rangle \geq 0</span>. Следовательно, если мы используем <span class="math inline">\alpha \leq \frac1L</span>: <span class="math display">
+\begin{aligned}
+\|x_{k+1} - x^*\|^2_2 &amp;\leq (1 - \alpha \mu)\|x_k - x^*\|^2 \\
+\|x_k - x^*\|_2^2 &amp;\leq (1 - \alpha \mu)^k \|x_0 - x^*\|_2^2
+\end{aligned}
+</span> –&gt;</p></li>
 </ol></li>
 <li><p>Теорема о сходимости метода Франк-Вульфа для выпуклых гладких функций.</p>
 <div class="callout callout-style-simple callout-note">
@@ -3010,13 +3007,14 @@ f(x_{k+1}) \leq f(x_k) - \alpha_k \langle \nabla f(x_k),  \nabla f_{i_k}(x_k)\ra
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
